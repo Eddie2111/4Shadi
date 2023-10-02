@@ -1,0 +1,20 @@
+# Ignore.env file
+.env
+
+# Ignore node_modules folder in client folder
+client/node_modules/
+client/.env
+
+# Ignore node_modules folder in server folder
+Server/node_modules/
+Server/.env
+
+# Ignore node_modules folder in SearchEngine folder
+SearchEngine/node_modules/
+SearchEngine/.env
+
+# Ignore node_modules folder in auth folder
+auth/node_modules/
+auth/.env
+auth/http_ca.crt
+auth/http_ca

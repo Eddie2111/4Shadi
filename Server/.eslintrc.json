@@ -1,0 +1,21 @@
+{
+    "env": {
+        "commonjs": true,
+        "es2021": true,
+        "node": true
+    },
+    "extends": "google",
+    "overrides": [
+    ],
+    "parserOptions": {
+        "ecmaVersion": "latest"
+    },
+    "rules": {
+        "linebreak-style": 2,
+        "max-len": ["error", {"code": 120}],
+        "indent": ["error", 4],
+        "no-undef": "off",
+        "no-unused-vars": "off",
+        "require-jsdoc": 2
+    }
+}
