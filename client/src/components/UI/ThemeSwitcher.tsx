@@ -16,13 +16,13 @@ export default function ThemeSwitcher() {
     <div>
         {
         theme === 'dark' ?
-            <Button auto
+            <Button
               onClick={() => setTheme('light')}
               color='secondary' variant='flat'>
                 <HiSun className='text-blue-700 text-4xl'/>
             </Button>
             :
-            <Button auto
+            <Button
               onClick={() => setTheme('dark')}
               color='primary' variant='flat'>
                 <HiOutlineMoon className='text-white text-4xl'/>

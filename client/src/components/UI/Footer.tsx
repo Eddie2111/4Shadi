@@ -1,8 +1,8 @@
 import Link from "next/link";
 export default function Footer() {
-    const SubmitHandle = async(e:Event) => {
+    const SubmitHandle = async(e:any) => {
         e.preventDefault();
-        const email = e.target.UserEmail.value;
+        const email = e?.target?.UserEmail?.value || '';
         console.log(email)
         // const res = await fetch('/api/subscribe', {
         //     body: JSON.stringify({
