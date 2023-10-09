@@ -3,14 +3,16 @@ import React from "react";
 import {Navbar, NavbarBrand, NavbarContent, NavbarItem, NavbarMenu, NavbarMenuItem, NavbarMenuToggle, Link, Button} from "@nextui-org/react";
 import {AcmeLogo} from "./AcmeLogo";
 import ThemeSwitcher from "./ThemeSwitcher";
+import { useAuth, UserButton } from "@clerk/nextjs";
 
-export default function NavigationBar() {
+export default function NavigationBar():JSX.Element {
     const [isMenuOpen, setIsMenuOpen] = React.useState(false);
     const menuItems = [ "Profile", "Dashboard", "My Settings", "Help & Feedback", "Log Out" ];
+    const { isLoaded, userId, sessionId, getToken } = useAuth();
+    // if (!isLoaded || !userId) { return null }
     return (
     <Navbar shouldHideOnScroll onMenuOpenChange={setIsMenuOpen} className='light:bg-white'>
       <NavbarMenuToggle className="sm:hidden" aria-label={isMenuOpen ? "Close menu" : "Open menu"} />
-
         <NavbarBrand>
           {/** Brand logo here */}
           <p className="font-bold text-inherit">Brand</p>
@@ -33,11 +35,12 @@ export default function NavigationBar() {
           <ThemeSwitcher/>
         </NavbarItem>
         <NavbarItem className="hidden lg:flex">
-          <Link href="/">Login</Link>
+          <Link href="/signin">Login</Link>
         </NavbarItem>
         <NavbarItem>
-          <Button as={Link} color="primary" href="/" variant="flat"> Sign Up </Button>
+          <Button as={Link} color="primary" href="/signup" variant="flat"> Sign Up </Button>
         </NavbarItem>
+        <UserButton />
       </NavbarContent>
       <NavbarMenu>
         {menuItems.map((item, index) => (

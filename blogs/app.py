@@ -39,8 +39,7 @@ def post_data():
         return jsonify({
             "error": "Invalid JSON data",
             "message": e
-        }
-        ), 400
+        }), 400
 
 
 @app.route('/api/upload', methods=['POST'])

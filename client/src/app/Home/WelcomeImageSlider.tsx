@@ -5,7 +5,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination } from 'swiper/modules';
 export default function WelcomeImageSlider() {
     return (
-        <div className='mt-[-200px]'>
+        <div className='mt-1 md:mt-[-200px]'>
             <Swiper
             spaceBetween={50}
             slidesPerView={1}

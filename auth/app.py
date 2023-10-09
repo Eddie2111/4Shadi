@@ -42,7 +42,7 @@ async def login(user_type: str):
 
     else: return {"message": "Invalid user type"}
 
-# register/employee
+# !register/employee
 # register/user
 @app.post("/register/{user_type}")
 async def register(user_type: str):
