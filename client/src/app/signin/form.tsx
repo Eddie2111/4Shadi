@@ -1,9 +1,14 @@
 'use client';
 import React from 'react';
+import axios from 'axios';
 import {Card, Input, Button} from '@nextui-org/react';
 import {EyeFilledIcon} from "@/components/Icons/EyeFilledIcon";
 import {EyeSlashFilledIcon} from "@/components/Icons/EyeSlashFilledIcon";
 import * as yup from 'yup';
+interface IResponseProps{
+    id: string;
+    message: string;
+}
 export default function SignInForm() {
     const [isVisible, setIsVisible] = React.useState(false);
     const toggleVisibility = () => setIsVisible(!isVisible);
@@ -32,6 +37,17 @@ export default function SignInForm() {
         }
         // adding validation using yup
         console.log({name, email, password})
+        try {
+            const response = await axios.post<IResponseProps>('http://localhost:3400/login/user', {
+                email,
+                password,
+            });
+            console.log(response);
+            alert('Signed in Successfully');
+        } catch (error) {
+            console.log(error);
+            alert('Error Signing In');
+        }
     }
     return (
         <Card className="w-[93%] md:w-[380px] mt-1 p-3" shadow={'md'}>

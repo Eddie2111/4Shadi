@@ -6,7 +6,7 @@ from config.CorsOrigins import origins
 
 import secrets
 from fastapi import HTTPException
-
+from datatype.UserModel import UserModel_Signup, UserModel_Login
 
 
 app = FastAPI()
@@ -47,20 +47,20 @@ def generate_unique_token(user_type):
     token = secrets.token_hex(8)
     return token
 
-@app.post("/register/{user_type}", response_model=dict)
-async def register(user_type: str):
-    if user_type in user_types:
-        # Generate a unique token for the user type
-        token = generate_unique_token(user_type)
+# @app.post("/register/{user_type}", response_model=dict)
+# async def register(user_type: str):
+#     if user_type in user_types:
+#         # Generate a unique token for the user type
+#         token = generate_unique_token(user_type)
         
-        # Store the token for the user type (you can save it in a database)
-        user_tokens[user_type].add(token)
+#         # Store the token for the user type (you can save it in a database)
+#         user_tokens[user_type].add(token)
         
-        # Construct the response explicitly as JSON
-        response_data = {"message": f"Hello {user_type}", "token": token}
-        return JSONResponse(content=response_data)
-    else:
-        raise HTTPException(status_code=400, detail="Invalid user type")
+#         # Construct the response explicitly as JSON
+#         response_data = {"message": f"Hello {user_type}", "token": token}
+#         return JSONResponse(content=response_data)
+#     else:
+#         raise HTTPException(status_code=400, detail="Invalid user type")
 
 #D07.10.23<
 @app.get("/")
@@ -71,8 +71,9 @@ async def root():
 # login/employee
 # login/user
 @app.post("/login/{user_type}")
-async def login(user_type: str):
+async def login(user_type: str, data: UserModel_Login):
     if user_type in user_types:
+        print(data)
         return {"message": f"Hello {user_type}"}
 
     else: return {"message": "Invalid user type"}
@@ -80,9 +81,14 @@ async def login(user_type: str):
 # !register/employee
 # register/user
 @app.post("/register/{user_type}")
-async def register(user_type: str):
+async def register(user_type: str, data: UserModel_Signup):
     if user_type in user_types:
-        return {"message": f"Hello {user_type}"}
+        print(data)
+        # add to auth database from here
+        return {
+            "message": f"Hello {user_type}",
+            "id": data.serial,
+        }
     else: return {"message": "Invalid user type"}
 
 # logout

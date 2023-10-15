@@ -1,12 +1,20 @@
 'use client';
 import React from 'react';
+import axios from 'axios';
+import {v4} from 'uuid';
+import {useRouter} from 'next/navigation';
 import {Card, Input, Button} from '@nextui-org/react';
 import {EyeFilledIcon} from "@/components/Icons/EyeFilledIcon";
 import {EyeSlashFilledIcon} from "@/components/Icons/EyeSlashFilledIcon";
 import * as yup from 'yup';
+interface IResponseProps{
+    id: string;
+    message: string;
+}
 export default function SignInForm() {
     const [isVisible, setIsVisible] = React.useState(false);
     const toggleVisibility = () => setIsVisible(!isVisible);
+    const router = useRouter();
     const SubmitHandle = async(e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const target = e.target as typeof e.currentTarget & {
@@ -34,7 +42,21 @@ export default function SignInForm() {
             return;
         }
         // adding validation using yup
-        console.log({name, email, password})
+        console.log({name, email, password});
+        try {
+            const response = await axios.post<IResponseProps>('http://localhost:3400/register/user', {
+                serial:v4(),
+                name,
+                email,
+                password,
+            });
+            console.log(response);
+            alert('Signed Up Successfully');
+            router.push('/on-board');
+        } catch (error) {
+            console.log(error);
+            alert('Error Signing In');
+        }
     }
     return (
         <Card
