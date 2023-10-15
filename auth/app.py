@@ -1,8 +1,13 @@
 from fastapi import FastAPI
 # from lib.mysql import __test__
 from fastapi.middleware.cors import CORSMiddleware
-
+from fastapi.responses import JSONResponse
 from config.CorsOrigins import origins
+
+import secrets
+from fastapi import HTTPException
+
+
 
 app = FastAPI()
 
@@ -28,6 +33,36 @@ async def add_security_headers(request, call_next):
 
 user_types:list = ["admin", "employee", "user"]
 
+#D07.10.23> Huntick
+# Dictionary to store user tokens
+user_tokens = {
+    "admin": set(),
+    "employee": set(),
+    "user": set(),
+}
+
+# Function to generate a unique token for a user type
+def generate_unique_token(user_type):
+    # Generate a random token (16 characters long)
+    token = secrets.token_hex(8)
+    return token
+
+@app.post("/register/{user_type}", response_model=dict)
+async def register(user_type: str):
+    if user_type in user_types:
+        # Generate a unique token for the user type
+        token = generate_unique_token(user_type)
+        
+        # Store the token for the user type (you can save it in a database)
+        user_tokens[user_type].add(token)
+        
+        # Construct the response explicitly as JSON
+        response_data = {"message": f"Hello {user_type}", "token": token}
+        return JSONResponse(content=response_data)
+    else:
+        raise HTTPException(status_code=400, detail="Invalid user type")
+
+#D07.10.23<
 @app.get("/")
 async def root():
     return {"message": "Hello World"}
@@ -86,6 +121,9 @@ async def delete(user_type: str):
     if user_type in user_types:
         return {"message": f"Hello {user_type}"}
     else: return {"message": "Invalid user type"}
+
+
+
 
 
 
