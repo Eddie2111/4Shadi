@@ -1,19 +1,25 @@
-from fastapi import FastAPI
-# from lib.mysql import __test__
+from fastapi import FastAPI, APIRouter, Response, Request, status, Depends, HTTPException, Cookie
+from lib.mysql import __test__, cursor
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from config.CorsOrigins import origins
-
+# from lib.env_test import __test__
 import secrets
 from fastapi import HTTPException
 from datatype.UserModel import UserModel_Signup, UserModel_Login
-
+# Models
+from model.register_user import RegisterUser
+from model.authenticate_user import AuthenticateUser
 
 app = FastAPI()
 
 # initating cors  → Cross Origin Resource Sharing, allows the server to accept requests from only the specified origins as in our nextjs app
 # this is a security feature, origin sources are provided in config/CorsOrigins.py
 # no need to change anything here unless you know what you are doing
+
+@app.on_event("startup")
+async def startup():
+    __test__(); # turning the database on
 
 ###################################################################################################
 app.add_middleware(
@@ -52,10 +58,10 @@ def generate_unique_token(user_type):
 #     if user_type in user_types:
 #         # Generate a unique token for the user type
 #         token = generate_unique_token(user_type)
-        
+
 #         # Store the token for the user type (you can save it in a database)
 #         user_tokens[user_type].add(token)
-        
+
 #         # Construct the response explicitly as JSON
 #         response_data = {"message": f"Hello {user_type}", "token": token}
 #         return JSONResponse(content=response_data)
@@ -71,11 +77,32 @@ async def root():
 # login/employee
 # login/user
 @app.post("/login/{user_type}")
-async def login(user_type: str, data: UserModel_Login):
+async def login(user_type: str, data: UserModel_Login, response: Response):
     if user_type in user_types:
-        print(data)
-        return {"message": f"Hello {user_type}"}
-
+        userdata = {
+            "email": data.email,
+            "password": data.password,
+            "user_type": user_type
+        }
+        # authenticate user from here
+        resulting_in = AuthenticateUser(userdata)
+        print(resulting_in,'this?')
+        if resulting_in["status"] == 1:
+            response.set_cookie(
+                key="user_token",
+                value=resulting_in["token"],
+                httponly=True,
+                samesite="strict",
+                secure=True,
+                max_age=36000,
+                expires=36000,
+            )
+            return {
+                "message": f"Hello {user_type}",
+                "id": data.email,
+                "result": resulting_in
+            }
+        else: return {"message": "Error authenticating user"}
     else: return {"message": "Invalid user type"}
 
 # !register/employee
@@ -83,12 +110,24 @@ async def login(user_type: str, data: UserModel_Login):
 @app.post("/register/{user_type}")
 async def register(user_type: str, data: UserModel_Signup):
     if user_type in user_types:
-        print(data)
-        # add to auth database from here
-        return {
-            "message": f"Hello {user_type}",
-            "id": data.serial,
+        userdata = {
+            "serial": data.serial,
+            "name": data.name,
+            "email": data.email,
+            "password": data.password,
+            "user_type": user_type
         }
+        # add to auth database from here
+        resulting_in = RegisterUser(userdata)
+        print(resulting_in)
+        if resulting_in:
+            return {
+                "message": f"Hello {user_type}",
+                "id": data.serial,
+                "name": data.name,
+                "email": data.email,
+            }
+        else: return {"message": "Error registering user"}
     else: return {"message": "Invalid user type"}
 
 # logout
