@@ -1,8 +1,9 @@
-from beanie import Document
+from beanie import Document, Indexed
 from pydantic import BaseModel
 from typing import Optional
 
 class Profile(Document):
+    serial: Indexed(str, unique=True)
     name: str
     email: str
     nid_number: str

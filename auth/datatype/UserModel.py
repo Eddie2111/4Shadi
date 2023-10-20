@@ -16,5 +16,7 @@ class UserModel_Login(BaseModel):
     email: str
     password: str
 
+class UserModel_Remove(BaseModel):
+    id: str
 
 

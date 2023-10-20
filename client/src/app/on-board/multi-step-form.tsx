@@ -1,8 +1,16 @@
 'use client';
 import React from "react";
 import axios from "axios";
+import {useRouter} from "next/navigation";
 import { Card, Input, Button } from "@nextui-org/react";
+interface IResponseProps {
+  data: {
+    message: string;
+    status: number;
+  };
+}
 export default function MultiStepForm() {
+  const router = useRouter();
   const [name, setName] = React.useState<string>("");
   const [email, setEmail] = React.useState<string>("");
   const [id, setID] = React.useState<string>("");
@@ -18,10 +26,14 @@ export default function MultiStepForm() {
     }
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
-      const collect_data = {...inputdata, id, name, email};
+      const collect_data = {...inputdata, serial:id, name, email};
       console.log(collect_data);
-      const response = await axios.post('http://localhost:3500/profile', collect_data);
+      const response = await axios.post<IResponseProps>('http://localhost:3500/profile', collect_data);
       console.log(response.data)
+      if (response.data.status === 200){
+        alert(response.data.message);
+        router.push('/profile');
+      }
     }
   return (
     <div>

@@ -8,10 +8,12 @@ import {EyeFilledIcon} from "@/components/Icons/EyeFilledIcon";
 import {EyeSlashFilledIcon} from "@/components/Icons/EyeSlashFilledIcon";
 import * as yup from 'yup';
 interface IResponseProps{
-    id: string;
-    message: string;
-    name: string;
-    email: string;
+    data: {
+        id: string;
+        message: string;
+        name: string;
+        email: string;
+    }
 }
 export default function SignInForm() {
     const [isVisible, setIsVisible] = React.useState(false);
@@ -53,11 +55,11 @@ export default function SignInForm() {
                 password,
             });
             console.log(response);
-            alert(response.message);
-            localStorage.setItem('id', JSON.stringify(response.id));
-            localStorage.setItem('name', JSON.stringify(response.name));
-            localStorage.setItem('email', JSON.stringify(response.email));
-            //router.push('/on-board');
+            //alert(response.message);//
+            localStorage.setItem('id', response.data.id);
+            localStorage.setItem('name', response.data.name);
+            localStorage.setItem('email', response.data.email);
+            router.push('/on-board');
         } catch (error) {
             console.log(error);
             alert('Error Signing In');

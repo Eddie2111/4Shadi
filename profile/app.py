@@ -1,9 +1,12 @@
+from beanie import PydanticObjectId
 from fastapi import FastAPI
 # from lib.mysql import __test__
 from fastapi.middleware.cors import CORSMiddleware
-from datatypes.UserModel import UserModel_Register
+from datatypes.UserModel import UserModel_Register, UserModel_GetOne
 from config.CorsOrigins import origins
+from schema.ProfileSchema import Profile
 from lib.py_mongo import init_db
+from pydantic import *
 app = FastAPI()
 
 # initating cors  → Cross Origin Resource Sharing, allows the server to accept requests from only the specified origins as in our nextjs app
@@ -37,19 +40,41 @@ async def root():
 # register/employee
 # register/user
 @app.post("/profile")
-async def register(data:UserModel_Register):
-    return {
-        "message": "Hello register",
-        "data": data
-    }
+async def register(data:Profile):
+    try:
+        await data.insert()
+        return {
+            "message": "Hello register",
+            # "data": data,
+            "status":200
+        }
+    except Exception as e:
+        print(e)
+        return {
+            "message": "register failed",
+            # "data": data,
+            "status":500
+        }
 
 # getone/employee
 # getone/user
-@app.get("/getone/{user_type}")
-async def getone(user_type: str):
-    if user_type in user_types:
-        return {"message": f"Hello {user_type}"}
-    else: return {"message": "Invalid user type"}
+@app.post("/getone/{Id}", response_model=Profile)
+async def getone(Id: PydanticObjectId):
+    print(Id)
+    return {
+        "message": "Hello getone",
+        # "id": data,
+        "status": 200
+    }
+@app.get("/user/{id}", response_model=Profile)
+async def get_book(id: PydanticObjectId):
+    #book = await Profile.get(id)
+    print(id)
+    return {
+        "message": "Hello getone",
+        # "id": data,
+        "status": 200
+    }
 
 # getall/employee
 # getall/user

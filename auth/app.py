@@ -1,15 +1,21 @@
-from fastapi import FastAPI, APIRouter, Response, Request, status, Depends, HTTPException, Cookie
+from fastapi import *
 from lib.mysql import __test__, cursor
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from config.CorsOrigins import origins
+
 # from lib.env_test import __test__
 import secrets
 from fastapi import HTTPException
-from datatype.UserModel import UserModel_Signup, UserModel_Login
+from datatype.UserModel import UserModel_Signup, UserModel_Login, UserModel_Remove
+
 # Models
 from model.register_user import RegisterUser
 from model.authenticate_user import AuthenticateUser
+
+# Controllers
+from controller.GetAll import GetAllUsers
+from controller.RemoveOneUser import RemoveAUser
 
 app = FastAPI()
 
@@ -148,7 +154,12 @@ async def getone(user_type: str):
 @app.get("/getall/{user_type}")
 async def getall(user_type: str):
     if user_type in user_types:
-        return {"message": f"Hello {user_type}"}
+        userdata = await GetAllUsers()
+        return {
+            "status": "200",
+            "data": userdata,
+            "user_type": user_type
+        }
     else: return {"message": "Invalid user type"}
 
 # update/employee
@@ -162,10 +173,10 @@ async def update(user_type: str):
 # delete/employee
 # delete/user
 @app.delete("/delete/{user_type}")
-async def delete(user_type: str):
-    if user_type in user_types:
-        return {"message": f"Hello {user_type}"}
-    else: return {"message": "Invalid user type"}
+async def delete(user_type: str, data: UserModel_Remove):
+    if user_type == 'admin':
+        result = RemoveAUser(data.id)
+        return result
 
 
 
