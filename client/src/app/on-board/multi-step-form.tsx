@@ -4,12 +4,14 @@ import axios from "axios";
 import {useRouter} from "next/navigation";
 import { Card, Input, Button } from "@nextui-org/react";
 interface IResponseProps {
+  message: string;
+  status: number;
   data: {
     message: string;
     status: number;
   };
 }
-export default function MultiStepForm() {
+export default function MultiStepForm(): JSX.Element {
   const router = useRouter();
   const [name, setName] = React.useState<string>("");
   const [email, setEmail] = React.useState<string>("");

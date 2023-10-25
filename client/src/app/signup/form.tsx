@@ -8,7 +8,11 @@ import {EyeFilledIcon} from "@/components/Icons/EyeFilledIcon";
 import {EyeSlashFilledIcon} from "@/components/Icons/EyeSlashFilledIcon";
 import * as yup from 'yup';
 interface IResponseProps{
-    data: {
+    id?: string;
+    message?: string;
+    name?: string;
+    email?: string;
+    data?: {
         id: string;
         message: string;
         name: string;

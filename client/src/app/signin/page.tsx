@@ -8,7 +8,7 @@ export const metadata:Metadata = {
   description: 'Sign in to your account',
 }
 
-export default function Page() {
+export default function Page(): JSX.Element {
   return (
     <center className='flex flex-col md:flex-row-reverse w-full justify-between md:w-[75%] md:mx-auto mx-3'>
       <SignIn />

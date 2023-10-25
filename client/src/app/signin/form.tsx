@@ -10,7 +10,7 @@ interface IResponseProps{
     id: string;
     message: string;
 }
-export default function SignInForm() {
+export default function SignInForm(): JSX.Element {
     const [isVisible, setIsVisible] = React.useState(false);
     const toggleVisibility = () => setIsVisible(!isVisible);
     const router = useRouter();
