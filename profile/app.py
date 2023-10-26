@@ -1,5 +1,5 @@
 from beanie import PydanticObjectId
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 # from lib.mysql import __test__
 from fastapi.middleware.cors import CORSMiddleware
 from datatypes.UserModel import UserModel_Register, UserModel_GetOne
@@ -7,6 +7,7 @@ from config.CorsOrigins import origins
 from schema.ProfileSchema import Profile
 from lib.py_mongo import init_db
 from pydantic import *
+import jsonwebtoken
 app = FastAPI()
 
 # initating cors  → Cross Origin Resource Sharing, allows the server to accept requests from only the specified origins as in our nextjs app
@@ -100,6 +101,20 @@ async def delete(user_type: str):
         return {"message": f"Hello {user_type}"}
     else: return {"message": "Invalid user type"}
 
+from schema.ProfileSchema import Profile
+
+@app.get("/profile/getone")
+async def getone(request: Request):
+    print(request.cookies['user_token'])
+    user_Data = jsonwebtoken.decode(request.cookies['user_token'], "secret", algorithms=["HS256"])
+    print(user_Data['serial'])
+    datalog = await Profile.find_one(Profile.serial == str(user_Data['serial']))
+    print(datalog)
+    return {
+        "message": "Hello World",
+        "user": datalog
+
+        }
 
 # install all required dependencies for fastapi:
 ## pip install "fastapi[all]"

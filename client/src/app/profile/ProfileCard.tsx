@@ -2,9 +2,17 @@
 import React from 'react';
 import {Card, Input, Button, CardBody, CardHeader, Image, Divider, CardFooter, Link} from '@nextui-org/react';
 
-export default function ProfileCard(): JSX.Element {
+interface IDataProps{
+    name:string;
+    email:string;
+    age:string;
+    height:string;
+    preferences:string;
+}
+
+export default function ProfileCard({data}:IDataProps): JSX.Element {
     return (
-    <Card className="md:max-w-[450px] max-w-screen my-2 h-[360px]">
+    <Card className="md:max-w-[450px] max-w-screen my-2 h-[380px]">
         <CardHeader className="flex flex-col gap-3 justify-center">
             <Image
             alt="nextui logo"
@@ -14,23 +22,25 @@ export default function ProfileCard(): JSX.Element {
             width={120}
             />
             <div className="flex flex-col justify-center text-center">
-                <p className="text-md">Dante</p>
-                <p className="text-small text-default-500"><span className='font-bold'>@</span>NariProttashi_69</p>
+                <p className="text-md">{data.name}</p>
             </div>
         </CardHeader>
         <Divider/>
 
         <CardBody>
-            <p>Guy forgot to add my bio here</p>
+            <p>Age: {data.age}</p>
+            <p>Height: {data.height}</p>
+            <p>Preferences: {data.preferences}</p>
         </CardBody>
         <Divider/>
 
-        <CardFooter>
+        <CardFooter className='text-center'>
             <Link
             isExternal
             showAnchorIcon
+            className="w-[320px] text-center"
             href="https://github.com/nextui-org/nextui"
-            > I only use Pager so I have no social media links
+            > {data.email}
             </Link>
         </CardFooter>
     </Card>
