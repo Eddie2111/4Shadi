@@ -23,13 +23,13 @@ def allowed_file(filename):
     return '.' in filename and filename.rsplit(
         '.', 1)[1].lower() in allowed_extensions
 
-
+# Example GET request
 @app.route('/', methods=['GET'])
 def get_data():
     data = {"message": "This is a GET request response."}
     return jsonify(data), 200
 
-
+# Example POST request with JSON data
 @app.route('/', methods=['POST'])
 def post_data():
     try:
@@ -41,7 +41,7 @@ def post_data():
             "message": e
         }), 400
 
-
+# Example POST request with form data
 @app.route('/api/upload', methods=['POST'])
 def upload_file():
     try:
@@ -77,3 +77,17 @@ def upload_file():
                 "message": e
             }
         ), 500
+
+
+##############################################
+# TODO: Implement the following endpoints
+'''
+Blog:
+- create a post endpoint: blogs/post
+- create a connection to local mysql database, (please try to use class component)
+- test on posting the data
+- store the data
+- try to make it asynchronous (optional) 
+- can you implement threads? (optional)
+'''
+##############################################

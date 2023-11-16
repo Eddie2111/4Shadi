@@ -12,7 +12,6 @@ interface IDataProps {
 }
 
 export default function BioCard({data}:IDataProps): JSX.Element {
-    console.log(data)
     return (
     <Card className="md:w-[750px] max-w-screen mx-4 my-2">
         <CardHeader className="flex flex-col gap-3 justify-center">

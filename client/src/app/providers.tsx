@@ -2,7 +2,7 @@
 
 import {NextUIProvider, Spacer} from '@nextui-org/react'
 import {ThemeProvider as NextThemesProvider} from "next-themes";
-import Navbar from "@/components/UI/Navbar";
+import Navbar from "@/components/UI/Navbar/index";
 import Footer from "@/components/UI/Footer";
 import {ReactLenis} from '@studio-freight/react-lenis';
 export function Providers({children}: { children: React.ReactNode }) {

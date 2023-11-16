@@ -181,8 +181,6 @@ async def delete(user_type: str, data: UserModel_Remove):
 
 
 
-
-
 # install all required dependencies for fastapi:
 ## pip install "fastapi[all]"
 ## pip install "uvicorn[standard]"

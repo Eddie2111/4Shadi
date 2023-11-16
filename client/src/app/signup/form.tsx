@@ -7,6 +7,7 @@ import {Card, Input, Button} from '@nextui-org/react';
 import {EyeFilledIcon} from "@/components/Icons/EyeFilledIcon";
 import {EyeSlashFilledIcon} from "@/components/Icons/EyeSlashFilledIcon";
 import * as yup from 'yup';
+
 interface IResponseProps{
     id?: string;
     message?: string;
@@ -19,6 +20,7 @@ interface IResponseProps{
         email: string;
     }
 }
+
 export default function SignInForm() {
     const [isVisible, setIsVisible] = React.useState(false);
     const toggleVisibility = () => setIsVisible(!isVisible);
