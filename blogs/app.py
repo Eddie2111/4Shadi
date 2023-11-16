@@ -91,3 +91,7 @@ Blog:
 - can you implement threads? (optional)
 '''
 ##############################################
+# !Imp: Please do test the code before pushing:
+# - Run command: python -m flask --app app run --port=3700 --reload
+# - Fix Lint: python -m autopep8 --in-place --aggressive --aggressive app.py
+# - Test command: python -m flake8 app.py
