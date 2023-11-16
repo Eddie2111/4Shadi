@@ -16,5 +16,6 @@ SearchEngine/.env
 # Ignore node_modules folder in auth folder
 auth/node_modules/
 auth/.env
+auth/lib
 auth/http_ca.crt
 auth/http_ca
