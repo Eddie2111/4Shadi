@@ -18,3 +18,4 @@ refactor: Refactoring a specific section of the codebase. (Improving a specific 
 test: Everything related to testing
 docs: Tasks related to documentation
 chore: Regular code maintenance
+
