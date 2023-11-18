@@ -4,7 +4,9 @@ import type {Metadata} from 'next';
 const SignInForm = dynamic(() => import("./form"), { ssr: false });
 
 export const metadata:Metadata = {
-  title: 'Sign In',
+  title: {
+    default: 'Sign In | 4Shadi',
+  },
   description: 'Sign in to your account',
 }
 

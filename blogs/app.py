@@ -87,7 +87,7 @@ Blog:
 - create a connection to local mysql database, (please try to use class component)
 - test on posting the data
 - store the data
-- try to make it asynchronous (optional) 
+- try to make it asynchronous (optional)
 - can you implement threads? (optional)
 '''
 ##############################################

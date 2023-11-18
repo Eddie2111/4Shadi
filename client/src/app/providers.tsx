@@ -2,10 +2,14 @@
 
 import {NextUIProvider, Spacer} from '@nextui-org/react'
 import {ThemeProvider as NextThemesProvider} from "next-themes";
+import {usePathname} from 'next/navigation';
+import {ReactLenis} from '@studio-freight/react-lenis';
+
 import Navbar from "@/components/UI/Navbar/index";
 import Footer from "@/components/UI/Footer";
-import {ReactLenis} from '@studio-freight/react-lenis';
+
 export function Providers({children}: { children: React.ReactNode }) {
+  const pathname: string = usePathname();
   return (
     <NextUIProvider>
        <NextThemesProvider attribute="class" defaultTheme="dark">
@@ -14,7 +18,9 @@ export function Providers({children}: { children: React.ReactNode }) {
                 {children}
               </ReactLenis>
               <Spacer y={32} />
-            <Footer/>
+            {
+              pathname.includes('/admin') ? null : <Footer />
+            }
        </NextThemesProvider>
     </NextUIProvider>
   )

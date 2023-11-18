@@ -2,7 +2,7 @@
 import axios from "axios";
 import React from "react";
 import {Navbar, NavbarBrand, NavbarContent, NavbarItem, NavbarMenu, NavbarMenuItem, NavbarMenuToggle, Link, Button} from "@nextui-org/react";
-import {AcmeLogo} from "./AcmeLogo";
+import Image from 'next/image';
 import ThemeSwitcher from "./ThemeSwitcher";
 import ProfileControlSection from "./ProfileControlSection";
 import { useAuth, UserButton } from "@clerk/nextjs";
@@ -30,7 +30,10 @@ export default function NavigationBar():JSX.Element {
 
         <NavbarBrand>
           {/** Brand logo here */}
-          <p className="font-bold text-inherit">Brand</p>
+          <Link href={ profileData?.data?.user?.serial ? `/choices` : "/"} >
+          <Image src='/brand-logo-clean.svg' width={100} height={50} alt='logo'  />
+          </Link>
+          {/* <p className="font-bold text-inherit">Brand</p> */}
         </NavbarBrand>
 
         <NavbarContent className="hidden sm:flex gap-4" justify="center">
@@ -39,7 +42,7 @@ export default function NavigationBar():JSX.Element {
                >Home </Link>
           </NavbarItem>
           <NavbarItem isActive>
-            <Link href="/" aria-current="page"> Choices </Link>
+            <Link href="/choices" aria-current="page"> Choices </Link>
           </NavbarItem>
           <NavbarItem>
             <Link color="foreground" href="/"> Support </Link>

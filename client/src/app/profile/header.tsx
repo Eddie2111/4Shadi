@@ -1,4 +1,6 @@
 'use client';
+import type {IUserProps} from '@/types/UserTypes';
+
 import dynamic from 'next/dynamic';
 import React from 'react';
 import axios from 'axios';
@@ -41,38 +43,4 @@ export default function Header(): JSX.Element {
             <BioCard data={biocardData}/>
         </div>
     )
-}
-
-
-interface IUserProps{
-    data?: {
-        user?: {
-            _id: string;
-            age: string
-            birth_cert: string
-            email: string;
-            height: string;
-            location: string;
-            marriage_cert: string;
-            name: string;
-            nid_number: string;
-            phone_number: string
-            preferences: string;
-            serial: string;
-        }
-    },
-    user?: {
-        _id: string;
-        age: string
-        birth_cert: string
-        email: string;
-        height: string;
-        location: string;
-        marriage_cert: string;
-        name: string;
-        nid_number: string;
-        phone_number: string
-        preferences: string;
-        serial: string;
-    }
 }
