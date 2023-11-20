@@ -1,6 +1,6 @@
 # 4Shadhi 
 
-- The league of extra ordinary divorcee's 
+- The league of extra ordinary divorcee's...
 
 ## Client
 
