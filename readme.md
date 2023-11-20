@@ -1,6 +1,6 @@
-# Propose a name and update the file whoever is working
+# 4Shadhi 
 
-- The league of extra ordinary divorcee's _Eddie2111
+- The league of extra ordinary divorcee's 
 
 ## Client
 
