@@ -1,4 +1,6 @@
 'use client';
+import type {IUserProps} from '@/types/UserTypes';
+
 import dynamic from 'next/dynamic';
 import React from 'react';
 import axios from 'axios';
@@ -17,7 +19,6 @@ export default function Header(): JSX.Element {
             {withCredentials: true}
             )
         .then((res)=>{
-            // console.log(res.data);
             setProfileCardData({
                 name: res.data.user.name, age: res.data.user.age,
                 height: res.data.user.height, email: res.data.user.email,
@@ -37,43 +38,9 @@ export default function Header(): JSX.Element {
         })
     },[])
     return(
-        <div className='w-[99%] md:w-[95%] p-5 md:px-20 flex flex-col md:flex-row'>
+        <div className='w-[95%] md:w-[70%] mx-5 md:mx-[18%] px-5 flex flex-col md:flex-row'>
             <ProfileCard data={profileCardData}/>
             <BioCard data={biocardData}/>
         </div>
     )
-}
-
-
-interface IUserProps{
-    data?: {
-        user?: {
-            _id: string;
-            age: string
-            birth_cert: string
-            email: string;
-            height: string;
-            location: string;
-            marriage_cert: string;
-            name: string;
-            nid_number: string;
-            phone_number: string
-            preferences: string;
-            serial: string;
-        }
-    },
-    user?: {
-        _id: string;
-        age: string
-        birth_cert: string
-        email: string;
-        height: string;
-        location: string;
-        marriage_cert: string;
-        name: string;
-        nid_number: string;
-        phone_number: string
-        preferences: string;
-        serial: string;
-    }
 }

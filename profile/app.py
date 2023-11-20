@@ -105,16 +105,58 @@ from schema.ProfileSchema import Profile
 
 @app.get("/profile/getone")
 async def getone(request: Request):
-    print(request.cookies['user_token'])
-    user_Data = jsonwebtoken.decode(request.cookies['user_token'], "secret", algorithms=["HS256"])
-    print(user_Data['serial'])
-    datalog = await Profile.find_one(Profile.serial == str(user_Data['serial']))
-    print(datalog)
-    return {
-        "message": "Hello World",
-        "user": datalog
-
+    try:
+        # print(request.cookies['user_token'])
+        user_Data = jsonwebtoken.decode(request.cookies['user_token'], "secret", algorithms=["HS256"])
+        print(user_Data['serial'])
+        datalog = await Profile.find_one(Profile.serial == str(user_Data['serial']))
+        # print(datalog)
+        return {
+            "message": "Hello World",
+            "user": datalog
         }
+    except Exception as e:
+        return {
+            "message": "Error",
+            "error": str(e)
+        }
+
+@app.post("/profile/getone")
+# use UserModel_GetOne data type to get only one field of the sent json
+async def getone(data: UserModel_GetOne):
+    try:
+        print(data.id)
+        datalog = await Profile.find_one(Profile.serial == data.id)
+        return {
+            "message": "Hello World",
+            "user": datalog
+        }
+    except Exception as e:
+        return {
+            "message": "Error",
+            "error": str(e)
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 # install all required dependencies for fastapi:
 ## pip install "fastapi[all]"
