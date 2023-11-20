@@ -3,13 +3,15 @@ import React from "react";
 import {Card, CardBody, CardFooter, Image} from "@nextui-org/react";
 
 interface IitemProps {
-  title: string;
-  img: string;
-  price: string;
+  data: {
+    title: string;
+    img: string;
+    price: string;
+  };
 }
 
-export default function CustomCard({item}: IitemProps): JSX.Element {
-
+export default function CustomCard({data}: IitemProps): JSX.Element {
+  const { title, img, price } = data;
   return (
         <Card shadow="sm" isPressable className="max-w-[400px]">
           <CardBody className="overflow-visible p-0">
@@ -17,13 +19,13 @@ export default function CustomCard({item}: IitemProps): JSX.Element {
               shadow="sm"
               radius="lg"
               width="100%"
-              alt={item.title}
+              alt={title}
               className="w-full object-cover h-[300px]"
-              src={item.img}
+              src={img}
             />
           </CardBody>
           <CardFooter className="text-small justify-between">
-            <b>{item.title}</b>
+            <b>{title}</b>
             <b> Age: 27 </b>
             <p className="text-default-500">Location: Dhaka</p>
           </CardFooter>

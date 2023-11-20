@@ -5,7 +5,8 @@ const SignInForm = dynamic(() => import("./form"), { ssr: false });
 
 export const metadata:Metadata = {
   title: {
-    default: 'Sign In | 4Shadi',
+    template: 'Sign In | 4Shadi',
+    absolute: 'Sign In | 4Shadi',
   },
   description: 'Sign in to your account',
 }

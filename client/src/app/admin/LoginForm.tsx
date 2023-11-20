@@ -32,9 +32,9 @@ export default function Login(): JSX.Element{
             }
             console.log(result)
         }
-        catch(error){
+        catch(error:any){
             console.log(
-                error.errors.map((err) => {
+                error.errors.map((err:any) => {
                     setErrors([...errors, err.message])
                 })
             )

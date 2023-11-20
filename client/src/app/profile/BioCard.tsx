@@ -3,12 +3,14 @@ import React from 'react';
 import {Card, Input, Button, CardBody, CardHeader, Image, Divider, CardFooter, Link} from '@nextui-org/react';
 
 interface IDataProps {
-    nid_number: string;
-    birth_cert: string;
-    marriage_cert: string;
-    phone_number: string;
-    email: string;
-    location: string;
+    data: {
+        nid_number: string;
+        birth_cert: string;
+        marriage_cert: string;
+        phone_number: string;
+        email: string;
+        location: string;
+    }
 }
 
 export default function BioCard({data}:IDataProps): JSX.Element {

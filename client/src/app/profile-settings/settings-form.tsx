@@ -10,7 +10,7 @@ export default function SettingsForm() {
     const [preference, setPreferences] = React.useState<string>("");
     const preferences:string[] = ["gardening", "driving", "travelling", "playing games", "atheletics", "gym"];
     const [selectedPreferences, SetSelectedPreferences] = React.useState<string[]>([]);
-    async function SettingSelectedPreferences(e: React.FormEvent<HTMLFormElement>){
+    async function SettingSelectedPreferences(e: React.ChangeEvent<HTMLSelectElement>){
         e.preventDefault();
         const stringConverter: string = e.currentTarget.value;
         if (!selectedPreferences.includes(stringConverter) && stringConverter !== "0") {
@@ -43,7 +43,9 @@ export default function SettingsForm() {
                             <p className='text-red-500'>No preferences selected</p>
                             }
                         </div>
-                        <select name="preferences" id="" onChange={SettingSelectedPreferences} className='w-64 text-md text-gray-700 rounded-lg p-2'>
+                        <select name="preferences" id="" 
+                            onChange={(e: React.ChangeEvent<HTMLSelectElement>) => SettingSelectedPreferences(e)} 
+                            className='w-64 text-md text-gray-700 rounded-lg p-2'>
                             <option value="0" className='text-md text-gray-700'>Select</option>
                             { preferences.map((item,index)=>{
                                 return(
@@ -60,7 +62,7 @@ export default function SettingsForm() {
     )
 }
 
-function Badge({title:string}):JSX.Element{
+function Badge({title}:any):JSX.Element{
     return(
         <motion.div
         initial={{scale:0}}

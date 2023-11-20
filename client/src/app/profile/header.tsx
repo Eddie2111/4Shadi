@@ -10,30 +10,30 @@ const BioCard = dynamic(() => import('./BioCard'), {ssr: false});
 
 
 export default function Header(): JSX.Element {
-    const [userdata, setUserdata] = React.useState<IUserProps>({});
-    const [profileCardData,setProfileCardData] = React.useState({});
-    const [biocardData,setBiocardData] = React.useState({});
+    const [userdata, setUserdata] = React.useState<any>({});
+    const [profileCardData,setProfileCardData] = React.useState<any>({});
+    const [biocardData,setBiocardData] = React.useState<any>({});
     React.useEffect(()=>{
-        axios.get<IUserProps>(
+        axios.get<any>(
             'http://localhost:3500/profile/getone',
             {withCredentials: true}
             )
         .then((res)=>{
             setProfileCardData({
-                name: res.data.user.name, age: res.data.user.age,
-                height: res.data.user.height, email: res.data.user.email,
-                preferences: res.data.user.preferences,
+                name: res?.data?.user?.name || " ", age: res?.data?.user?.age || " ",
+                height: res?.data?.user?.height || " ", email: res?.data?.user?.email || " ",
+                preferences: res?.data?.user?.preferences,
             });
             setBiocardData({
-                nid_number: res.data.user.nid_number,
-                birth_cert: res.data.user.birth_cert,
-                marriage_cert: res.data.user.marriage_cert,
-                phone_number: res.data.user.phone_number,
-                email: res.data.user.email,
-                location: res.data.user.location,
+                nid_number: res?.data?.user?.nid_number || " ",
+                birth_cert: res?.data?.user?.birth_cert || " ",
+                marriage_cert: res?.data?.user?.marriage_cert || " ",
+                phone_number: res?.data?.user?.phone_number || " ",
+                email: res?.data?.user?.email || " ",
+                location: res?.data?.user?.location || " ",
             });
         })
-        .catch((err)=>{
+        .catch((err:any)=>{
             console.log(err);
         })
     },[])

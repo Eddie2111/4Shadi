@@ -1,8 +1,9 @@
 import CustomCard from '@/components/Cards/CustomCards';
 import type {Metadata} from 'next';
-export const meta: Metadata = {
+export const metadata: Metadata = {
     title: {
-        default: 'Choices'
+        template: 'Choices',
+        absolute: 'Choices',
     },
     description: 'Choices for your wedding partner and wedding planning',
 }
@@ -53,8 +54,10 @@ export default function index(): JSX.Element {
         <div className='container mx-auto px-auto my-10'>
             <div className="gap-2 grid grid-cols-2 sm:grid-cols-4">
                 {
-                    list.map((item, index) => (
-                        <CustomCard key={index} item={item} />
+                    list.map((items, index) => (
+                      <div key={index}>
+                        <CustomCard data={items} />
+                      </div>
                     ))
                 }
             </div>
@@ -64,7 +67,9 @@ export default function index(): JSX.Element {
                   {/* render only three elements from the list */}
                   {
                     list.slice(0,3).map((item, index) => (
-                        <CustomCard key={index} item={item} />
+                      <div key={index}>
+                        <CustomCard data={item} />
+                      </div>
                     ))
                   }
                 </div>
@@ -72,7 +77,9 @@ export default function index(): JSX.Element {
                   Matches your Preferences
                   {
                     list.slice(5,8).map((item, index) => (
-                        <CustomCard key={index} item={item} />
+                      <div key={index}>
+                        <CustomCard data={item} />
+                      </div>
                     ))
                   }
                 </div>
@@ -80,7 +87,9 @@ export default function index(): JSX.Element {
                   Recommended
                   {
                     list.slice(2,5).map((item, index) => (
-                        <CustomCard key={index} item={item} />
+                      <div key={index}>
+                        <CustomCard data={item} />
+                      </div>
                     ))
                   }
                 </div>

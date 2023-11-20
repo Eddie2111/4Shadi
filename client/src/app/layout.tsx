@@ -16,13 +16,10 @@ export const metadata: Metadata = {
 		template: '%s | 4Shadi',
 		default: 'Home | Welcome to 4Shadi',
 	},
-	description: {
-		template: '%s',
-		default: '4Shadi is a wedding planning service that helps you plan your wedding with ease.',
-	}
+	description:  '4Shadi is a wedding planning service that helps you plan your wedding with ease.',
 };
 
-export const revalidate:int = 3600;
+export const revalidate:number = 3600;
 
 export default function RootLayout({
   children,

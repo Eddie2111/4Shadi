@@ -3,11 +3,13 @@ import React from 'react';
 import {Card, Input, Button, CardBody, CardHeader, Image, Divider, CardFooter, Link} from '@nextui-org/react';
 
 interface IDataProps{
-    name:string;
-    email:string;
-    age:string;
-    height:string;
-    preferences:string;
+    data: {
+        name:string;
+        email:string;
+        age:string;
+        height:string;
+        preferences:string;
+    }
 }
 
 export default function ProfileCard({data}:IDataProps): JSX.Element {

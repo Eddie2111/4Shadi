@@ -62,9 +62,9 @@ export default function SignInForm() {
             });
             console.log(response);
             //alert(response.message);//
-            localStorage.setItem('id', response.data.id);
-            localStorage.setItem('name', response.data.name);
-            localStorage.setItem('email', response.data.email);
+            localStorage.setItem('id', response.data.id || " ");
+            localStorage.setItem('name', response.data.name || " ");
+            localStorage.setItem('email', response.data.email || " ");
             router.push('/on-board');
         } catch (error) {
             console.log(error);
