@@ -22,7 +22,8 @@ export default function Header(): JSX.Element {
             setProfileCardData({
                 name: res?.data?.user?.name || " ", age: res?.data?.user?.age || " ",
                 height: res?.data?.user?.height || " ", email: res?.data?.user?.email || " ",
-                preferences: res?.data?.user?.preferences,
+                preferences: res?.data?.user?.preferences || " ",
+                gender: res?.data?.user?.gender || " ", lookingFor: res?.data?.user?.lookingFor || " ",
             });
             setBiocardData({
                 nid_number: res?.data?.user?.nid_number || " ",

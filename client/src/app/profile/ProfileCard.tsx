@@ -9,6 +9,8 @@ interface IDataProps{
         age:string;
         height:string;
         preferences:string;
+        gender:string;
+        lookingFor:string;
     }
 }
 
@@ -30,9 +32,12 @@ export default function ProfileCard({data}:IDataProps): JSX.Element {
         <Divider/>
 
         <CardBody>
+            <p>Gender {data.gender} </p>
             <p>Age: {data.age}</p>
             <p>Height: {data.height}</p>
             <p>Preferences: {data.preferences}</p>
+            <p>Looking for: {data.lookingFor}</p>
+
         </CardBody>
         <Divider/>
 

@@ -1,7 +1,7 @@
 import type {Metadata} from 'next';
 import Header from './header';
 export const metadata: Metadata = {
-    title: 'Profile | 4Shadi',
+    title: 'Profile',
     description: 'Profile page',
 }
 

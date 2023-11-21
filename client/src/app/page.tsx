@@ -1,7 +1,8 @@
 import type {Metadata} from 'next';
 
 import WelcomeImageSlider from './Home/WelcomeImageSlider';
-
+import Brand_Image from './Home/Brand-logo';
+import Banner_one from './Home/Banner_one';
 export const metadata:Metadata = {
   title: 'Home',
   description: 'Welcome Home',
@@ -10,9 +11,13 @@ export const metadata:Metadata = {
 
 export default function Home():JSX.Element {
   return (
-    <div>
+    <>
+    <div className='container mx-auto flex flex-col md:flex-row justify-center'>
+      <Brand_Image />
       <WelcomeImageSlider />
     </div>
+    <Banner_one />
+    </>
   )
 }
 /**

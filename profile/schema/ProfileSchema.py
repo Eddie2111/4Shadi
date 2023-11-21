@@ -14,6 +14,8 @@ class Profile(Document):
     height: str
     location: str
     preferences: str
+    gender: str
+    lookingFor: str
 
     class Profile:
         name = "profile"

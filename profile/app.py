@@ -67,6 +67,7 @@ async def getone(Id: PydanticObjectId):
         # "id": data,
         "status": 200
     }
+
 @app.get("/user/{id}", response_model=Profile)
 async def get_book(id: PydanticObjectId):
     #book = await Profile.get(id)

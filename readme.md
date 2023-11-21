@@ -1,4 +1,4 @@
-# 4Shadhi 
+# 4Shadhi
 
 - The league of extra ordinary divorcee's...
 
@@ -41,3 +41,7 @@
 ## Payment
 
 - service done, no need to progress
+
+## Errors
+
+- sign up for authentication error is not caught

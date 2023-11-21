@@ -13,6 +13,8 @@ interface IUserProps{
             phone_number: string
             preferences: string;
             serial: string;
+            gender: string;
+            lookingFor: string;
         }
     },
     user?: {
@@ -28,6 +30,8 @@ interface IUserProps{
         phone_number: string
         preferences: string;
         serial: string;
+        gender: string;
+        lookingFor: string;
     }
 }
 

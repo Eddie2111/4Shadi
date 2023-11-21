@@ -137,8 +137,18 @@ async def register(user_type: str, data: UserModel_Signup):
     else: return {"message": "Invalid user type"}
 
 # logout
-@app.post("/logout")
-async def logout():
+@app.get("/logout")
+async def logout(response: Response):
+    # remove all the httponly cookies
+    response.set_cookie(
+        key="user_token",
+        value="",
+        httponly=True,
+        samesite="strict",
+        secure=True,
+        max_age=0,
+        expires=36000,
+    )
     return {"message": "Hello logout"}
 
 # getone/employee

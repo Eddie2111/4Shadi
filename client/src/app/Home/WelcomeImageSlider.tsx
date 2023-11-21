@@ -2,17 +2,23 @@
 import React from 'react';
 import {Image} from '@nextui-org/react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination } from 'swiper/modules';
+import { Autoplay, Pagination } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/pagination';
 export default function WelcomeImageSlider() {
     return (
-        <div className='mt-1 md:mt-[-200px]'>
+        <div className='md:mt-72 md:w-[40rem]'>
             <Swiper
-            spaceBetween={50}
-            slidesPerView={1}
-            pagination={{ clickable: true }}
-            autoplay={{ delay: 1, disableOnInteraction: false }}
-            onSlideChange={() => console.log('slide change')}
-            onSwiper={(swiper) => console.log(swiper)}>
+                spaceBetween={30}
+                centeredSlides={true}
+                autoplay={{
+                delay: 2500,
+                disableOnInteraction: false,
+                }}
+                pagination={{
+                clickable: true,
+                }}
+                modules={[Autoplay, Pagination ]}>
                 <SwiperSlide>
                     <Image
                         src='https://www.nijolcreative.com/wp-content/uploads/2023/07/The-Best-Wedding-Photography-Bangladesh-by-Nijol-Creative-Photography.jpg'
