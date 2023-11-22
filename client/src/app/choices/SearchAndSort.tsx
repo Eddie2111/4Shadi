@@ -5,13 +5,19 @@ import {Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, useDisclosure}
 
 export default function SearchAndSort(): JSX.Element {
     const {isOpen, onOpen, onOpenChange} = useDisclosure();
-    const [isLocation, setIsLocation] = React.useState(false);
+    const [isLocation, setIsLocation] = React.useState<boolean>(false);
+    const [ageRange, setAgeRange] = React.useState<number[]>([0,0]);
+    const [isPreference, setIsPreference] = React.useState<boolean>(false);
     const category= [
         'location', 'preference', 'age', 'gender'
     ]
     const HandleClickFunc = (item: string): void => {
         console.log('clicked',item)
     }
+    console.log(
+        'ageRange', ageRange,
+        'isLocation', isLocation
+    )
     return(
         <div className='flex flex-col'>
             <div>{
@@ -35,24 +41,22 @@ export default function SearchAndSort(): JSX.Element {
                     <>
                         <ModalHeader className="flex flex-col gap-1">Customize Search</ModalHeader>
                         <ModalBody>
-                            <Slider 
+                            <Slider
                             label="Age"
                             step={1}
                             maxValue={99}
                             minValue={18}
-                            defaultValue={24}
                             className="max-w-md"
+                            defaultValue={[24, 30]}
+                            onChange={setAgeRange}
                             />
                         <Checkbox isSelected={isLocation} onValueChange={setIsLocation}>
                             Match Location
                         </Checkbox>
-                        <p>
-                            Magna exercitation reprehenderit magna aute tempor cupidatat consequat elit
-                            dolor adipisicing. Mollit dolor eiusmod sunt ex incididunt cillum quis. 
-                            Velit duis sit officia eiusmod Lorem aliqua enim laboris do dolor eiusmod. 
-                            Et mollit incididunt nisi consectetur esse laborum eiusmod pariatur 
-                            proident Lorem eiusmod et. Culpa deserunt nostrud ad veniam.
-                        </p>
+                        <Checkbox isSelected={isPreference} onValueChange={setIsPreference}>
+                            Match Your Preferences
+                        </Checkbox>
+
                         </ModalBody>
                         <ModalFooter>
                         <Button color="danger" variant="light" onPress={onClose}>

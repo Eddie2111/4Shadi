@@ -142,23 +142,6 @@ async def getone(data: UserModel_GetOne):
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 # install all required dependencies for fastapi:
 ## pip install "fastapi[all]"
 ## pip install "uvicorn[standard]"

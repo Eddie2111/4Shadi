@@ -16,7 +16,7 @@ interface IitemProps {
 export default function CustomCard({data}: IitemProps): JSX.Element {
   const { title, img, price } = data;
   return (
-        <Card shadow="sm" isPressable className="w-[350px]">
+        <Card shadow="sm" isPressable className="w-[300px] m-2">
           <CardBody className="overflow-visible p-0">
             <Image
               shadow="sm"

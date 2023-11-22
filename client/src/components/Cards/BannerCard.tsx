@@ -20,8 +20,8 @@ export default function BannerCard({data}:BannerCardProps) : JSX.Element {
       radius="lg"
       className="border-none w-[18rem] h-[18rem]"
     >
-      <Image
-        alt="Woman listing to music"
+      <img
+        alt="Ai generated men for example profile"
         style= {{backgroundSize: 'cover'}}
         height={200}
         src={data.img}
