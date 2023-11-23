@@ -3,36 +3,57 @@ import React from 'react';
 import {Button, Checkbox, Input, Slider} from '@nextui-org/react';
 import {Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, useDisclosure} from "@nextui-org/react";
 
+import Handler from './handler'
 export default function SearchAndSort(): JSX.Element {
     const {isOpen, onOpen, onOpenChange} = useDisclosure();
     const [isLocation, setIsLocation] = React.useState<boolean>(false);
     const [ageRange, setAgeRange] = React.useState<number[]>([0,0]);
     const [isPreference, setIsPreference] = React.useState<boolean>(false);
+    const searchLocation = React.useRef<boolean>(false);
+    const searchPreference = React.useRef<boolean>(false);
+    const searchAge = React.useRef<number[]>([18,99]);
     const category= [
-        'location', 'preference', 'age', 'gender'
+        'location', 'preference', 'age'
     ]
-    const HandleClickFunc = (item: string): void => {
-        console.log('clicked',item)
+    const HandleClickFunc = async (item: string): void => {
+        switch (item) {
+            case 'location':
+                searchLocation.current = true;
+                break;
+            case 'preference':
+                searchPreference.current = true;
+                break;
+            case 'age':
+                searchAge.current = [21,27]
+                break;
+        }
+        try{
+            await Handler({
+                location: searchLocation.current,
+                preference: searchPreference.current,
+                age: searchAge.current
+            })
+        }
+        catch(err){
+            console.log(err)
+        }
+
     }
-    console.log(
-        'ageRange', ageRange,
-        'isLocation', isLocation
-    )
     return(
         <div className='flex flex-col'>
             <div>{
                 category.map((item, index) => {
                     return (
-                        <Button onClick={()=>HandleClickFunc(item)} key={index} className='bg-blue-500 p-2 text-white rounded-lg m-2 hover:bg-blue-700 duration-300'>
+                        <Button onClick={()=>HandleClickFunc(item)} key={index} className='bg-[#006663] p-2 text-white rounded-lg m-2 hover:bg-blue-700 duration-300'>
                             {item}
                         </Button>
                     )
                 })
             }
-                <Button onPress={onOpen} className='bg-blue-500 p-2 text-white rounded-lg m-2 hover:bg-blue-700 duration-300'>Custom</Button>
+                <Button onPress={onOpen} className='bg-[#006663] p-2 text-white rounded-lg m-2 hover:bg-blue-700 duration-300'>Custom</Button>
             </div>
             <div>
-                <Button color="success">Sort</Button>
+                <Button className='bg-[#6E9DB2] text-white'>Sort</Button>
             </div>
 
             <Modal isOpen={isOpen} onOpenChange={onOpenChange}>

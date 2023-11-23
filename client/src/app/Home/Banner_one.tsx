@@ -11,7 +11,7 @@ export default function Banner_one():JSX.Element {
         style={{ backgroundImage: `url('banners/banner1.svg')` }}
       />
       <div className="relative z-10 flex flex-row items-center justify-center text-white h-52 mx-auto">
-        <div>
+        <div className='mx-5'>
             {/*https://i.pngimg.me/thumb/f/720/cd844b54e6.jpg */}
             {/*https://www.the-sun.com/wp-content/uploads/sites/6/2023/02/AS_AI-WOMEN_OP.jpg?strip=all&quality=100&w=1620&h=1080&crop=1 */}
             <BannerCard data={{
@@ -21,7 +21,7 @@ export default function Banner_one():JSX.Element {
             }} />
         </div>
         <div>
-            <h1 className="text-6xl font-bold">Choose your best choice from here</h1>
+            <h1 className="text-6xl font-bold w-[320px] mx-5">Choose your best choice from here</h1>
             <p className="text-lg">We consider your location, preference and long lasting as well.</p>
         </div>
       </div>

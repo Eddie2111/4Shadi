@@ -1,7 +1,8 @@
+// DEPRECATED
 'use strict';
 const express = require('express');
 const app = express();
-
+const dbConnect = require('./src/lib/mongo');
 require('dotenv').config();
 const port = process.env.PORT || 3000;
 
@@ -14,5 +15,7 @@ app.post('/', (req, res) => {
 });
 
 app.listen(port, () => {
+    dbConnect();
     console.log(`Example app listening on port ${port}`);
 });
+
