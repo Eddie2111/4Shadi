@@ -27,8 +27,8 @@ async function SearchBulk(req, res) {
     const token = req.body.token.value;
     const decodedToken = jwt.decode(token, process.env.JWT_SECRET);
     const userdata = await UserModel.find({serial: decodedToken.serial.toString()});
-    const target = await SearchLocation(userdata[0].location);
-    console.log(target);
+    const target = [await SearchLocation(userdata[0].location), await SearchPreference(userdata[0].preferences)];
+    console.log(target[1]);
     const {packet} = req.body;
     res.json({msg: 'success', data: userdata});
 }
@@ -36,10 +36,30 @@ async function SearchBulk(req, res) {
 module.exports = SearchBulk;
 
 async function SearchLocation(UserLocation) {
-    const regexPattern = UserLocation.split(',').map((location) => `^${location.trim()}`).join('|');
-    console.log(regexPattern);
-    const userFoundBasedLocation = await UserModel.find({location: {$regex: regexPattern, $options: 'i'}});
+    const regexPattern = UserLocation.split(',').map((location) => `${location.trim()}`).join('|');
+    const regexPattern2 = regexPattern.split(' ').map((location) => `${location.trim()}`).join('|');
+    const userFoundBasedLocation = await UserModel.find({location: {$regex: regexPattern2, $options: 'i'}});
     return userFoundBasedLocation;
 }
-
+async function SearchPreference(UserPreference) {
+    const BulkPatterns = UserPreference.split(',');
+    const storingResults = [];
+    for (let i = 0; i < BulkPatterns.length; i++) {
+        const regexPattern = BulkPatterns[i].trim();
+        const userFoundBasedPreference = await UserModel.find({preferences: {$regex: regexPattern, $options: 'i'}});
+        if (!storingResults.includes(userFoundBasedPreference[0])) {
+            storingResults.push(userFoundBasedPreference[0]);
+        }
+    }
+    // remove duplicate objects from storingResults
+    // const unique = storingResults.filter((v, i, a) => a.indexOf(v) === i);
+    return storingResults;
+}
+async function FilterSearcherSelf(SearchResult, UserData) {
+    const filteredResult = SearchResult.filter((user) => user.serial !== UserData.serial);
+    return filteredResult;
+}
+async function FilterSearcherGender(SearchResult, UserData) {
+    return null;
+}
 

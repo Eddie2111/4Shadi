@@ -78,13 +78,20 @@ async def get_book(id: PydanticObjectId):
         "status": 200
     }
 
-# getall/employee
-# getall/user
-@app.get("/getall/{user_type}")
-async def getall(user_type: str):
-    if user_type in user_types:
-        return {"message": f"Hello {user_type}"}
-    else: return {"message": "Invalid user type"}
+# getall is only used by admin and gets all the users from the database
+@app.get("/getall")
+async def getall():
+    try:
+        datalog = await Profile.find_all().to_list()
+        return {
+            "message": "Hello World",
+            "user": datalog
+        }
+    except Exception as e:
+        return {
+            "message": "Error",
+            "error": str(e)
+        }
 
 # update/employee
 # update/user
