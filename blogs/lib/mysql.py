@@ -1,44 +1,37 @@
-import os
-import MySQLdb
+
 from dotenv import load_dotenv, dotenv_values
+import MySQLdb
+import os
 
 # Load environment variables from .env file
-dotenv_path = os.path.join(os.path.dirname(__file__), '.env')
-load_dotenv(dotenv_path)
+load_dotenv()
 
-# Read database configurations from .env file
-db_config = dotenv_values(dotenv_path)
+# Get database configuration from environment variables
+db_config = dotenv_values(".env")
 
-# Establish a connection to MySQL
+# Connect to MySQL database
 conn = MySQLdb.connect(
-    host=db_config['DB_HOST'],
-    user=db_config['DB_USER'],
-    password=db_config['DB_PASSWORD'],
+    host=db_config["DB_HOST"],
+    user=db_config["DB_USER"],
+    passwd=db_config["DB_PASSWORD"],
+    db=db_config["DB_NAME"]
 )
 
 # Create a cursor object to execute SQL queries
 cursor = conn.cursor()
 
-# Create a new database
-database_name = db_config['DB_NAME']
-cursor.execute(f"CREATE DATABASE IF NOT EXISTS {database_name};")
+# Create the blogs table
+create_table_query = """
+CREATE TABLE IF NOT EXISTS blogs (
+    id VARCHAR(50) PRIMARY KEY,
+    title VARCHAR(128),
+    description VARCHAR(1024),
+    author VARCHAR(32)
+)
+"""
 
-# Switch to the newly created database
-cursor.execute(f"USE {database_name};")
-
-# Create a table with the specified columns
-cursor.execute("""
-    CREATE TABLE IF NOT EXISTS your_table_name (
-        id VARCHAR(255) UNIQUE,
-        title VARCHAR(128),
-        description VARCHAR(1024),
-        author VARCHAR(32),
-        PRIMARY KEY (id)
-    );
-""")
+cursor.execute(create_table_query)
 
 # Commit the changes and close the connection
 conn.commit()
 conn.close()
-
-print(f"Database '{database_name}' and table 'your_table_name' created successfully.")
