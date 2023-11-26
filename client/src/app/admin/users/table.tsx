@@ -37,10 +37,9 @@ export default function UsersTable(){
     console.log(dataset)
 
     return(
-        dataset.length<1 ? <Spinner className='text-6xl mt-10 p-10 mx-32 max-h-6xl max-w-6xl'/> :
+        dataset.length<1 ? <Spinner className='text-6xl mt-10 p-10 mx-32 max-h-6xl max-w-6xl my-5'/> :
         <>
-        <p>Users Table{dataset[0].serial}</p>
-        <Table aria-label="Example static collection table">
+        <Table aria-label="Example static collection table" className='my-5'>
             <TableHeader>
                 <TableColumn>Serial</TableColumn>
                 <TableColumn>Name</TableColumn>

@@ -68,15 +68,6 @@ async def getone(Id: PydanticObjectId):
         "status": 200
     }
 
-@app.get("/user/{id}", response_model=Profile)
-async def get_book(id: PydanticObjectId):
-    #book = await Profile.get(id)
-    print(id)
-    return {
-        "message": "Hello getone",
-        # "id": data,
-        "status": 200
-    }
 
 # getall is only used by admin and gets all the users from the database
 @app.get("/getall")
