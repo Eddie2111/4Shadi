@@ -17,7 +17,7 @@ app.config['CORS_ORIGINS'] = ['http://localhost:3000']
 UPLOAD_FOLDER = 'uploads'
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-
+ 
 # Helper function to check allowed file extensions
 
 
@@ -26,19 +26,18 @@ def allowed_file(filename):
     return '.' in filename and filename.rsplit(
         '.', 1)[1].lower() in allowed_extensions
 
-# Example GET request
-@app.route('/', methods=['GET'])
+#get methods 
+
+@app.route('/', methods=['GET']) #get all the data from 'blogs' table
 def get_data():
-    #get will bring all the data from the database
     cursor.execute("SELECT * FROM `blogs`")
     data = cursor.fetchall()
     return jsonify(data), 200
 
-@app.route('/get_one', methods=['GET'])
+
+@app.route('/get_one', methods=['GET']) # Get the data with spacific'id' from the query parameters of'blogs' table
 def get_one_data():
-    # Get the 'id' from the query parameters
     blog_id = request.args.get('id', type=int)
-    # Get the blog with the specified 'id'
     if not blog_id:
         return jsonify({"error": "Missing 'id' parameter"}), 400
     
@@ -50,14 +49,33 @@ def get_one_data():
             "error": "An error occurred while processing the request",
             "message": e
         }), 500
+    return jsonify(data), 200    
+  
+@app.route('/lawsupport', methods=['GET'])  #get all the data from 'lawsupport' table
+def get_lawsupport():
+    cursor.execute("SELECT * FROM `lawsupport`")
+    data = cursor.fetchall()
+    return jsonify(data), 200
+
+@app.route('/lawsupport/get_one', methods=['GET']) # Get the data with spacific'id' from the query parameters of'lawsupport' table
+def get_one_lawsupport():
+    law_id = request.args.get('id', type=int)
+    if not law_id:
+        return jsonify({"error": "Missing 'id' parameter"}), 400
+    
+    try:
+        cursor.execute("SELECT * FROM `lawsupport` WHERE `id` = %s", (law_id,))
+        data = cursor.fetchone()
+    except Exception as e:
+        return jsonify({
+            "error": "An error occurred while processing the request",
+            "message": e
+        }), 500
     return jsonify(data), 200
 
 
-  
-
-
-# Example POST request with JSON data
-@app.route('/', methods=['POST'])
+#post methods
+@app.route('/', methods=['POST']) #post data to 'blogs' table
 def post_data():
     try:
         data = request.get_json()
@@ -72,6 +90,25 @@ def post_data():
             "error": "Invalid JSON data",
             "message": e
         }), 400
+        
+
+
+@app.route('/lawsupport', methods=['POST']) #post data to 'lawsupport' table
+def post_lawsupport():
+    try:
+        data = request.get_json()
+        cursor.execute(
+            "INSERT INTO `lawsupport` (`title`, `details`, `created_at`, `status`) VALUES (%s, %s, %s, %s)",
+            (data["title"], data["details"], data["created_at"], data["status"])
+        )
+        return jsonify(data), 201
+        
+    except Exception as e:
+        return jsonify({
+            "error": "Invalid JSON data",
+            "message": e
+        }), 400
+ 
 
 # Example POST request with form data
 @app.route('/api/upload', methods=['POST'])

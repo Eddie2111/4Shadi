@@ -28,9 +28,20 @@ create_tabel_query = """
         `created_at` varchar(16) NOT NULL,
         PRIMARY KEY (`id`)
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+"""
+create_lawsupport_table_query = """
+    CREATE TABLE IF NOT EXISTS `lawsupport` (
+        id int(11) NOT NULL AUTO_INCREMENT,
+        title varchar(255) NOT NULL,
+        details text NOT NULL,
+        created_at varchar(16) NOT NULL,
+        status varchar(50) NOT NULL,
+        PRIMARY KEY (id)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
     """
 
 def __test__():
     cursor.execute(create_tabel_query)
+    cursor.execute(create_lawsupport_table_query)
     if connection: print("Database Connection successful"); return True
     else: print("Database Connection unsuccessful"); return False
