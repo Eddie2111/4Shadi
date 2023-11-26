@@ -3,57 +3,78 @@ import React from 'react';
 import {Button, Checkbox, Input, Slider} from '@nextui-org/react';
 import {Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, useDisclosure} from "@nextui-org/react";
 
+import CustomCards from '@/components/Cards/CustomCards';
+
 import Handler from './handler'
+
 export default function SearchAndSort(): JSX.Element {
+    // modal state management and handler data setup
     const {isOpen, onOpen, onOpenChange} = useDisclosure();
+    const [dataset, setDataset] = React.useState<any[]>([]);
+
+    // for custom search modal
     const [isLocation, setIsLocation] = React.useState<boolean>(false);
     const [ageRange, setAgeRange] = React.useState<number[]>([0,0]);
     const [isPreference, setIsPreference] = React.useState<boolean>(false);
+
+    // for button callback style changes
+    const [locationbutton, setLocationButton] = React.useState<string>('bg-blue-500 p-2 text-white rounded-lg m-2 hover:bg-blue-700 duration-300');
+    const [preferencebutton, setPreferenceButton] = React.useState<string>('bg-blue-500 p-2 text-white rounded-lg m-2 hover:bg-blue-700 duration-300');
+    const [agebutton, setAgeButton] = React.useState<string>('bg-blue-500 p-2 text-white rounded-lg m-2 hover:bg-blue-700 duration-300');
+
+    // for search and sort state management
     const searchLocation = React.useRef<boolean>(false);
     const searchPreference = React.useRef<boolean>(false);
     const searchAge = React.useRef<number[]>([18,99]);
-    const category= [
-        'location', 'preference', 'age'
-    ]
+
+    // main function for handling button clicks: server side component calls
     const HandleClickFunc = async (item: string): void => {
         switch (item) {
             case 'location':
-                searchLocation.current = true;
+                searchLocation.current = !searchLocation.current;
+                setLocationButton(
+                    searchLocation.current ? 'bg-blue-700 p-2 text-white rounded-lg m-2 hover:bg-blue-700 duration-300' :
+                        'bg-blue-500 p-2 text-white rounded-lg m-2 hover:bg-blue-700 duration-300'
+                )
                 break;
             case 'preference':
-                searchPreference.current = true;
+                searchPreference.current = !searchPreference.current;
+                setPreferenceButton(
+                    searchPreference.current ? 'bg-blue-700 p-2 text-white rounded-lg m-2 hover:bg-blue-700 duration-300' :
+                        'bg-blue-500 p-2 text-white rounded-lg m-2 hover:bg-blue-700 duration-300'
+                )
                 break;
             case 'age':
                 searchAge.current = [21,27]
+                setAgeButton(
+                    searchAge.current ? 'bg-blue-700 p-2 text-white rounded-lg m-2 hover:bg-blue-700 duration-300' :
+                        'bg-blue-500 p-2 text-white rounded-lg m-2 hover:bg-blue-700 duration-300'
+                )
                 break;
         }
         try{
-            await Handler({
+            const responsiveData = await Handler({
                 location: searchLocation.current,
                 preference: searchPreference.current,
                 age: searchAge.current
             })
+            setDataset(responsiveData)
+            console.log(responsiveData)
         }
         catch(err){
             console.log(err)
         }
 
     }
+    const InActiveButtonClassName = 'bg-blue-500 p-2 text-white rounded-lg m-2 hover:bg-blue-700 duration-300';
+    const ActiveButtonClassName = 'bg-blue-700 p-2 text-white rounded-lg m-2 hover:bg-blue-700 duration-300';
     return(
         <div className='flex flex-col'>
-            <div>{
-                category.map((item, index) => {
-                    return (
-                        <Button onClick={()=>HandleClickFunc(item)} key={index} className='bg-[#006663] p-2 text-white rounded-lg m-2 hover:bg-blue-700 duration-300'>
-                            {item}
-                        </Button>
-                    )
-                })
-            }
-                <Button onPress={onOpen} className='bg-[#006663] p-2 text-white rounded-lg m-2 hover:bg-blue-700 duration-300'>Custom</Button>
-            </div>
             <div>
-                <Button className='bg-[#6E9DB2] text-white'>Sort</Button>
+                <Button onPress={() => HandleClickFunc('location')} className={locationbutton}>Location</Button>
+                <Button onPress={() => HandleClickFunc('preference')} className={preferencebutton}>Preference</Button>
+                <Button onPress={() => HandleClickFunc('age')} className={agebutton}>Age</Button>
+                <Button onPress={onOpen} className='bg-blue-500 p-2 text-white rounded-lg m-2 hover:bg-blue-700 duration-300'>Custom</Button>
             </div>
 
             <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
@@ -91,7 +112,19 @@ export default function SearchAndSort(): JSX.Element {
                     )}
                 </ModalContent>
             </Modal>
-
+            <div class="grid grid-cols-4 gap-4 mx-auto">
+                {
+                    dataset.map((item, index) => (
+                        <CustomCards key={index} data={
+                            {
+                                title: item.name,
+                                img: 'test',
+                                age: '24'
+                            }
+                        }/>
+                    ))
+                }
+            </div>
         </div>
     )
 }

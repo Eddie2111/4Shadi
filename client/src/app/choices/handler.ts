@@ -1,4 +1,5 @@
 'use server';
+
 import { cookies } from 'next/headers'
 import Axios from 'axios';
 interface IQueryProps {
@@ -12,9 +13,9 @@ export default async function Handler(Query:IQueryProps) {
   try {
     const response = await Axios.post("http://localhost:3200", { Query, token }, { withCredentials: true})
     console.log(response.data);
-} catch (err) {
-    console.log(err)
-}
-
-  return '...'
+    return response.data.data;
+  } catch (err) {
+      console.log(err)
+      return err
+  }
 }
