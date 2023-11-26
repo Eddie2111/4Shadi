@@ -1,4 +1,5 @@
 // profiles/header.tsx
+// shows other people profiles here
 'use client'
 import type {IUserProps} from '@/types/UserTypes';
 import {useSearchParams} from 'next/navigation';

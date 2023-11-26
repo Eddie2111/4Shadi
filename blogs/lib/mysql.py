@@ -1,37 +1,25 @@
-
+## mysql connection here
 from dotenv import load_dotenv, dotenv_values
 import MySQLdb
 import os
 
-# Load environment variables from .env file
-load_dotenv()
+# load_dotenv()
+config   = dotenv_values(".env")
+# config["DB_HOST"][0]
 
-# Get database configuration from environment variables
-db_config = dotenv_values(".env")
+connection =  MySQLdb.connect(
+        host     = str(config["DB_HOST"]), # os.environ.get("HOST"),
+        user     = str(config["DB_USERNAME"]), # os.environ.get("USERNAMER"),
+        passwd   = str(config["DB_PASSWORD"]), # os.environ.get("PASSWORD"),
+        db       = str(config["DB_NAME"]), # os.environ.get("DATABASE"),
+        autocommit = True,
+        ssl_mode = "VERIFY_IDENTITY",
+        ssl      = {
+          "ca": "etc/ssl/cacert.pem"
+        }
+    )
+cursor = connection.cursor()
 
-# Connect to MySQL database
-conn = MySQLdb.connect(
-    host=db_config["DB_HOST"],
-    user=db_config["DB_USERNAME"],
-    passwd=db_config["DB_PASSWORD"],
-    db=db_config["DB_NAME"]
-)
-
-# Create a cursor object to execute SQL queries
-cursor = conn.cursor()
-
-# Create the blogs table
-create_table_query = """
-CREATE TABLE IF NOT EXISTS blogs (
-    id VARCHAR(50) PRIMARY KEY,
-    title VARCHAR(128),
-    description VARCHAR(1024),
-    author VARCHAR(32)
-)
-"""
-
-cursor.execute(create_table_query)
-
-# Commit the changes and close the connection
-conn.commit()
-conn.close()
+def __test__():
+  if connection: print("Database Connection successful"); return True
+  else: print("Database Connection unsuccessful"); return False

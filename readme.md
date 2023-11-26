@@ -45,3 +45,44 @@
 ## Errors
 
 - sign up for authentication error is not caught
+
+## Target Features
+
+Profile:
+
+- can create their profile and see their profile (done)
+- user has to send a request
+- upload their images
+- information restriction
+- user can see other profiles (done)
+
+Profile Verification:
+
+- NID upload for both male/female (done)
+- Information extraction from NID using OCR (done)
+- Account approval upon NID Verification (done)
+- Marriage/Divorce Certificate for Male users (done)
+- Divorce certificate form Female users (done)
+
+Search System:
+
+- Profile sorting based on tags (educational qualification, heights, age, location, Married/Divorced)
+- Profile suggestion based on tags (location, age, likes/preferences) (done)
+- Boost Profile matching upon search depending on payment status
+- Search history
+- Favourite lists
+
+Blogs and other features:
+
+- relationship based therapy blogs and tips
+- online law support
+- instant security on meetup
+- report a problem (done)
+
+Payment service:
+
+- SSLCommerz integration (done)
+- encrypted form submission
+- payment history
+- profile boosting and third party advertisements
+- advertisement removal upon payment

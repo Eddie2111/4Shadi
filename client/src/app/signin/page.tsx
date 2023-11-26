@@ -13,9 +13,9 @@ export const metadata:Metadata = {
 
 export default function Page(): JSX.Element {
   return (
-    <center className='flex flex-col md:flex-row-reverse w-full justify-between md:w-[75%] md:mx-auto mx-3'>
+    <div className='flex flex-col md:flex-row-reverse w-full justify-between md:w-[65%] md:mx-auto mx-3 my-10 py-10'>
       <SignIn />
       <SignInForm />
-    </center>
+    </div>
   );
 }
