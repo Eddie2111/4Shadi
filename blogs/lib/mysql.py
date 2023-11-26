@@ -12,7 +12,7 @@ db_config = dotenv_values(".env")
 # Connect to MySQL database
 conn = MySQLdb.connect(
     host=db_config["DB_HOST"],
-    user=db_config["DB_USER"],
+    user=db_config["DB_USERNAME"],
     passwd=db_config["DB_PASSWORD"],
     db=db_config["DB_NAME"]
 )
