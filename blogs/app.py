@@ -29,8 +29,32 @@ def allowed_file(filename):
 # Example GET request
 @app.route('/', methods=['GET'])
 def get_data():
-    data = {"message": "This is a GET request response."}
+    #get will bring all the data from the database
+    cursor.execute("SELECT * FROM `blogs`")
+    data = cursor.fetchall()
     return jsonify(data), 200
+
+@app.route('/get_one', methods=['GET'])
+def get_one_data():
+    # Get the 'id' from the query parameters
+    blog_id = request.args.get('id', type=int)
+    # Get the blog with the specified 'id'
+    if not blog_id:
+        return jsonify({"error": "Missing 'id' parameter"}), 400
+    
+    try:
+        cursor.execute("SELECT * FROM `blogs` WHERE `id` = %s", (blog_id,))
+        data = cursor.fetchone()
+    except Exception as e:
+        return jsonify({
+            "error": "An error occurred while processing the request",
+            "message": e
+        }), 500
+    return jsonify(data), 200
+
+
+  
+
 
 # Example POST request with JSON data
 @app.route('/', methods=['POST'])
