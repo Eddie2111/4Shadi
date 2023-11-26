@@ -19,7 +19,18 @@ connection =  MySQLdb.connect(
         }
     )
 cursor = connection.cursor()
+create_tabel_query = """
+    CREATE TABLE IF NOT EXISTS `blogs` (
+        `id` int(11) NOT NULL AUTO_INCREMENT,
+        `title` varchar(255) NOT NULL,
+        `content` text NOT NULL,
+        `author` varchar(32) NOT NULL,
+        `created_at` varchar(16) NOT NULL,
+        PRIMARY KEY (`id`)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+    """
 
 def __test__():
-  if connection: print("Database Connection successful"); return True
-  else: print("Database Connection unsuccessful"); return False
+    cursor.execute(create_tabel_query)
+    if connection: print("Database Connection successful"); return True
+    else: print("Database Connection unsuccessful"); return False

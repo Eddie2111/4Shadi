@@ -2,11 +2,11 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 from werkzeug.utils import secure_filename
 import os
-from lib.mysql import cursor
+from lib.mysql import cursor, __test__
 
 app = Flask(__name__)
 CORS(app)
-
+__test__()
 # Define the allowed origins for CORS (replace with your specific needs)
 # Example: Allow requests from all origins
 app.config['CORS_ORIGINS'] = '*'
@@ -37,7 +37,12 @@ def get_data():
 def post_data():
     try:
         data = request.get_json()
+        cursor.execute(
+            "INSERT INTO `blogs` (`title`, `content`, `author`, `created_at`) VALUES (%s, %s, %s, %s)",
+            (data["title"], data["content"], data["author"], data["created_at"])
+        )
         return jsonify(data), 201
+        
     except Exception as e:
         return jsonify({
             "error": "Invalid JSON data",
