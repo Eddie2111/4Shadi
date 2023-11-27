@@ -110,6 +110,36 @@ def post_lawsupport():
         }), 400
  
 
+#delete methods 
+@app.route('/blog', methods=['DELETE']) #delete data spacific'id' from the query parameters of'blogs' table
+def delete_data():
+    blog_id = request.args.get('id', type=int)
+    if not blog_id:
+        return jsonify({"error": "Missing 'id' parameter"}), 400
+    try:
+        cursor.execute("DELETE FROM `blogs` WHERE `id` = %s", (blog_id,))
+        return jsonify({"message": "Blog deleted successfully"}), 200
+    except Exception as e:
+        return jsonify({
+            "error": "An error occurred while processing the request",
+            "message": e
+        }), 500
+        
+@app.route('/lawsupport', methods=['DELETE']) #delete data spacific'id' from the query parameters of'lawsupport' table
+def delete_lawsupport():
+    law_id = request.args.get('id', type=int)
+    if not law_id:
+        return jsonify({"error": "Missing 'id' parameter"}), 400
+    try:
+        cursor.execute("DELETE FROM `lawsupport` WHERE `id` = %s", (law_id,))
+        return jsonify({"message": "Law support deleted successfully"}), 200
+    except Exception as e:
+        return jsonify({
+            "error": "An error occurred while processing the request",
+            "message": e
+        }), 500
+        
+
 # Example POST request with form data
 @app.route('/api/upload', methods=['POST'])
 def upload_file():
