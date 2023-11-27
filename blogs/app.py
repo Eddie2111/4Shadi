@@ -139,6 +139,39 @@ def delete_lawsupport():
             "message": e
         }), 500
         
+#update methods
+
+@app.route('/blog', methods=['PUT']) #update data spacific'id' from the query parameters of'lawsupport' table
+def update_data():
+    blog_id = request.args.get('id', type=int)
+    if not blog_id:
+        return jsonify({"error": "Missing 'id' parameter"}), 400
+    try:
+        data = request.get_json()
+        cursor.execute("UPDATE `blogs` SET `title` = %s, `content` = %s, `author` = %s, `created_at` = %s WHERE `id` = %s", (data["title"], data["content"], data["author"], data["created_at"], blog_id))
+        return jsonify({"message": "Blog updated successfully"}), 200
+    except Exception as e:
+        return jsonify({
+            "error": "An error occurred while processing the request",
+            "message": e
+        }), 500
+        
+@app.route('/lawsupport', methods=['PUT']) #update data spacific'id' from the query parameters of'lawsupport' table
+def update_lawsupport():
+    law_id = request.args.get('id', type=int)
+    if not law_id:
+        return jsonify({"error": "Missing 'id' parameter"}), 400
+    try:
+        data = request.get_json()
+        cursor.execute("UPDATE `lawsupport` SET `title` = %s, `details` = %s, `created_at` = %s, `status` = %s WHERE `id` = %s", (data["title"], data["details"], data["created_at"], data["status"], law_id))
+        return jsonify({"message": "Law support updated successfully"}), 200
+    except Exception as e:
+        return jsonify({
+            "error": "An error occurred while processing the request",
+            "message": e
+        }), 500
+    
+
 
 # Example POST request with form data
 @app.route('/api/upload', methods=['POST'])
