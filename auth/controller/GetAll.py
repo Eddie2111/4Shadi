@@ -1,4 +1,11 @@
 from lib.mysql import cursor
+###
+"""
+@component: GetAllUsers
+@description: Get all the users from the database
+@props: Data[serial,name,email,password,user_type]
+
+"""
 
 async def GetAllUsers():
     allUserData = cursor.execute("SELECT * FROM Users")
