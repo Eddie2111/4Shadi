@@ -1,8 +1,8 @@
 from lib.mysql import cursor
 ###
 """
-@component: GetAllUsers
-@description: Get all the users from the database
+@component: GetAllUsers, Converting_Arrays_to_dict
+@description: Get all the users from the database, Convert arrays to dictionary
 @props: Data[serial,name,email,password,user_type]
 
 """
