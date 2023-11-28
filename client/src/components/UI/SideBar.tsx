@@ -31,16 +31,16 @@ const Sidebar = () => {
                 {
                     isExpanded
                         ? <p> Dashboard </p>
-                        : <LayoutDashboard size={24} className='text-black dark:text-white '/>
+                        : <BarChart4 size={24} className='text-black dark:text-white '/>
                 }
                 </Link>
             </li>
             <li className={liColor}>
-                <Link href='/admin/statistics'>
+                <Link href='/admin/blogs'>
                 {
                     isExpanded
-                        ? <p> Statistics </p>
-                        : <BarChart4 size={24} className='text-black dark:text-white '/>
+                        ? <p> Blogs </p>
+                        : <LayoutDashboard size={24} className='text-black dark:text-white '/>
                 }
                 </Link>
             </li>
