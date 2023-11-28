@@ -23,7 +23,7 @@ create_tabel_query = """
     CREATE TABLE IF NOT EXISTS `blogs` (
         `id` int(11) NOT NULL AUTO_INCREMENT,
         `title` varchar(255) NOT NULL,
-        `content` text NOT NULL,
+        `content` varchar(2048) NOT NULL,
         `author` varchar(32) NOT NULL,
         `created_at` varchar(16) NOT NULL,
         PRIMARY KEY (`id`)
@@ -41,7 +41,7 @@ create_lawsupport_table_query = """
     """
 
 def __test__():
-    cursor.execute(create_tabel_query)
-    cursor.execute(create_lawsupport_table_query)
+    # cursor.execute(create_tabel_query)
+    # cursor.execute(create_lawsupport_table_query)
     if connection: print("Database Connection successful"); return True
     else: print("Database Connection unsuccessful"); return False

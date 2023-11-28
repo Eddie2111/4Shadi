@@ -3,6 +3,7 @@ from flask_cors import CORS
 from werkzeug.utils import secure_filename
 import os
 from lib.mysql import cursor, __test__
+from utils.TimeNow import TimeNow
 
 app = Flask(__name__)
 CORS(app)
@@ -79,9 +80,10 @@ def get_one_lawsupport():
 def post_data():
     try:
         data = request.get_json()
+        dateTime = TimeNow()
         cursor.execute(
             "INSERT INTO `blogs` (`title`, `content`, `author`, `created_at`) VALUES (%s, %s, %s, %s)",
-            (data["title"], data["content"], data["author"], data["created_at"])
+            (data["title"], data["content"], data["author"], dateTime)
         )
         return jsonify(data), 201
         
