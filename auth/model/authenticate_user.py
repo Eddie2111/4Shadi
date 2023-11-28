@@ -3,6 +3,13 @@ import asyncio
 from lib.mysql import cursor
 import jsonwebtoken
 
+###
+"""
+@component: AuthenticateUser
+@description: User authentication
+@props: data
+"""
+
 def AuthenticateUser(data):
     try:
         query = cursor.execute(
