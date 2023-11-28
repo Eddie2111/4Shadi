@@ -1,7 +1,9 @@
 from lib.mysql import cursor
 ###
 """
-
+@component: RemoveAUser
+@description: Removes a particular user
+@props: id
 """
 def RemoveAUser(id):
     try:
