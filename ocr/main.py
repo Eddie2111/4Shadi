@@ -7,9 +7,8 @@ import os
 import re
 
 def read_text(img_location):  #read the image
-  
+
     myconfig = r"--psm 6 --oem 3" #config for pytesseract
-    
     text = pytesseract.image_to_string(img.open(img_location), config=myconfig)
     #print(text)
     #extract name, date of birth, id No form the text
@@ -53,7 +52,7 @@ def extract_id(id_no):
     except:
         return "ID not found"
     
-name, dob, id_no = read_text("img/3.png")
+name, dob, id_no = read_text("i:/470/cse-470-project-main/ocr/img/2.jpg")
 print("Name: ", extract_name(name))
 print("DOB: ", extract_dob(dob))
 print("ID: ", extract_id(id_no))
