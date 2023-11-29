@@ -16,6 +16,9 @@ class Profile(Document):
     preferences: str
     gender: str
     lookingFor: str
+    # optionals
+    profileImage: Optional[str]
+    images: Optional[list]
 
     class Profile:
         name = "profile"

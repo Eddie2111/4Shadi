@@ -7,6 +7,7 @@ import React from "react";
 
 export default function CreatePost(): JSX.Element{
     const {isOpen, onOpen, onOpenChange} = useDisclosure();
+    const [error, setError] = React.useState<string>('');
     const FormSchema = z.object({
         title: z.string().min(3).max(150),
         content: z.string().min(10).max(2048),
@@ -44,7 +45,7 @@ export default function CreatePost(): JSX.Element{
                 <ModalBody>
                     <form onSubmit={SubmitHandle}>
                         <Input className='my-4' isRequired label="Title" placeholder="Title" name='title'/>
-                        <Textarea minRows={5} isRequired className='my-4' label="Content" placeholder="Content" name='content'/>
+                        <Textarea minRows={5} isRequired className='my-4' label="Content (minimum 10 characters)" placeholder="Content" name='content'/>
                         <Input className='my-4' isRequired label="Author" placeholder="Author" name='author'/>
                         <Button type='submit' className='my-2' color="primary"> Submit</Button>
                     </form>

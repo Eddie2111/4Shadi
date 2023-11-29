@@ -18,7 +18,7 @@ app.config['CORS_ORIGINS'] = ['http://localhost:3000']
 UPLOAD_FOLDER = 'uploads'
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
- 
+
 # Helper function to check allowed file extensions
 
 
@@ -27,7 +27,7 @@ def allowed_file(filename):
     return '.' in filename and filename.rsplit(
         '.', 1)[1].lower() in allowed_extensions
 
-#get methods 
+#get methods
 
 @app.route('/', methods=['GET']) #get all the data from 'blogs' table
 def get_data():
@@ -41,7 +41,7 @@ def get_one_data():
     blog_id = request.args.get('id', type=int)
     if not blog_id:
         return jsonify({"error": "Missing 'id' parameter"}), 400
-    
+
     try:
         cursor.execute("SELECT * FROM `blogs` WHERE `id` = %s", (blog_id,))
         data = cursor.fetchone()
@@ -50,8 +50,8 @@ def get_one_data():
             "error": "An error occurred while processing the request",
             "message": e
         }), 500
-    return jsonify(data), 200    
-  
+    return jsonify(data), 200
+
 @app.route('/lawsupport', methods=['GET'])  #get all the data from 'lawsupport' table
 def get_lawsupport():
     cursor.execute("SELECT * FROM `lawsupport`")
@@ -63,7 +63,7 @@ def get_one_lawsupport():
     law_id = request.args.get('id', type=int)
     if not law_id:
         return jsonify({"error": "Missing 'id' parameter"}), 400
-    
+
     try:
         cursor.execute("SELECT * FROM `lawsupport` WHERE `id` = %s", (law_id,))
         data = cursor.fetchone()
@@ -86,13 +86,13 @@ def post_data():
             (data["title"], data["content"], data["author"], dateTime)
         )
         return jsonify(data), 201
-        
+
     except Exception as e:
         return jsonify({
             "error": "Invalid JSON data",
             "message": e
         }), 400
-        
+
 
 
 @app.route('/lawsupport', methods=['POST']) #post data to 'lawsupport' table
@@ -104,15 +104,15 @@ def post_lawsupport():
             (data["title"], data["details"], data["created_at"], data["status"])
         )
         return jsonify(data), 201
-        
+
     except Exception as e:
         return jsonify({
             "error": "Invalid JSON data",
             "message": e
         }), 400
- 
 
-#delete methods 
+
+#delete methods
 @app.route('/blog', methods=['DELETE']) #delete data spacific'id' from the query parameters of'blogs' table
 def delete_data():
     blog_id = request.args.get('id', type=int)
@@ -126,7 +126,7 @@ def delete_data():
             "error": "An error occurred while processing the request",
             "message": e
         }), 500
-        
+
 @app.route('/lawsupport', methods=['DELETE']) #delete data spacific'id' from the query parameters of'lawsupport' table
 def delete_lawsupport():
     law_id = request.args.get('id', type=int)
@@ -140,7 +140,7 @@ def delete_lawsupport():
             "error": "An error occurred while processing the request",
             "message": e
         }), 500
-        
+
 #update methods
 
 @app.route('/blog', methods=['PUT']) #update data spacific'id' from the query parameters of'lawsupport' table
@@ -157,7 +157,7 @@ def update_data():
             "error": "An error occurred while processing the request",
             "message": e
         }), 500
-        
+
 @app.route('/lawsupport', methods=['PUT']) #update data spacific'id' from the query parameters of'lawsupport' table
 def update_lawsupport():
     law_id = request.args.get('id', type=int)
@@ -172,7 +172,7 @@ def update_lawsupport():
             "error": "An error occurred while processing the request",
             "message": e
         }), 500
-    
+
 
 
 # Example POST request with form data

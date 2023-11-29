@@ -43,7 +43,7 @@ async def upload()-> dict:
         "name": name[0],
         "size": os.path.getsize(file_path),
         "path": file_path,
-        "url": "http://localhost:3800/get?image="+serial+'.'+image.content_type.split("/")[1],
+        "url": "http://localhost:3800/get_any?image="+serial+'.'+image.content_type.split("/")[1],
         "date": str(datetime.now())
     }
 # post request with json data with name

@@ -3,6 +3,7 @@ import React from "react";
 import axios from "axios";
 import {useRouter} from "next/navigation";
 import { Card, Input, Button } from "@nextui-org/react";
+import {Select, SelectSection, SelectItem} from "@nextui-org/react";
 interface IResponseProps {
   message: string;
   status: number;
@@ -28,14 +29,15 @@ export default function MultiStepForm(): JSX.Element {
     }
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
-      const collect_data = {...inputdata, serial:id, name, email};
+      const collect_data = {...inputdata, serial:id, name, email, profileImage: '', images: []};
       console.log(collect_data);
-      const response = await axios.post<IResponseProps>('http://localhost:3500/profile', collect_data);
-      console.log(response.data)
-      if (response.data.status === 200){
-        alert(response.data.message);
-        router.push('/login');
-      }
+      router.push('/on-board/step2');
+      // const response = await axios.post<IResponseProps>('http://localhost:3500/profile', collect_data);
+      // console.log(response.data)
+      // if (response.data.status === 200){
+      //   alert(response.data.message);
+      //   router.push('/on-board/step2');
+      // }
     }
   return (
 
@@ -70,6 +72,16 @@ export default function MultiStepForm(): JSX.Element {
               <Input className='my-2' label="Phone Number" variant="bordered" placeholder="01xxxxxxx-xx" onChange={handleChange} type='text' name='phone_number'/>
               <Input className='my-2' label="Height" variant="bordered" placeholder="" onChange={handleChange} type='text' name='height'/>
               <Input className='my-2' label="Location" variant="bordered" placeholder="" onChange={handleChange} type='text' name='location'/>
+              <Select label="Select your gender" className="max-w-xs my-2" onChange={handleChange} name='gender'>
+                  <SelectItem key='Male' value={'Male'}> Male </SelectItem>
+                  <SelectItem key='Female' value={'Female'}> Female </SelectItem>
+                  <SelectItem key='Other' value={'Other'}> Other </SelectItem>
+              </Select>
+              <Select label="Whom are you looking for" className="max-w-xs my-2" onChange={handleChange} name='looking_for'>
+                  <SelectItem key='Male' value={'Male'}> Male </SelectItem>
+                  <SelectItem key='Female' value={'Female'}> Female </SelectItem>
+                  <SelectItem key='Other' value={'Other'}> Other </SelectItem>
+              </Select>
               <Input className='my-2' label="Preferences" variant="bordered" placeholder="Eg: Swimming, Walking" onChange={handleChange} type='text' name='preferences'/>
               <Button className='my-2 bg-blue-500' type='submit' >Submit</Button>
               <Button className='my-2' onClick={() => setStep(2)}>Previous</Button>

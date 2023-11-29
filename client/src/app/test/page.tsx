@@ -1,20 +1,22 @@
 'use client';
 import axios from 'axios';
 import React, { useState } from 'react';
-
+import { Button, Card, CardHeader, CardBody, CardFooter, Divider, Image as NextUIImage } from '@nextui-org/react';
+import Image from 'next/image';
 export default function Test(): JSX.Element {
-  const [image, setImage] = useState(null);
-  const [preview, setPreview] = useState(null);
+  const [images, setImages] = useState([]);
+  const [previews, setPreviews] = useState([]);
   const [error, setError] = useState(null);
 
   const handleChange = (e) => {
     const selected = e.target.files[0];
     const ALLOWED_TYPES = ['image/png', 'image/jpeg', 'image/jpg', 'image/gif', 'image/webp'];
+
     if (selected && ALLOWED_TYPES.includes(selected.type)) {
       let reader = new FileReader();
       reader.onloadend = () => {
-        setImage(selected);
-        setPreview(reader.result);
+        setImages((prevImages) => [...prevImages, selected]);
+        setPreviews((prevPreviews) => [...prevPreviews, reader.result]);
       };
       reader.readAsDataURL(selected);
     } else {
@@ -25,51 +27,51 @@ export default function Test(): JSX.Element {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData();
-    formData.append('file', image); // Use 'image' instead of 'file'
-    try {
-      const res = await axios.post('http://localhost:3800/upload', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      });
-      console.log(res.data);
-    } catch (err) {
-      console.log(err);
-    }
+    images.forEach((image, index) => {
+      formData.append('file'+index.toString(), image);
+    });
+    console.log(formData);
+    /*
+      try {
+        const res = await axios.post('http://localhost:3800/upload', formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        });
+        console.log(`Image ${i + 1} uploaded successfully:`, res.data);
+      } catch (err) {
+        console.log(`Error uploading image ${i + 1}:`, err);
+      }
+      */
+  };
+
+  const removeTheImage = (index) => {
+    setImages((prevImages) => {
+      const updatedImages = [...prevImages];
+      updatedImages.splice(index, 1);
+      return updatedImages;
+    });
+
+    setPreviews((prevPreviews) => {
+      const updatedPreviews = [...prevPreviews];
+      updatedPreviews.splice(index, 1);
+      return updatedPreviews;
+    });
   };
 
   return (
     <div>
       <h1>Test</h1>
-      <form onSubmit={handleSubmit}>
-        <input type='file' className='px-2 mx-2 w-72' name='file' onChange={handleChange} />
-        <p> {error} </p>
-        <p> Preview </p>
-        <img src={preview} alt='' />
-        <button type="submit">Submit</button>
+      <form onSubmit={handleSubmit} className='flex flex-row w-[36rem]'>
+        <input type='file' className='flex flex-col px-2 mx-2 w-72 my-16' name='file' onChange={handleChange} multiple accept="image/*" />
+        {previews.map((preview, index) => (
+          <div key={index} className="flex flex-col">
+            <Image src={preview} alt={`preview-${index}`} height={100} width={120} />
+            <button onClick={() => removeTheImage(index)} className='w-32 block p-2 mx-4 h-10 rounded-lg my-6 text-red-600 text-2xl'>Remove</button>
+          </div>
+        ))}
+        <button type="submit" className='w-32 bg-blue-500 block p-2 mx-4 h-10 rounded-lg my-6'>Submit All</button>
       </form>
-      <GetImage />
     </div>
   );
-}
-import Image from 'next/image';
-
-function GetImage(){
-  const [Image, setImage] = useState(' ');
-  const [imageValue, setImageValue] = useState(null);
-  const GettheImage = async() => {
-    try {
-      const res = await axios.get('http://localhost:3800/get_any?image=4JQpNWsUVgL4wD0CHPW341dW58YBWL8v.jpeg');
-      console.log(res.data);
-      setImage(res.data);
-    } catch (err) {
-      console.log(err);
-    }
-  }
-  return(
-    <div>
-      <button onClick={GettheImage}>Get Image</button>
-      <Image src={Image} alt='test' width={200} height={200} />
-    </div>
-  )
 }

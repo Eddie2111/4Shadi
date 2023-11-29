@@ -48,11 +48,13 @@
 
 ## Target Features
 
+Progress: 14/25
+
 Profile:
 
 - can create their profile and see their profile (done)
 - user has to send a request
-- upload their images
+- upload their images (done)
 - information restriction
 - user can see other profiles (done)
 
@@ -66,7 +68,8 @@ Profile Verification:
 
 Search System:
 
-- Profile sorting based on tags (educational qualification, heights, age, location, Married/Divorced)
+- Profile sorting based on tags (educational qualification, heights, age, location, Married/Divorced) (done)
+- Customized profile searching (done)
 - Profile suggestion based on tags (location, age, likes/preferences) (done)
 - Boost Profile matching upon search depending on payment status
 - Search history
@@ -74,7 +77,7 @@ Search System:
 
 Blogs and other features:
 
-- relationship based therapy blogs and tips
+- relationship based therapy blogs and tips (done)
 - online law support
 - instant security on meetup
 - report a problem (done)
@@ -86,3 +89,10 @@ Payment service:
 - payment history
 - profile boosting and third party advertisements
 - advertisement removal upon payment
+
+Revisions:
+
+- Complete registration with ensuring file upload and retrieval from CDN.
+- Complete check of searching.
+- Implement payment frontend form.
+- ToC, Privacy Policy, About, Support pages.

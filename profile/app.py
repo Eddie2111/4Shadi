@@ -2,12 +2,13 @@ from beanie import PydanticObjectId
 from fastapi import FastAPI, Request
 # from lib.mysql import __test__
 from fastapi.middleware.cors import CORSMiddleware
-from datatypes.UserModel import UserModel_Register, UserModel_GetOne
+from datatypes.UserModel import UserModel_Register, UserModel_GetOne, UpdateProfileModel
 from config.CorsOrigins import origins
 from schema.ProfileSchema import Profile
 from lib.py_mongo import init_db
 from pydantic import *
 import jsonwebtoken
+from typing import Optional
 app = FastAPI()
 
 # initating cors  → Cross Origin Resource Sharing, allows the server to accept requests from only the specified origins as in our nextjs app
@@ -86,11 +87,39 @@ async def getall():
 
 # update/employee
 # update/user
-@app.put("/update/{user_type}")
-async def update(user_type: str):
-    if user_type in user_types:
-        return {"message": f"Hello {user_type}"}
-    else: return {"message": "Invalid user type"}
+@app.post("/update")
+async def update(
+    data: UpdateProfileModel,
+):
+    try:
+        datalog = await Profile.find_one(Profile.serial == str(data.serial))
+        # update with new data
+        datalog.name = data.name or datalog.name
+        datalog.email = data.email or datalog.email
+        datalog.nid_number = data.nid_number or datalog.nid_number
+        datalog.birth_cert = data.birth_cert or datalog.birth_cert
+        datalog.marriage_cert = data.marriage_cert or datalog.marriage_cert
+        datalog.age = data.age or datalog.age
+        datalog.phone_number = data.phone_number or datalog.phone_number
+        datalog.height = data.height or datalog.height
+        datalog.location = data.location or datalog.location
+        datalog.preferences = data.preferences or datalog.preferences
+        datalog.gender = data.gender or datalog.gender
+        datalog.lookingFor = data.lookingFor or datalog.lookingFor
+        datalog.profileImage = data.profileImage or datalog.profileImage
+        datalog.images = data.images or datalog.images
+        # save to database
+        await datalog.replace()
+        return {
+            "message": "updated successfully",
+            "status":200
+        }
+    except Exception as e:
+        print(e)
+        return {
+            "message": "update failed",
+            "status":500
+        }
 
 # delete/employee
 # delete/user
