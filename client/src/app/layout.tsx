@@ -19,7 +19,7 @@ export const metadata: Metadata = {
 	description:  '4Shadi is a wedding planning service that helps you plan your wedding with ease.',
 };
 
-export const revalidate:number = 3600;
+export const revalidate:number = 600;
 
 export default function RootLayout({
   children,

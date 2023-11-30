@@ -10,20 +10,6 @@ export default async function Page(): JSX.Element {
     const data = await res.json();
     return data;
   };
-  const deleteData = (id: string) => {
-    // 'use server';
-    console.log(id);
-    // const res = await fetch('http://localhost:3700/', {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //   },
-    //   body: JSON.stringify({ id: id }),
-    // });
-    // const data = await res.json();
-    // return data;
-  }
-  const editData = async (id: string) => {}
   const data = await getData();
 
   return (

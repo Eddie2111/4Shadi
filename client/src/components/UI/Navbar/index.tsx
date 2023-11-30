@@ -36,23 +36,24 @@ export default function NavigationBar():JSX.Element {
         </NavbarBrand>
 
         <NavbarContent className="hidden sm:flex gap-4" justify="center">
-          <NavbarItem
-          >
+          <NavbarItem>
             <Link href={ profileData?.data?.user?.serial ? `/feed` : "/"}
                   className={pathname === "/" ? "underline" : ""}
                >Home </Link>
           </NavbarItem>
-          <NavbarItem
-
-          >
+          <NavbarItem>
             <Link href="/choices"
                   aria-current="page"
                   className={pathname === "/choices" ? "underline" : ""}
                 > Choices </Link>
           </NavbarItem>
-          <NavbarItem
-
-          >
+          <NavbarItem>
+            <Link href="/blogs"
+                  aria-current="page"
+                  className={pathname === "/blogs" ? "underline" : ""}
+                > Blogs </Link>
+          </NavbarItem>
+          <NavbarItem>
             <Link href="/"
                   aria-current="page"
                   className={pathname === "/about" ? "underline" : ""}
