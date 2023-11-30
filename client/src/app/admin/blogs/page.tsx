@@ -2,6 +2,7 @@ import SideBar from '@/components/UI/SideBar'
 import SimpleCard from '@/components/Cards/SimpleCard'
 import CreatePost from './CreatePost'
 import DeleteButton from './components/DeletePost'
+import EditButton from './components/EditPost'
 export default async function Page(): JSX.Element {
   const getData = async () => {
     'use server';
@@ -37,7 +38,7 @@ export default async function Page(): JSX.Element {
                 <div className='flex flex-row justify-between'>
                     <h1 className='text-2xl font-bold'>{item[1]}</h1>
                     <div className='flex flex-row ml-5'>
-                        <button className='border-2 border-green-600 p-2 rounded-lg'>Edit</button>
+                        <EditButton id={item[0]} ButtonName={'Edit'} Title={'Edit Blog'} />
                         <DeleteButton id={item[0]} ButtonName={'Delete'} Title={'Delete Blog'} Description={ 'Are you sure to delete this Blog?' } />
                     </div>
                 </div>

@@ -113,7 +113,7 @@ def post_lawsupport():
 
 
 #delete methods
-@app.route('/blog', methods=['DELETE']) #delete data spacific'id' from the query parameters of'blogs' table
+@app.route('/blog/delete', methods=['GET']) #delete data spacific'id' from the query parameters of'blogs' table
 def delete_data():
     blog_id = request.args.get('id', type=int)
     if not blog_id:
@@ -143,14 +143,13 @@ def delete_lawsupport():
 
 #update methods
 
-@app.route('/blog', methods=['PUT']) #update data spacific'id' from the query parameters of'lawsupport' table
+@app.route('/blog/update', methods=['POST']) #update data spacific'id' from the query parameters of'lawsupport' table
 def update_data():
-    blog_id = request.args.get('id', type=int)
-    if not blog_id:
-        return jsonify({"error": "Missing 'id' parameter"}), 400
+    blog_id = request.get_json()['id']
+    title = request.get_json()['title']
+    content = request.get_json()['content']
     try:
-        data = request.get_json()
-        cursor.execute("UPDATE `blogs` SET `title` = %s, `content` = %s, `author` = %s, `created_at` = %s WHERE `id` = %s", (data["title"], data["content"], data["author"], data["created_at"], blog_id))
+        cursor.execute("UPDATE `blogs` SET `title` = %s, `content` = %s WHERE `id` = %s", (title, content, blog_id))
         return jsonify({"message": "Blog updated successfully"}), 200
     except Exception as e:
         return jsonify({
