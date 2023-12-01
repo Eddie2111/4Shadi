@@ -70,21 +70,6 @@ def generate_unique_token(user_type):
     token = secrets.token_hex(8)
     return token
 
-# @app.post("/register/{user_type}", response_model=dict)
-# async def register(user_type: str):
-#     if user_type in user_types:
-#         # Generate a unique token for the user type
-#         token = generate_unique_token(user_type)
-
-#         # Store the token for the user type (you can save it in a database)
-#         user_tokens[user_type].add(token)
-
-#         # Construct the response explicitly as JSON
-#         response_data = {"message": f"Hello {user_type}", "token": token}
-#         return JSONResponse(content=response_data)
-#     else:
-#         raise HTTPException(status_code=400, detail="Invalid user type")
-
 #D07.10.23<
 @app.get("/")
 async def root():

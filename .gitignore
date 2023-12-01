@@ -19,3 +19,15 @@ auth/.env
 auth/lib
 auth/http_ca.crt
 auth/http_ca
+
+# Ignore images folder in posts folder
+posts/images/*
+posts/images/.gitkeep
+posts/images/
+
+# Ignore .env in blogs folder
+blogs/.env
+
+# Ignore .env in issues folder
+issues/.env
+

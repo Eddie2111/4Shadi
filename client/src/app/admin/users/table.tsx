@@ -20,7 +20,6 @@ interface IUserTableProps{
 }
 
 export default function UsersTable(){
-    const [loading, setLoading] = React.useState<boolean>(true);
     const [dataset, setDataset] = React.useState<IUserTableProps[]>([]); // [] is the initial state value
     async function fetchUsers(){
         try{
@@ -32,7 +31,6 @@ export default function UsersTable(){
     }
     React.useEffect(() => {
         fetchUsers();
-        setTimeout(() => setLoading(false), 1000);
     }, []);
     console.log(dataset)
 

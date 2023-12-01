@@ -4,6 +4,8 @@ import axios from "axios";
 import {useRouter} from "next/navigation";
 import { Card, Input, Button } from "@nextui-org/react";
 import {Select, SelectSection, SelectItem} from "@nextui-org/react";
+import {z} from "zod";
+
 interface IResponseProps {
   message: string;
   status: number;
@@ -12,6 +14,7 @@ interface IResponseProps {
     status: number;
   };
 }
+
 export default function MultiStepForm(): JSX.Element {
   const router = useRouter();
   const [name, setName] = React.useState<string>("");
@@ -29,16 +32,19 @@ export default function MultiStepForm(): JSX.Element {
     }
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
-      const collect_data = {...inputdata, serial:id, name, email, profileImage: '', images: []};
+      const collect_data = {...inputdata, serial: id, name, email };
       console.log(collect_data);
-      router.push('/on-board/step2');
-      // const response = await axios.post<IResponseProps>('http://localhost:3500/profile', collect_data);
-      // console.log(response.data)
-      // if (response.data.status === 200){
-      //   alert(response.data.message);
-      //   router.push('/on-board/step2');
-      // }
+      collect_data.age = parseInt(collect_data.age);
+      // router.push('/on-board/step2');
+      const isValid = InputValidation(collect_data);
+      const response = await axios.post<IResponseProps>('http://localhost:3500/profile', collect_data);
+      console.log(collect_data, isValid,response.data)
+      if (response.data.status === 200){
+        alert(response.data.message);
+        router.push('/on-board/step2');
+      }
     }
+    console.log(name,id,email)
   return (
 
       <form onSubmit={handleSubmit}>
@@ -46,8 +52,14 @@ export default function MultiStepForm(): JSX.Element {
         step === 1 && (
           <Card className='w-72 p-2'>
             <h1>Step 1</h1>
-            <Input className='my-2' label="Name" variant="bordered" placeholder="Enter your email" name='name' defaultValue={name}/>
-            <Input className='my-2' label="Email" variant="bordered" placeholder="Enter your email" name='email' defaultValue={email}/>
+            <div className='flex flex-col border-1 border-gray-300 dark:border-gray-600 rounded-lg px-2 py-2'>
+              <label className='text-xs'>Name</label>
+              <input className='mb-1 text-sm bg-transparent focus:outline-none' label="Name" variant="bordered" placeholder="Enter your name" name='name' defaultValue={name}/>
+            </div>
+            <div className='flex flex-col border-1 border-gray-300 dark:border-gray-600 rounded-lg px-2 py-2'>
+              <label className='text-xs'>Email</label>
+              <input className='mb-1 text-sm focus:outline-none bg-transparent' label="email" type='email' variant="bordered" placeholder="Enter your email" name='email' defaultValue={email}/>
+            </div>
             <Button className='my-2' onClick={() => setStep(2)}>Next</Button>
           </Card>
         )
@@ -56,7 +68,10 @@ export default function MultiStepForm(): JSX.Element {
         step === 2 && (
             <Card className='w-72 p-2'>
               <h1>Step 2</h1>
-              <Input className='my-2' label="NID Number" variant="bordered" placeholder="BD07813654..." name='nid_number' onChange={handleChange}/>
+                <div className='flex flex-col border-1 border-gray-300 dark:border-gray-600 rounded-lg px-2 py-2'>
+                  <label className='text-xs'>NID Number<span className='text-red-600 text-xs'>*</span></label>
+                  <input className='mb-1 text-sm bg-transparent focus:outline-none' label="NID_Number" placeholder="Enter your NID_Number" name='nid_number' onChange={handleChange}/>
+                </div>
               <Input className='my-2' label="Birth Certificate" variant="bordered" placeholder="BD-01AC57...." name='birth_cert' onChange={handleChange}/>
               <Input className='my-2' label="Marriage Cetrificate ID" variant="bordered" placeholder="BA-102533..." name='marriage_cert' onChange={handleChange}/>
               <Input className='my-2' label="Age" variant="bordered" placeholder="" onChange={handleChange} name='age' type='number'/>
@@ -77,7 +92,7 @@ export default function MultiStepForm(): JSX.Element {
                   <SelectItem key='Female' value={'Female'}> Female </SelectItem>
                   <SelectItem key='Other' value={'Other'}> Other </SelectItem>
               </Select>
-              <Select label="Whom are you looking for" className="max-w-xs my-2" onChange={handleChange} name='looking_for'>
+              <Select label="Whom are you looking for" className="max-w-xs my-2" onChange={handleChange} name='lookingFor'>
                   <SelectItem key='Male' value={'Male'}> Male </SelectItem>
                   <SelectItem key='Female' value={'Female'}> Female </SelectItem>
                   <SelectItem key='Other' value={'Other'}> Other </SelectItem>
@@ -91,4 +106,31 @@ export default function MultiStepForm(): JSX.Element {
     </form>
 
   )
+}
+import {IUserProps} from '@/types/UserTypes'
+function InputValidation(data:IUserProps){
+  const schema = z.object({
+    serial: z.string().min(10).max(36).nonempty(),
+    name: z.string().min(3).max(30).nonempty(),
+    email: z.string().email(),
+    nid_number: z.string().min(10).max(20).nonempty(),
+    birth_cert: z.string().min(10).max(20).nonempty(),
+    marriage_cert: z.string().min(10).max(20).nonempty(),
+    age: z.number().min(18).max(100),
+    phone_number: z.string().min(11).max(20).nonempty(),
+    height: z.string().min(2).max(10).nonempty(),
+    gender: z.string().nonempty(),
+    lookingFor: z.string().nonempty(),
+    location: z.string().nonempty(),
+    preferences: z.string().nonempty(),
+  })
+  try{
+    const result = schema.parse(data);
+    console.log(result);
+    return true;
+  }
+  catch(err){
+    console.log(err);
+    return err;
+  }
 }

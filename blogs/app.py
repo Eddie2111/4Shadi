@@ -27,16 +27,18 @@ def allowed_file(filename):
     return '.' in filename and filename.rsplit(
         '.', 1)[1].lower() in allowed_extensions
 
-#get methods
+# get methods
 
-@app.route('/', methods=['GET']) #get all the data from 'blogs' table
+
+@app.route('/', methods=['GET'])  # get all the data from 'blogs' table
 def get_data():
     cursor.execute("SELECT * FROM `blogs`")
     data = cursor.fetchall()
     return jsonify(data), 200
 
 
-@app.route('/get_one', methods=['GET']) # Get the data with spacific'id' from the query parameters of'blogs' table
+# Get the data with spacific'id' from the query parameters of'blogs' table
+@app.route('/get_one', methods=['GET'])
 def get_one_data():
     blog_id = request.args.get('id', type=int)
     if not blog_id:
@@ -52,13 +54,17 @@ def get_one_data():
         }), 500
     return jsonify(data), 200
 
-@app.route('/lawsupport', methods=['GET'])  #get all the data from 'lawsupport' table
+
+# get all the data from 'lawsupport' table
+@app.route('/lawsupport', methods=['GET'])
 def get_lawsupport():
     cursor.execute("SELECT * FROM `lawsupport`")
     data = cursor.fetchall()
     return jsonify(data), 200
 
-@app.route('/lawsupport/get_one', methods=['GET']) # Get the data with spacific'id' from the query parameters of'lawsupport' table
+
+# Get the data with spacific'id' from the query parameters of'lawsupport' table
+@app.route('/lawsupport/get_one', methods=['GET'])
 def get_one_lawsupport():
     law_id = request.args.get('id', type=int)
     if not law_id:
@@ -75,8 +81,8 @@ def get_one_lawsupport():
     return jsonify(data), 200
 
 
-#post methods
-@app.route('/', methods=['POST']) #post data to 'blogs' table
+# post methods
+@app.route('/', methods=['POST'])  # post data to 'blogs' table
 def post_data():
     try:
         data = request.get_json()
@@ -94,15 +100,16 @@ def post_data():
         }), 400
 
 
-
-@app.route('/lawsupport', methods=['POST']) #post data to 'lawsupport' table
+@app.route('/lawsupport', methods=['POST'])  # post data to 'lawsupport' table
 def post_lawsupport():
     try:
         data = request.get_json()
         cursor.execute(
             "INSERT INTO `lawsupport` (`title`, `details`, `created_at`, `status`) VALUES (%s, %s, %s, %s)",
-            (data["title"], data["details"], data["created_at"], data["status"])
-        )
+            (data["title"],
+             data["details"],
+                data["created_at"],
+                data["status"]))
         return jsonify(data), 201
 
     except Exception as e:
@@ -112,8 +119,9 @@ def post_lawsupport():
         }), 400
 
 
-#delete methods
-@app.route('/blog/delete', methods=['GET']) #delete data spacific'id' from the query parameters of'blogs' table
+# delete methods
+# delete data spacific'id' from the query parameters of'blogs' table
+@app.route('/blog/delete', methods=['GET'])
 def delete_data():
     blog_id = request.args.get('id', type=int)
     if not blog_id:
@@ -127,7 +135,9 @@ def delete_data():
             "message": e
         }), 500
 
-@app.route('/lawsupport', methods=['DELETE']) #delete data spacific'id' from the query parameters of'lawsupport' table
+
+# delete data spacific'id' from the query parameters of'lawsupport' table
+@app.route('/lawsupport', methods=['DELETE'])
 def delete_lawsupport():
     law_id = request.args.get('id', type=int)
     if not law_id:
@@ -141,15 +151,21 @@ def delete_lawsupport():
             "message": e
         }), 500
 
-#update methods
+# update methods
 
-@app.route('/blog/update', methods=['POST']) #update data spacific'id' from the query parameters of'lawsupport' table
+
+# update data spacific'id' from the query parameters of'lawsupport' table
+@app.route('/blog/update', methods=['POST'])
 def update_data():
     blog_id = request.get_json()['id']
     title = request.get_json()['title']
     content = request.get_json()['content']
     try:
-        cursor.execute("UPDATE `blogs` SET `title` = %s, `content` = %s WHERE `id` = %s", (title, content, blog_id))
+        cursor.execute(
+            "UPDATE `blogs` SET `title` = %s, `content` = %s WHERE `id` = %s",
+            (title,
+             content,
+             blog_id))
         return jsonify({"message": "Blog updated successfully"}), 200
     except Exception as e:
         return jsonify({
@@ -157,21 +173,28 @@ def update_data():
             "message": e
         }), 500
 
-@app.route('/lawsupport', methods=['PUT']) #update data spacific'id' from the query parameters of'lawsupport' table
+
+# update data spacific'id' from the query parameters of'lawsupport' table
+@app.route('/lawsupport', methods=['PUT'])
 def update_lawsupport():
     law_id = request.args.get('id', type=int)
     if not law_id:
         return jsonify({"error": "Missing 'id' parameter"}), 400
     try:
         data = request.get_json()
-        cursor.execute("UPDATE `lawsupport` SET `title` = %s, `details` = %s, `created_at` = %s, `status` = %s WHERE `id` = %s", (data["title"], data["details"], data["created_at"], data["status"], law_id))
+        cursor.execute(
+            "UPDATE `lawsupport` SET `title` = %s, `details` = %s, `created_at` = %s, `status` = %s WHERE `id` = %s",
+            (data["title"],
+             data["details"],
+                data["created_at"],
+                data["status"],
+                law_id))
         return jsonify({"message": "Law support updated successfully"}), 200
     except Exception as e:
         return jsonify({
             "error": "An error occurred while processing the request",
             "message": e
         }), 500
-
 
 
 # Example POST request with form data
@@ -212,17 +235,6 @@ def upload_file():
         ), 500
 
 
-##############################################
-# TODO: Implement the following endpoints
-'''
-Blog:
-- create a post endpoint: blogs/post
-- create a connection to local mysql database, (please try to use class component)
-- test on posting the data
-- store the data
-- try to make it asynchronous (optional)
-- can you implement threads? (optional)
-'''
 ##############################################
 # !Imp: Please do test the code before pushing:
 # - Run command: python -m flask --app app run --port=3700 --reload

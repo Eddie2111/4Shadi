@@ -1,6 +1,6 @@
 'use client';
 import React from 'react';
-import {Button, Checkbox, Input, Slider} from '@nextui-org/react';
+import {Button, Checkbox, Slider} from '@nextui-org/react';
 import {Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, useDisclosure} from "@nextui-org/react";
 
 import CustomCards from '@/components/Cards/CustomCards';
@@ -14,7 +14,7 @@ export default function SearchAndSort(): JSX.Element {
 
     // for custom search modal
     const [isLocation, setIsLocation] = React.useState<boolean>(false);
-    const [ageRange, setAgeRange] = React.useState<number[]>([0,0]);
+    // const [ageRange, setAgeRange] = React.useState<number[]>([0,0]);
     const [isPreference, setIsPreference] = React.useState<boolean>(false);
 
     // for button callback style changes
@@ -66,8 +66,8 @@ export default function SearchAndSort(): JSX.Element {
         }
 
     }
-    const InActiveButtonClassName = 'bg-blue-500 p-2 text-white rounded-lg m-2 hover:bg-blue-700 duration-300';
-    const ActiveButtonClassName = 'bg-blue-700 p-2 text-white rounded-lg m-2 hover:bg-blue-700 duration-300';
+    // const InActiveButtonClassName = 'bg-blue-500 p-2 text-white rounded-lg m-2 hover:bg-blue-700 duration-300';
+    // const ActiveButtonClassName = 'bg-blue-700 p-2 text-white rounded-lg m-2 hover:bg-blue-700 duration-300';
     return(
         <div className='flex flex-col'>
             <div>

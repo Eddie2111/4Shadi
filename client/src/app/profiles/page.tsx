@@ -8,7 +8,7 @@ import React from 'react';
 import {Image} from '@nextui-org/react';
 export default function Profiles(): JSX.Element {
     const params = useSearchParams() as URLSearchParams;
-    const [userdata, setUserdata] = React.useState<any>({});
+    const [userdata, setUserdata] = React.useState<IUserProps>({});
     const paramID = params.get('id') || " ";
     React.useEffect(()=>{
         axios.post<IUserProps>(

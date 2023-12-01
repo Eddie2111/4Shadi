@@ -4,7 +4,7 @@ from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from datatypes.UserModel import UserModel_Register, UserModel_GetOne, UpdateProfileModel
 from config.CorsOrigins import origins
-from schema.ProfileSchema import Profile
+from schema.ProfileSchema import Profile, MockProfile
 from lib.py_mongo import init_db
 from pydantic import *
 import jsonwebtoken
@@ -43,6 +43,8 @@ async def root():
 # register/user
 @app.post("/profile")
 async def register(data:Profile):
+    data_dict = data.dict()
+    print("Received data:", data_dict)
     try:
         await data.insert()
         return {
@@ -54,8 +56,8 @@ async def register(data:Profile):
         print(e)
         return {
             "message": "register failed",
-            # "data": data,
-            "status":500
+            "data": e,
+            "status":200
         }
 
 # getone/employee
@@ -92,6 +94,7 @@ async def update(
     data: UpdateProfileModel,
 ):
     try:
+        print('update recieved')
         datalog = await Profile.find_one(Profile.serial == str(data.serial))
         # update with new data
         datalog.name = data.name or datalog.name
@@ -120,6 +123,30 @@ async def update(
             "message": "update failed",
             "status":500
         }
+
+# update/user
+@app.post("/updateimages")
+async def update(
+    data: UpdateProfileModel,
+):
+    try:
+        print('update recieved')
+        datalog = await Profile.find_one(Profile.serial == str(data.serial))
+        datalog.profileImage = data.profileImage or datalog.profileImage
+        datalog.images = data.images or datalog.images
+        # save to database
+        await datalog.replace()
+        return {
+            "message": "updated successfully",
+            "status":200
+        }
+    except Exception as e:
+        print(e)
+        return {
+            "message": "update failed",
+            "status":500
+        }
+
 
 # delete/employee
 # delete/user

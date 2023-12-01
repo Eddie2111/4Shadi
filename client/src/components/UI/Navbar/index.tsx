@@ -1,16 +1,16 @@
 'use client';
 import axios from "axios";
 import React from "react";
-import {Navbar, NavbarBrand, NavbarContent, NavbarItem, NavbarMenu, NavbarMenuItem, NavbarMenuToggle, Link, Button} from "@nextui-org/react";
+import {Navbar, NavbarBrand, NavbarContent, NavbarItem, NavbarMenu, NavbarMenuItem, NavbarMenuToggle, Link} from "@nextui-org/react";
 import Image from 'next/image';
-import ThemeSwitcher from "./ThemeSwitcher";
 import ProfileControlSection from "./ProfileControlSection";
 import {usePathname} from "next/navigation";
-import { useAuth, UserButton } from "@clerk/nextjs";
+import { useAuth,
+        UserButton
+        } from "@clerk/nextjs";
 export default function NavigationBar():JSX.Element {
     const [isMenuOpen, setIsMenuOpen] = React.useState(false);
     const [profileData, setProfileData] = React.useState<IUserProps>({});
-    const [tokening, setTokening] = React.useState<string>('');
     const menuItems = [ "Profile", "Dashboard", "My Settings", "Help & Feedback", "Log Out" ];
     const pathname = usePathname();
     React.useEffect(()=>{
@@ -23,7 +23,7 @@ export default function NavigationBar():JSX.Element {
       })
       .catch((err)=>{console.log(err)})
     },[profileData?.data?.user?.serial])
-    const { isLoaded, userId, sessionId, getToken } = useAuth();
+    // const { isLoaded, userId, sessionId, getToken } = useAuth();
     return (
 
     <Navbar shouldHideOnScroll onMenuOpenChange={setIsMenuOpen} className='light:bg-white'>
@@ -62,6 +62,7 @@ export default function NavigationBar():JSX.Element {
         </NavbarContent>
 
       <ProfileControlSection token={profileData?.data?.user?.serial || 'null'}/>
+      <UserButton/>
 
       <NavbarMenu>
         {menuItems.map((item, index) => (

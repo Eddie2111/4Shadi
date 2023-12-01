@@ -5,7 +5,7 @@ import type {Metadata} from 'next';
 const SignUpForm = dynamic(() => import("./form"), { ssr: false });
 
 export const metadata:Metadata = {
-  title: 'Sign Up | 4Shadi',
+  title: 'Sign Up',
   description: 'Sign up for an account',
 }
 export default function Page():JSX.Element {

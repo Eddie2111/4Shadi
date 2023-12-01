@@ -9,11 +9,12 @@ from functions.randomGenerator import stringGenerator
 from functions.StoreFiles import StoreFile
 
 app = Flask(__name__)
-CORS(app, resources={r"/*":
-                     {"origins": "*",
-                      "methods": ["GET", "POST"],
-                      "allow_headers": ["Content-Type", "Authorization"]}
-                })
+CORS(app)
+# Define the allowed origins for CORS (replace with your specific needs)
+# Example: Allow requests from all origins
+app.config['CORS_ORIGINS'] = '*'
+# Example: Allow requests from a frontend running on localhost:3000
+app.config['CORS_ORIGINS'] = ['http://localhost:3000']
 
 @app.route("/")
 def hello_world():
@@ -74,5 +75,5 @@ def get_any():
         return e
 
 
-# python -m flask run --app cdn run --port=3700 --reload
-# python -m flask --app cdn run --port=3700 --reload
+# python -m flask run --app cdn run --port=3800 --reload
+# python -m flask --app cdn run --port=3800 --reload

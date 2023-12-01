@@ -1,20 +1,14 @@
 'use client';
 import React, { useState } from 'react';
 import {AlertOctagon,ArrowLeftRight, BarChart4, ChevronLeftSquare, LogOut, LayoutDashboard, Menu, Users} from 'lucide-react';
-import {useRouter} from 'next/navigation';
 import Link from 'next/link';
+
 const Sidebar = () => {
-    const router = useRouter();
     const [isExpanded, setIsExpanded] = useState(false);
     const liColor = 'p-[20px] text-center border-b-[1px] border-gray-100 hover:bg-gray-400 hover:text-blue-700 duration-300';
     const toggleSidebar = () => {
         setIsExpanded(!isExpanded);
     };
-    function OnclickRoute(route: string): void{
-        const pushingRoute:string = 'admin'+route;
-        console.log(pushingRoute)
-        router.push(pushingRoute)
-    }
 
   return (
         <div className={

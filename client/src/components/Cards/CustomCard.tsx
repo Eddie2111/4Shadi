@@ -1,7 +1,6 @@
 'use client'
 
 import React from 'react'
-import {Card, CardBody} from '@nextui-org/react'
 import {motion} from 'framer-motion'
 export default function SimpleCard({ children }: { children: React.ReactNode}): JSX.Element{
     return(

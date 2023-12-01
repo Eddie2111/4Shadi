@@ -1,6 +1,6 @@
 'use client';
 import axios from 'axios';
-import {Button, Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Spinner, useDisclosure} from "@nextui-org/react";
+import {Button, Modal, ModalContent, ModalHeader, ModalBody, Spinner, useDisclosure} from "@nextui-org/react";
 import React from "react";
 
 interface ModalProps {
@@ -38,18 +38,6 @@ const DefaultModal = ({ButtonName, Title, id}: ModalProps): JSX.Element => {
       }
 
     }
-    const OnClickFunction = async () => {
-      try{
-        const res = await axios.post(`http://localhost:3700/blog/update?id=${id}`, {id: ID});
-        console.log(res.data);
-        // onOpenChange();
-        // reload the page
-        // window.location.reload();
-      }
-      catch(err){
-        console.log(err);
-      }
-    }
     React.useEffect(()=>{
       async function GetData(){
         if (!isOpen) {return null}
@@ -66,12 +54,12 @@ const DefaultModal = ({ButtonName, Title, id}: ModalProps): JSX.Element => {
     },[id, isOpen]);
     return(
         <>
-        <Button className='border-2 bg-transparent mx-2 border-green-500 hover:bg-blue-500 hover:text-black duration-300' onPress={onOpen}>{ButtonName}</Button>
+        <Button className='border-2 bg-transparent mx-2 border-green-500 hover:bg-blue-500 hover:text-black duration-300' onPress={onOpen}>{buttonName}</Button>
         <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
           <ModalContent>
           {(onClose) => (
             <>
-              <ModalHeader className="flex flex-col gap-1">{Title}</ModalHeader>
+              <ModalHeader className="flex flex-col gap-1">{title}</ModalHeader>
               <ModalBody>
                 {recID === '0' ? (
                   <div className='my-20 py-10 h-[12rem]'>

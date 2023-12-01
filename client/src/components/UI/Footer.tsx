@@ -1,27 +1,16 @@
 import Image from "next/image";
 import Link from "next/link";
-
+import {z} from "zod";
 export default function Footer() {
-    const SubmitHandle = async(e:any) => {
-        e.preventDefault();
-        const email = e?.target?.UserEmail?.value || '';
-        console.log(email)
-        // const res = await fetch('/api/subscribe', {
-        //     body: JSON.stringify({
-        //         email: email
-        //     }),
-        //     headers: {
-        //         'Content-Type': 'application/json'
-        //     },
-        //     method: 'POST'
-        // })
-        // const { error } = await res.json()
-        // if (error) {
-        //     console.log(error)
-        //     return
-        // }
-        e.target.UserEmail.value = ''
-    }
+    async function create(formData: FormData) {
+        const email = formData.get('email') as string
+        const user = { email }
+        const userSchema = z.object({
+            email: z.string().email()
+        })
+        userSchema.parse(user)
+        // await subscribe(user)
+      }
     return (
         <footer className="bg-white dark:bg-gray-900">
             <div className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
@@ -47,7 +36,7 @@ export default function Footer() {
                     </div>
 
                     <div className="col-span-2 lg:col-span-3 lg:flex lg:items-end">
-                    <form className="w-full" onSubmit={SubmitHandle}>
+                    <form className="w-full" action={create}>
                         <label className="sr-only"> Email </label>
                         <div className="border border-gray-100 p-2 focus-within:ring sm:flex sm:items-center sm:gap-4" >
                             <input type="email" id="UserEmail" placeholder="john@rhcp.com" name='UserEmail'

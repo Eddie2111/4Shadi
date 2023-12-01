@@ -1,14 +1,18 @@
 'use client';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
-import { Button, Card, CardHeader, CardBody, CardFooter, Divider, Image as NextUIImage } from '@nextui-org/react';
+// import { Button, Card, CardHeader, CardBody, CardFooter, Divider, Image as NextUIImage } from '@nextui-org/react';
+import {useRouter} from 'next/navigation'
 import Image from 'next/image';
+import Link from 'next/link';
 import Handler from './handler'
 export default function Test(): JSX.Element {
+  const router = useRouter();
   const [id, setID] = useState<string>('');
   const [image, setImage] = useState(null);
   const [preview, setPreview] = useState('/');
   const [error, setError] = useState(null);
+  const [state, setState] = useState<number>(0);
     const [image1, setImage1] = useState(null);
     const [preview1, setPreview1] = useState('/');
     const [image2, setImage2] = useState(null);
@@ -24,12 +28,15 @@ export default function Test(): JSX.Element {
   useEffect(() => {
     localStorage.getItem('id') && setID(localStorage.getItem('id')!);
   },[]);
+  const OnWard = () => {
+    router.push('/signin')
+  }
   // Handle each of the images in image 1,2,3,4,5 from the 2nd form input
   const HandleBulk = (e) => {
     const selected = e.target.files[0];
     const ALLOWED_TYPES = ['image/png', 'image/jpeg', 'image/jpg', 'image/gif', 'image/webp'];
     if (selected && ALLOWED_TYPES.includes(selected.type)) {
-      let reader = new FileReader();
+      const reader = new FileReader();
       reader.onloadend = () => {
         switch (e.target.name) {
           case 'image1':
@@ -65,7 +72,7 @@ export default function Test(): JSX.Element {
     const selected = e.target.files[0];
     const ALLOWED_TYPES = ['image/png', 'image/jpeg', 'image/jpg', 'image/gif', 'image/webp'];
     if (selected && ALLOWED_TYPES.includes(selected.type)) {
-      let reader = new FileReader();
+      const reader = new FileReader();
       reader.onloadend = () => {
         setImage(selected);
         setPreview(reader.result);
@@ -90,20 +97,22 @@ export default function Test(): JSX.Element {
       setProfileImage(res.data.url);
       const response = await axios.post('http://localhost:3500/update',
             {
-                id: id,
+                serial: id,
                 profileImage: profileImage,
                 images: sentImages
             },
         );
       console.log(response);
+      setState(state + 1)
     } catch (err) {
-      console.log(err);
+      console.log(err.message);
     }
   };
   const removeTheImage = async() => {
     setImage(null);
     setPreview('/');
   }
+  // bulk image submit
   const HandleHardSubmit = async(e) => {
     e.preventDefault();
     // submitting all the files from bulk using a loop
@@ -127,7 +136,17 @@ export default function Test(): JSX.Element {
     }
     console.log(setUpArray);
     setSentImages(setUpArray);
-    await Handler(id, setUpArray);
+    const response = await axios.post('http://localhost:3500/update',
+            {
+                serial: id,
+                profileImage: profileImage,
+                images: sentImages
+            },
+        );
+        if(response.data.status === 200){
+          setState(state + 1)
+        }
+      console.log(response);
   }
   return (
     <div>
@@ -150,6 +169,14 @@ export default function Test(): JSX.Element {
           <button onClick={removeTheImage} className='w-32 block p-2 mx-4 h-10 rounded-lg my-6 text-red-600 text-2xl bg-white'>X</button>
         </div>
     </form>
+    {
+      state > 1 && (
+        <Link
+        className='w-32 block text-center p-2 mx-4 h-10 rounded-lg my-6 text-white-600 text-xl bg-blue-500'
+        href='/signin'
+        > Continue </Link>
+      )
+    }
     </div>
   );
 }

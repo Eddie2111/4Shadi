@@ -18,7 +18,7 @@ export default async function Page(): JSX.Element {
       <div className="container mx-20">
         <h1 className="text-2xl font-bold">Blogs</h1>
         <CreatePost />
-        {data.map((item: any) => (
+        {data.map((item: string[]) => (
           <div key={item[0]} className='mx-10 my-10'>
             <SimpleCard>
                 <div className='flex flex-row justify-between'>

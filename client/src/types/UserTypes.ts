@@ -36,4 +36,4 @@ interface IUserProps{
 }
 
 //export
-export type {IUserProps};
+export { IUserProps }

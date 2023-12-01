@@ -10,7 +10,7 @@ const BioCard = dynamic(() => import('./BioCard'), {ssr: false});
 
 
 export default function Header(): JSX.Element {
-    const [userdata, setUserdata] = React.useState<any>({});
+    const [userdata, setUserdata] = React.useState<IUserProps>({});
     const [profileCardData,setProfileCardData] = React.useState<any>({});
     const [biocardData,setBiocardData] = React.useState<any>({});
     React.useEffect(()=>{

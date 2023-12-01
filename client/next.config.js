@@ -6,6 +6,10 @@ const nextConfig = {
             protocol: 'https',
             hostname: 'picsum.photos',
           },
+          {
+            protocol: 'https',
+            hostname: 'queerty-prodweb.s3.amazonaws.com',
+          }
         ],
       },
 }

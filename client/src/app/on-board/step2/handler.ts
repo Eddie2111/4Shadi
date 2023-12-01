@@ -7,12 +7,12 @@ interface IUpdateHandler {
     profileImage?: string;
 }
 
-export default async function Updatehandler(data): boolean{
+export default async function Updatehandler(data:IUpdateHandler): boolean{
     if (data.profileImage) {
         // update profile image
         const response = await axios.post('http://localhost:3500/update',
             {
-                id: id,
+                serial: id,
                 profileImage: profileImage,
                 images: sentImages
             },
@@ -23,7 +23,7 @@ export default async function Updatehandler(data): boolean{
         // update images
         const response = await axios.post('http://localhost:3500/update',
             {
-                id: data.id,
+                serial: data.id,
                 images: data.images
             },
         );

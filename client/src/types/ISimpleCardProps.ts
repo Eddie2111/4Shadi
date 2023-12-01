@@ -7,3 +7,5 @@ interface ISimpleCardProps {
     link?: string;
     footer?: string;
 }
+
+export default ISimpleCardProps;

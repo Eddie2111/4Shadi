@@ -1,6 +1,6 @@
 'use client';
 import React from 'react';
-import {Card, Input, Button, CardBody, CardHeader, Image, Divider, CardFooter, Link} from '@nextui-org/react';
+import {Card, CardBody, CardHeader, Image, Divider, CardFooter, Link} from '@nextui-org/react';
 
 interface IDataProps{
     data: {
