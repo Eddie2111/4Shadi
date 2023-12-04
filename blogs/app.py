@@ -5,6 +5,18 @@ import os
 from lib.mysql import cursor, __test__
 from utils.TimeNow import TimeNow
 
+###
+"""
+@component : 1. allowed_file, 2. get_data, 3. get_one_data, 4. get_lawsupport, 5. get_one_lawsupport, 6. post_data, 7. post_lawsupport, 8. delete_data,
+             9. delete_lawsupport, 10. update_data, 11. update_lawsupport, 12. upload_file 
+@description : upload file, fetches data, retrieves a single blog entry, Retrieves data from 'lawsupport' table, Retrieves a single entry, Inserts new data, 
+             Inserts new data in 'lawsupport' table, Deletes a blog entry,Deletes law support entry, Updates the title and content, Updates a law support entry, 
+             Handles POSTS
+@params : filename, void, request, cursor, (5-12) request
+@return : boolean val, fetched data, (3,4) JSON data and status code, (5-12) JSON(data/message)and status code,
+
+"""
+
 app = Flask(__name__)
 CORS(app)
 __test__()
