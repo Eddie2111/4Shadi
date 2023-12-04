@@ -11,6 +11,16 @@ from utils.TimeNow import TimeNow
 
 from schema.IssueSchema import Issues
 
+###
+"""
+@component : start_db, add_security_headers, root, (1.0)read_item, (1.1)read_item, (2.0)store_item, (2.1)store_item
+@description : initializes the database, adds security headers, serves as an endpoint, (1.0)retrieves all items, (1.1)retrieves a single item,
+             (2.0)inserts a new item using from provided data, (2.1)inserts a new item using formed data 
+@params : void, (request,call_next), void, void, str, data, str
+@return : coroutine(must be awaited for the initialization to complete), HTTP response, (retrieved data,response with a status code), (1,2)response with a status code 
+
+"""
+
 app = FastAPI()
 
 # initating cors  → Cross Origin Resource Sharing, allows the server to accept requests from only the specified origins as in our nextjs app
