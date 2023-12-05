@@ -11,7 +11,6 @@ interface IDataProps{
         preferences:string;
         gender:string;
         lookingFor:string;
-        profileImage:string;
     }
 }
 
@@ -23,7 +22,7 @@ export default function ProfileCard({data}:IDataProps): JSX.Element {
             alt="nextui logo"
             height={120}
             radius="sm"
-            src={data.profileImage}
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS28_XoPPQzqxyJvpLIAcXAp-WcXwsSkuluaA&usqp=CAU"
             width={120}
             />
             <div className="flex flex-col justify-center text-center">
