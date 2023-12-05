@@ -28,9 +28,9 @@ export default function Test(): JSX.Element {
   useEffect(() => {
     localStorage.getItem('id') && setID(localStorage.getItem('id')!);
   },[]);
-  const OnWard = () => {
-    router.push('/signin')
-  }
+  // const OnWard = () => {
+  //   router.push('/signin')
+  // }
   // Handle each of the images in image 1,2,3,4,5 from the 2nd form input
   const HandleBulk = (e) => {
     const selected = e.target.files[0];

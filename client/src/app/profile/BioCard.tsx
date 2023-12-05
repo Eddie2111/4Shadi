@@ -1,6 +1,6 @@
 'use client';
 import React from 'react';
-import {Card, Input, Button, CardBody, CardHeader, Image, Divider, CardFooter, Link} from '@nextui-org/react';
+import {Card, CardBody, CardHeader, Image, Divider, CardFooter} from '@nextui-org/react';
 
 interface IDataProps {
     data: {
@@ -10,6 +10,7 @@ interface IDataProps {
         phone_number: string;
         email: string;
         location: string;
+        images: string[];
     }
 }
 
@@ -30,37 +31,17 @@ export default function BioCard({data}:IDataProps): JSX.Element {
         <Divider/>
 
         <CardFooter>
-            <div className='flex flex-col'>
-            <Link
-                isExternal
-                showAnchorIcon
-                href="/"
-            > Works at Sudan
-            </Link>
-            <Link
-                isExternal
-                showAnchorIcon
-                href="/"
-            > Works at Sudan
-            </Link>
-            <Link
-                isExternal
-                showAnchorIcon
-                href="/"
-            > Works at Sudan
-            </Link>
-            <Link
-                isExternal
-                showAnchorIcon
-                href="/"
-            > Works at Sudan
-            </Link>
-            <Link
-                isExternal
-                showAnchorIcon
-                href="/"
-            > Works at Sudan
-            </Link>
+            <div class="grid grid-cols-4 grid-flow-row gap-4">
+                {data.images.map((image, index)=>{
+                    return <Image
+                    key={index}
+                    alt="nextui logo"
+                    height={120}
+                    radius="sm"
+                    src={image}
+                    width={120}
+                    />
+                })}
             </div>
         </CardFooter>
     </Card>

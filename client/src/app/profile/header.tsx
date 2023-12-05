@@ -22,7 +22,7 @@ export default function Header(): JSX.Element {
             setProfileCardData({
                 name: res?.data?.user?.name || " ", age: res?.data?.user?.age || " ",
                 height: res?.data?.user?.height || " ", email: res?.data?.user?.email || " ",
-                preferences: res?.data?.user?.preferences || " ",
+                preferences: res?.data?.user?.preferences || " ", profileImage: res?.data?.user?.profileImage || " ",
                 gender: res?.data?.user?.gender || " ", lookingFor: res?.data?.user?.lookingFor || " ",
             });
             setBiocardData({
@@ -30,7 +30,7 @@ export default function Header(): JSX.Element {
                 birth_cert: res?.data?.user?.birth_cert || " ",
                 marriage_cert: res?.data?.user?.marriage_cert || " ",
                 phone_number: res?.data?.user?.phone_number || " ",
-                email: res?.data?.user?.email || " ",
+                email: res?.data?.user?.email || " ", images: res?.data?.user?.images || [],
                 location: res?.data?.user?.location || " ",
             });
         })
