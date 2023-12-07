@@ -68,7 +68,19 @@ async def read_item(id: str):
     except Exception as e:
         print(e)
         return ResponseStruct(500, "/get/{id}","GET","error occured")
-
+###############################
+"""
+@params: data -> {
+    serial: Indexed(str, unique=True)
+    title: str
+    description: str
+    status: str
+    issued_user: str
+    issuer_name: str
+    issued_date: str
+    resolved_date: str
+}
+"""
 @app.post("/issues/create")
 async def store_item(data: Issues):
     try:
@@ -77,6 +89,7 @@ async def store_item(data: Issues):
     except Exception as e:
         print(e)
         return ResponseStruct(500, "/create","POST","error occured")
+
 # post with formdata
 @app.post("/issues/create/formdata")
 async def store_item(

@@ -87,42 +87,9 @@ async def getall():
             "error": str(e)
         }
 
-# update/employee
 # update/user
-@app.post("/update")
-async def update(
-    data: UpdateProfileModel,
-):
-    try:
-        print('update recieved')
-        datalog = await Profile.find_one(Profile.serial == str(data.serial))
-        # update with new data
-        datalog.name = data.name or datalog.name
-        datalog.email = data.email or datalog.email
-        datalog.nid_number = data.nid_number or datalog.nid_number
-        datalog.birth_cert = data.birth_cert or datalog.birth_cert
-        datalog.marriage_cert = data.marriage_cert or datalog.marriage_cert
-        datalog.age = data.age or datalog.age
-        datalog.phone_number = data.phone_number or datalog.phone_number
-        datalog.height = data.height or datalog.height
-        datalog.location = data.location or datalog.location
-        datalog.preferences = data.preferences or datalog.preferences
-        datalog.gender = data.gender or datalog.gender
-        datalog.lookingFor = data.lookingFor or datalog.lookingFor
-        datalog.profileImage = data.profileImage or datalog.profileImage
-        datalog.images = data.images or datalog.images
-        # save to database
-        await datalog.replace()
-        return {
-            "message": "updated successfully",
-            "status":200
-        }
-    except Exception as e:
-        print(e)
-        return {
-            "message": "update failed",
-            "status":500
-        }
+from routes.update import update
+app.include_router(update, prefix="/update")
 
 # update/user
 @app.post("/updateimages")

@@ -12,7 +12,7 @@ export default function Footer() {
         // await subscribe(user)
       }
     return (
-        <footer className="bg-white dark:bg-gray-900">
+        <footer className="bg-transparent">
             <div className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
                 <div className="lg:flex lg:items-start lg:gap-8">
                 <div className="text-blue-600">
@@ -24,7 +24,7 @@ export default function Footer() {
                 <div className="mt-8 grid grid-cols-2 gap-8 lg:mt-0 lg:grid-cols-5 lg:gap-y-16" >
                     <div className="col-span-2">
                     <div>
-                        <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
+                        <h2 className="text-2xl font-bold text-gray-900 dark:text-slate-400">
                         Get the latest news!
                         </h2>
 
@@ -40,7 +40,7 @@ export default function Footer() {
                         <label className="sr-only"> Email </label>
                         <div className="border border-gray-100 p-2 focus-within:ring sm:flex sm:items-center sm:gap-4" >
                             <input type="email" id="UserEmail" placeholder="john@rhcp.com" name='UserEmail'
-                                className="w-full border-none focus:border-transparent focus:ring-transparent sm:text-sm h-8"
+                                className="w-full border-none focus:border-transparent focus:ring-transparent sm:text-sm h-8 px-2"
                             />
                         <button type='submit' className="mt-1 w-full bg-blue-700 px-6 py-3 text-sm font-bold uppercase tracking-wide text-white hover:bg-blue-600 sm:mt-0 sm:w-auto sm:shrink-0 duration-300 rounded-lg">
                             Sign Up
@@ -50,35 +50,35 @@ export default function Footer() {
                     </div>
 
                     <div className="col-span-2 sm:col-span-1">
-                    <p className="font-medium text-gray-900">Services</p>
+                    <p className="font-medium text-gray-900 dark:text-slate-300">Services</p>
 
                     <ul className="mt-6 space-y-4 text-sm">
                         <li>
-                        <Link href="/" className="text-gray-700 transition hover:opacity-75 dark:text-white">
+                        <Link href="/" className="text-gray-700 transition hover:opacity-75 dark:text-slate-400">
                             1on1 Coaching
                         </Link>
                         </li>
 
                         <li>
-                        <Link href="/" className="text-gray-700 transition hover:opacity-75 dark:text-white">
+                        <Link href="/" className="text-gray-700 transition hover:opacity-75 dark:text-slate-400">
                             Company Review
                         </Link>
                         </li>
 
                         <li>
-                        <Link href="/" className="text-gray-700 transition hover:opacity-75 dark:text-white">
+                        <Link href="/" className="text-gray-700 transition hover:opacity-75 dark:text-slate-400">
                             Accounts Review
                         </Link>
                         </li>
 
                         <li>
-                        <Link href="/" className="text-gray-700 transition hover:opacity-75 dark:text-white">
+                        <Link href="/" className="text-gray-700 transition hover:opacity-75 dark:text-slate-400">
                             HR Consulting
                         </Link>
                         </li>
 
                         <li>
-                        <Link href="/" className="text-gray-700 transition hover:opacity-75 dark:text-white">
+                        <Link href="/" className="text-gray-700 transition hover:opacity-75 dark:text-slate-400">
                             SEO Optimisation
                         </Link>
                         </li>
@@ -86,23 +86,23 @@ export default function Footer() {
                     </div>
 
                     <div className="col-span-2 sm:col-span-1">
-                    <p className="font-medium text-gray-900">Company</p>
+                    <p className="font-medium text-gray-900 dark:text-slate-300">Company</p>
 
                     <ul className="mt-6 space-y-4 text-sm">
                         <li>
-                        <Link href="/" className="text-gray-700 transition hover:opacity-75 dark:text-white">
+                        <Link href="/" className="text-gray-700 transition hover:opacity-75 dark:text-slate-400">
                             About
                         </Link>
                         </li>
 
                         <li>
-                        <Link href="/" className="text-gray-700 transition hover:opacity-75 dark:text-white">
+                        <Link href="/" className="text-gray-700 transition hover:opacity-75 dark:text-slate-400">
                             Meet the Team
                         </Link>
                         </li>
 
                         <li>
-                        <Link href="/" className="text-gray-700 transition hover:opacity-75 dark:text-white">
+                        <Link href="/" className="text-gray-700 transition hover:opacity-75 dark:text-slate-400">
                             Accounts Review
                         </Link>
                         </li>
@@ -110,23 +110,23 @@ export default function Footer() {
                     </div>
 
                     <div className="col-span-2 sm:col-span-1">
-                    <p className="font-medium text-gray-900">Helpful Links</p>
+                    <p className="font-medium text-gray-900 dark:text-slate-300">Helpful Links</p>
 
                     <ul className="mt-6 space-y-4 text-sm">
                         <li>
-                        <Link href="/" className="text-gray-700 transition hover:opacity-75 dark:text-white">
+                        <Link href="/" className="text-gray-700 transition hover:opacity-75 dark:text-slate-400">
                             Contact
                         </Link>
                         </li>
 
                         <li>
-                        <Link href="/" className="text-gray-700 transition hover:opacity-75 dark:text-white">
+                        <Link href="/" className="text-gray-700 transition hover:opacity-75 dark:text-slate-400">
                             FAQs
                         </Link>
                         </li>
 
                         <li>
-                        <Link href="/" className="text-gray-700 transition hover:opacity-75 dark:text-white">
+                        <Link href="/" className="text-gray-700 transition hover:opacity-75 dark:text-slate-400">
                             Live Chat
                         </Link>
                         </li>
@@ -134,29 +134,29 @@ export default function Footer() {
                     </div>
 
                     <div className="col-span-2 sm:col-span-1">
-                    <p className="font-medium text-gray-900">Legal</p>
+                    <p className="font-medium text-gray-900 dark:text-slate-300">Legal</p>
 
                     <ul className="mt-6 space-y-4 text-sm">
                         <li>
-                        <Link href="/" className="text-gray-700 transition hover:opacity-75 dark:text-white">
+                        <Link href="/" className="text-gray-700 transition hover:opacity-75 dark:text-slate-400">
                             Accessibility
                         </Link>
                         </li>
 
                         <li>
-                        <Link href="/" className="text-gray-700 transition hover:opacity-75 dark:text-white">
+                        <Link href="/" className="text-gray-700 transition hover:opacity-75 dark:text-slate-400">
                             Returns Policy
                         </Link>
                         </li>
 
                         <li>
-                        <Link href="/" className="text-gray-700 transition hover:opacity-75 dark:text-white">
+                        <Link href="/" className="text-gray-700 transition hover:opacity-75 dark:text-slate-400">
                             Refund Policy
                         </Link>
                         </li>
 
                         <li>
-                        <Link href="/" className="text-gray-700 transition hover:opacity-75 dark:text-white">
+                        <Link href="/" className="text-gray-700 transition hover:opacity-75 dark:text-slate-400">
                             Hiring Statistics
                         </Link>
                         </li>
@@ -164,17 +164,17 @@ export default function Footer() {
                     </div>
 
                     <div className="col-span-2 sm:col-span-1">
-                    <p className="font-medium text-gray-900">Downloads</p>
+                    <p className="font-medium text-gray-900 dark:text-slate-300">Downloads</p>
 
                     <ul className="mt-6 space-y-4 text-sm">
                         <li>
-                        <Link href="/" className="text-gray-700 transition hover:opacity-75 dark:text-white">
+                        <Link href="/" className="text-gray-700 transition hover:opacity-75 dark:text-slate-400">
                             Marketing Calendar
                         </Link>
                         </li>
 
                         <li>
-                        <Link href="/" className="text-gray-700 transition hover:opacity-75 dark:text-white">
+                        <Link href="/" className="text-gray-700 transition hover:opacity-75 dark:text-slate-400">
                             SEO Infographics
                         </Link>
                         </li>
@@ -189,7 +189,7 @@ export default function Footer() {
                         href="/"
                         rel="noreferrer"
                         target="_blank"
-                        className="text-gray-700 transition hover:opacity-75 dark:text-white"
+                        className="text-gray-700 transition hover:opacity-75 dark:text-slate-400"
                         >
                         <span className="sr-only">Facebook</span>
 
@@ -213,7 +213,7 @@ export default function Footer() {
                         href="/"
                         rel="noreferrer"
                         target="_blank"
-                        className="text-gray-700 transition hover:opacity-75 dark:text-white"
+                        className="text-gray-700 transition hover:opacity-75 dark:text-slate-400"
                         >
                         <span className="sr-only">Instagram</span>
 
@@ -237,7 +237,7 @@ export default function Footer() {
                         href="/"
                         rel="noreferrer"
                         target="_blank"
-                        className="text-gray-700 transition hover:opacity-75 dark:text-white"
+                        className="text-gray-700 transition hover:opacity-75 dark:text-slate-400"
                         >
                         <span className="sr-only">Twitter</span>
 
@@ -259,7 +259,7 @@ export default function Footer() {
                         href="/"
                         rel="noreferrer"
                         target="_blank"
-                        className="text-gray-700 transition hover:opacity-75 dark:text-white"
+                        className="text-gray-700 transition hover:opacity-75 dark:text-slate-400"
                         >
                         <span className="sr-only">GitHub</span>
 
@@ -283,7 +283,7 @@ export default function Footer() {
                         href="/"
                         rel="noreferrer"
                         target="_blank"
-                        className="text-gray-700 transition hover:opacity-75 dark:text-white"
+                        className="text-gray-700 transition hover:opacity-75 dark:text-slate-400"
                         >
                         <span className="sr-only">Dribbble</span>
 
@@ -305,7 +305,7 @@ export default function Footer() {
                 </div>
                 </div>
 
-                <div className="mt-8 border-t border-gray-100 pt-8">
+                <div className="mt-8 border-t border-gray-100 pt-8 text-white">
                 <div className="sm:flex sm:justify-between">
                     <p className="text-xs text-gray-500">
                     &copy; 2022. Company Name. All rights reserved.

@@ -9,7 +9,7 @@ class UserModel_Register(BaseModel):
     nid_number: str
     birth_cert: str
     marriage_cert: str
-    age: str
+    age: int
     phone_number: str
     height: str
     location: str
@@ -37,7 +37,7 @@ class UpdateProfileModel(BaseModel):
     nid_number: str = Field(default=None)
     birth_cert: str = Field(default=None)
     marriage_cert: str = Field(default=None)
-    age: str = Field(default=None)
+    age: int = Field(default=None)
     phone_number: str = Field(default=None)
     height: str = Field(default=None)
     location: str = Field(default=None)

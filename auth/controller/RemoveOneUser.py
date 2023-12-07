@@ -8,7 +8,7 @@ from lib.mysql import cursor
 def RemoveAUser(id):
     try:
         query:str = str("DELETE FROM Users WHERE serial =") +"'"+ str(id) + "'" + ";"
-        print(query)
+        # print(query)
         cursor.execute(query)
         return {
             "message": "User removed successfully",

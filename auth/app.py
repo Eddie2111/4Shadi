@@ -88,7 +88,7 @@ async def login(user_type: str, data: UserModel_Login, response: Response):
         }
         # authenticate user from here
         resulting_in = AuthenticateUser(userdata)
-        print(resulting_in,'this?')
+        # print(resulting_in,'this?')
         if resulting_in["status"] == 1:
             response.set_cookie(
                 key="user_token",
@@ -121,7 +121,7 @@ async def register(user_type: str, data: UserModel_Signup):
         }
         # add to auth database from here
         resulting_in = RegisterUser(userdata)
-        print(resulting_in)
+        print("a user with serial {} and email {} registered".format(data.serial, data.email))
         if resulting_in:
             return {
                 "message": f"Hello {user_type}",

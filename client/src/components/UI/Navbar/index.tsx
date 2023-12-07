@@ -54,9 +54,9 @@ export default function NavigationBar():JSX.Element {
                 > Blogs </Link>
           </NavbarItem>
           <NavbarItem>
-            <Link href="/"
+            <Link href="/support"
                   aria-current="page"
-                  className={pathname === "/about" ? "underline" : ""}
+                  className={pathname === "/support" ? "underline" : ""}
                   > Support </Link>
           </NavbarItem>
         </NavbarContent>

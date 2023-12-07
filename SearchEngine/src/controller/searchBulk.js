@@ -23,14 +23,20 @@ const UserModel = require('../schema/userModel');
   }
 }
  */
+
 async function SearchBulk(req, res) {
-    const token = req.body.token.value;
-    const decodedToken = jwt.decode(token, process.env.JWT_SECRET);
-    const userdata = await UserModel.find({serial: decodedToken.serial.toString()});
-    const target = [await SearchLocation(userdata[0].location), await SearchPreference(userdata[0].preferences)];
-    console.log(target[1]);
-    const {packet} = req.body;
-    res.json({msg: 'success', data: userdata});
+    try{
+        const token = req.body.token.value;
+        const decodedToken = jwt.decode(token, process.env.JWT_SECRET);
+        const userdata = await UserModel.find({serial: decodedToken.serial.toString()});
+        const target = [await SearchLocation(userdata[0].location), await SearchPreference(userdata[0].preferences)];
+        console.log(target[1]);
+        const {packet} = req.body;
+        res.json({msg: 'success', data: userdata});
+    }
+    catch(err){
+        res.json({msg: 'failed', data: err});
+    }
 }
 
 module.exports = SearchBulk;
@@ -56,8 +62,13 @@ async function SearchPreference(UserPreference) {
     return storingResults;
 }
 async function FilterSearcherSelf(SearchResult, UserData) {
-    const filteredResult = SearchResult.filter((user) => user.serial !== UserData.serial);
-    return filteredResult;
+    try{
+        const filteredResult = SearchResult.filter((user) => user.serial !== UserData.serial);
+        return filteredResult;
+    }
+    catch(err){
+        return [];
+    }
 }
 async function FilterSearcherGender(SearchResult, UserData) {
     return null;

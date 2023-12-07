@@ -3,9 +3,9 @@ import React from "react";
 import axios from "axios";
 import {useRouter} from "next/navigation";
 import { Card, Input, Button } from "@nextui-org/react";
-import {Select, SelectSection, SelectItem} from "@nextui-org/react";
+import {Select, SelectItem} from "@nextui-org/react";
 import {z} from "zod";
-
+// !!! remove the any type here from line 29 ///
 interface IResponseProps {
   message: string;
   status: number;
