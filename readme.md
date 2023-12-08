@@ -48,14 +48,14 @@
 
 ## Target Features
 
-Progress: 14/25
+Progress: 16/25
 
 Profile:
 
 - can create their profile and see their profile (done)
 - user has to send a request
 - upload their images (done)
-- information restriction
+- information restriction (done)
 - user can see other profiles (done)
 
 Profile Verification:
@@ -78,7 +78,7 @@ Search System:
 Blogs and other features:
 
 - relationship based therapy blogs and tips (done)
-- online law support
+- online law support (done)
 - instant security on meetup
 - report a problem (done)
 
@@ -92,7 +92,6 @@ Payment service:
 
 Revisions:
 
-- Complete registration with ensuring file upload and retrieval from CDN.
 - Complete check of searching.
 - Implement payment frontend form.
 - ToC, Privacy Policy, About, Support pages.

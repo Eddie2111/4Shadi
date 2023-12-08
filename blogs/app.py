@@ -21,8 +21,10 @@ app = Flask(__name__)
 CORS(app)
 __test__()
 # Define the allowed origins for CORS (replace with your specific needs)
+
 # Example: Allow requests from all origins
 app.config['CORS_ORIGINS'] = '*'
+
 # Example: Allow requests from a frontend running on localhost:3000
 app.config['CORS_ORIGINS'] = ['http://localhost:3000']
 
@@ -111,7 +113,15 @@ def post_data():
             "message": e
         }), 400
 
-
+###########################
+"""
+@params: data -> {
+    "title": "string",
+    "details": "string",
+    "created_at": "string",
+    "status": "string"
+}
+"""
 @app.route('/lawsupport', methods=['POST'])  # post data to 'lawsupport' table
 def post_lawsupport():
     try:
