@@ -8,7 +8,7 @@
 
 ## Blogs
 
-- stack: Flask, MongoDB
+- stack: Flask, AWS, MySQL
 - relationship based therapy blogs and tips
 - online law support
 - instant security on meetup [frontend]-> `avoid this`
