@@ -1,27 +1,25 @@
-export default function Inde():JSX.Element{
+export default function Index():JSX.Element{
     return (
-      <div>
-        <h1>Privacy Policy</h1>
-        <p>Effective Date: 2023-12-09</p>
+      <div className='container mx-32'>
+        <h1 className='text-center text-2xl'>Privacy Policy</h1>
+        <p className='text-right'>Effective Date: 2023-12-09</p>
 
-        <p>
-          This Privacy Policy describes how 4Shadi ("4Shadi", "we", "us", or
-          "our") collects, uses, and shares your personal information when you
+        <p className='text-md my-2'>
+          This Privacy Policy describes how 4Shadi (&apos;4Shadi&apos;, &apos;we&apos;, &apos;us&apos;, or
+          &apos;our&apos;) collects, uses, and shares your personal information when you
           use our services, which include our website and mobile application
-          (collectively, the "Services").
+          (collectively, the &apos;Services&apos;).
         </p>
 
-        <h2>Information We Collect</h2>
+        <h2 className='font-bold my-2'>Information We Collect</h2>
 
-        <p>
+        <p className='mb-4'>
           We collect a variety of information from and about you, including:
         </p>
 
-        <ul>
-          <li>
-            <strong>Personal Information:</strong>
-          </li>
-          <ul>
+        <strong className='my-2'>Personal Information:</strong>
+        <ul className='list-disc list-inside my-2'>
+          <ul className='list-disc list-inside my-2'>
             <li>Name</li>
             <li>Email address</li>
             <li>Phone number</li>
@@ -37,10 +35,8 @@ export default function Inde():JSX.Element{
             <li>Marriage/Divorce certificate</li>
             <li>Payment information</li>
           </ul>
-          <li>
-            <strong>Non-Personal Information:</strong>
-          </li>
-          <ul>
+          <strong>Non-Personal Information:</strong>
+          <ul className='list-disc list-inside my-2'>
             <li>
               Device information, such as IP address, browser type, operating
               system, and device identifier
@@ -53,11 +49,11 @@ export default function Inde():JSX.Element{
           </ul>
         </ul>
 
-        <h2>How We Use Your Information</h2>
+        <h2 className='font-bold'>How We Use Your Information</h2>
 
         <p>We use your information for a variety of purposes, including:</p>
 
-        <ul>
+        <ul className='list-disc list-inside my-2'>
           <li>To provide and operate the Services</li>
           <li>To create and manage your account</li>
           <li>To verify your identity</li>
@@ -68,14 +64,14 @@ export default function Inde():JSX.Element{
           <li>To comply with legal obligations</li>
         </ul>
 
-        <h2>Sharing Your Information</h2>
+        <h2 className='font-bold text-lg'>Sharing Your Information</h2>
 
         <p>
           We may share your information with third-party service providers who
           help us operate the Services, such as:
         </p>
 
-        <ul>
+        <ul className='list-disc list-inside my-2'>
           <li>Payment processors</li>
           <li>Cloud storage providers</li>
           <li>Marketing and advertising partners</li>
@@ -88,23 +84,23 @@ export default function Inde():JSX.Element{
           rights of others.
         </p>
 
-        <h2>Your Choices</h2>
+        <h2 className='font-bold text-lg'>Your Choices</h2>
 
         <p>You have choices regarding your information:</p>
 
-        <ul>
+        <ul className='list-disc list-inside my-2'>
           <li>
             You can access and update your information through your profile
             settings.
           </li>
-          <li>
+          <li className='font-bold text-lg'>
             You can unsubscribe from marketing communications by clicking the
-            "unsubscribe" link in our emails.
+            &apos;unsubscribe&apos; link in our emails.
           </li>
           <li>You can delete your account by contacting us.</li>
         </ul>
 
-        <h2>Data Security</h2>
+        <h2 className='font-bold text-lg'>Data Security</h2>
 
         <p>
           We take reasonable precautions to protect your information from loss,
@@ -113,16 +109,7 @@ export default function Inde():JSX.Element{
           cannot guarantee the security of your information.
         </p>
 
-        <h2>Children's Privacy</h2>
-
-        <p>
-          Our Services are not intended for children under the age of 13. We do
-          not knowingly collect personal information from children under the age
-          of 13. If you are a parent or guardian and you believe that your child
-          has provided us with personal information, please contact us.
-        </p>
-
-        <h2>International Transfers</h2>
+        <h2 className='font-bold text-lg'>International Transfers</h2>
 
         <p>
           Your information may be transferred to and processed in countries
