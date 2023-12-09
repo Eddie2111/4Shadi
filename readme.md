@@ -1,7 +1,5 @@
 # 4Shadi
 
-- The league of extra ordinary divorcee's...
-
 ## Client
 
 - Frontend Application
