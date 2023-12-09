@@ -22,7 +22,6 @@ cursor = connection.cursor()
 create_tabel_query = """
     CREATE TABLE IF NOT EXISTS `MockDB_Govt` (
         `id` int(11) NOT NULL AUTO_INCREMENT,
-        `serial` varchar(64) NOT NULL UNIQUE,
         `birth_certificate` varchar(48) NOT NULL UNIQUE,
         `nid_number` varchar(32) NOT NULL UNIQUE,
         `marriage_certificate` varchar(32) NOT NULL UNIQUE,

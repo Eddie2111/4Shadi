@@ -25,3 +25,6 @@ async def root(serial:str):
         "method": "GET",
         "route": "/index"
     }
+
+
+    

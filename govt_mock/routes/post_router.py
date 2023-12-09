@@ -5,7 +5,6 @@ from lib.mysql import cursor
 from pydantic import BaseModel
 from typing import Optional
 class PostDataModel(BaseModel):
-    serial: str
     birth_certificate: str
     nid_number: str
     marriage_certificate: str
@@ -28,12 +27,16 @@ async def updating(
     try:
         print('RoutePost recieved')
         print(data)
-        # TODO: recieve the data here
-        # you may create a seperate function to handle the data
-        # and return the data to the client after storing it in the database
-        # return a boolean value to the client as true if found in database or false if not found
-        # cross check the posted data to ensure data safety and query execution safety by
-        # checking if it's a string or not, setting maximum limits of the string or stuff like that.
+        cursor.execute(
+            "INSERT INTO `MockDB_Govt` (`birth_certificate`, `nid_number`, `marriage_certificate`) VALUES (%s, %s, %s)",
+            (
+
+                data.birth_certificate,
+                data.nid_number,
+                data.marriage_certificate
+            )
+        )  
+        
         return {
             "message": "post success",
             "data": data,
@@ -60,3 +63,10 @@ cursor.execute(
             )
         )
 """
+# TODO: recieve the data here
+        # you may create a seperate function to handle the data
+        # and return the data to the client after storing it in the database
+        # return a boolean value to the client as true if found in database or false if not found
+        # cross check the posted data to ensure data safety and query execution safety by
+        # checking if it's a string or not, setting maximum limits of the string or stuff like that.
+        
