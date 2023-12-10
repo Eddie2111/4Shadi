@@ -16,7 +16,7 @@
         "indent": ["error", 4],
         "no-undef": "off",
         "no-unused-vars": "off",
-        "require-jsdoc": 0,
+        // "require-jsdoc": 0,
         "no-tabs": "off"
         // "no-invalid-this": "off",
         // "no-prototype-builtins": "off",

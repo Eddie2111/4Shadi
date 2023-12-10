@@ -2,16 +2,12 @@
 "use client";
 
 import {useTheme} from "next-themes";
-import {useEffect, useState} from "react";
 import {HiOutlineMoon} from "react-icons/hi";
 import {HiSun} from "react-icons/hi";
 import {Button} from "@nextui-org/react";
 
 export default function ThemeSwitcher(): JSX.Element {
-  const [mounted, setMounted] = useState(false)
   const { theme, setTheme } = useTheme()
-  useEffect(() => { setMounted(true) }, []);
-  //if(!mounted) return null
   return (
     <div>
         {

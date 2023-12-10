@@ -11,6 +11,16 @@ from utils.TimeNow import TimeNow
 
 from schema.IssueSchema import Issues
 
+###
+"""
+@component : start_db, add_security_headers, root, (1.0)read_item, (1.1)read_item, (2.0)store_item, (2.1)store_item
+@description : initializes the database, adds security headers, serves as an endpoint, (1.0)retrieves all items, (1.1)retrieves a single item,
+             (2.0)inserts a new item using from provided data, (2.1)inserts a new item using formed data 
+@params : void, (request,call_next), void, void, str, data, str
+@return : coroutine(must be awaited for the initialization to complete), HTTP response, (retrieved data,response with a status code), (1,2)response with a status code 
+
+"""
+
 app = FastAPI()
 
 # initating cors  → Cross Origin Resource Sharing, allows the server to accept requests from only the specified origins as in our nextjs app
@@ -58,7 +68,19 @@ async def read_item(id: str):
     except Exception as e:
         print(e)
         return ResponseStruct(500, "/get/{id}","GET","error occured")
-
+###############################
+"""
+@params: data -> {
+    serial: Indexed(str, unique=True)
+    title: str
+    description: str
+    status: str
+    issued_user: str
+    issuer_name: str
+    issued_date: str
+    resolved_date: str
+}
+"""
 @app.post("/issues/create")
 async def store_item(data: Issues):
     try:
@@ -67,6 +89,7 @@ async def store_item(data: Issues):
     except Exception as e:
         print(e)
         return ResponseStruct(500, "/create","POST","error occured")
+
 # post with formdata
 @app.post("/issues/create/formdata")
 async def store_item(

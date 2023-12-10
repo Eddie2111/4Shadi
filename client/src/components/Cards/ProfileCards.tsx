@@ -6,7 +6,6 @@ interface IitemProps {
   data: {
     title: string;
     img: string;
-    price: string;
   };
 }
  /*
@@ -14,7 +13,7 @@ interface IitemProps {
  * used in choices page
  */
 export default function CustomCard({data}: IitemProps): JSX.Element {
-  const { title, img, price } = data;
+  const { title, img } = data;
   return (
         <Card shadow="sm" isPressable className="w-[300px] m-2">
           <CardBody className="overflow-visible p-0">

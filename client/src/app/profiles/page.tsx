@@ -6,9 +6,11 @@ import {useSearchParams} from 'next/navigation';
 import axios from 'axios';
 import React from 'react';
 import {Image} from '@nextui-org/react';
+import CustomCards from '@/components/Cards/CustomCard';
+
 export default function Profiles(): JSX.Element {
     const params = useSearchParams() as URLSearchParams;
-    const [userdata, setUserdata] = React.useState<any>({});
+    const [userdata, setUserdata] = React.useState<IUserProps>({});
     const paramID = params.get('id') || " ";
     React.useEffect(()=>{
         axios.post<IUserProps>(
@@ -17,7 +19,7 @@ export default function Profiles(): JSX.Element {
         )
         .then((res:any)=>{
             setUserdata(res.data.user);
-            console.log(res);
+            console.log(res.data.user);
         })
         .catch((err)=>{
             console.log(err);
@@ -25,35 +27,31 @@ export default function Profiles(): JSX.Element {
     },[paramID])
     // console.log({'id': params.get('id').toString()})
     return(
-        <div className='container mx-auto px-auto'>
-            <div className='flex flex-row'>
-                <div className='w-1/3'>
-                    <Image src='https://nextui.org/images/card-example-3.jpeg' alt='avatar' className='rounded-full w-48 h-48'/>
-                </div>
-                <div className='w-2/3'>
-                    <div className='flex flex-row'>
-                        <div className='w-1/2'>
-                            <h1 className='text-3xl'>{userdata?._id || 'Null data'}</h1>
-                            <h2 className='text-xl'>{userdata?.email || 'Null data'}</h2>
-                            <h3 className='text-xl'>{userdata?.phone_number || 'Null data'}</h3>
-                        </div>
-                        <div className='w-1/2'>
-                            <h1 className='text-3xl'>{userdata?.name || 'Null data'}</h1>
-                            <h2 className='text-xl'>{userdata?.age || 'Null data'}</h2>
-                            <h3 className='text-xl'>{userdata?.height || 'Null data'}</h3>
-                        </div>
+        <center>
+            <div className='w-[300px] md:w-[48rem] max-h-screen '>
+                <div className='flex flex-col px-[100px]'>
+                    <center>
+                        <Image src={userdata.profileImage} width='300px' height='300px' alt='User Profile Image' className='my-5'/>
+                    </center>
+                    <div>
+                        <h1 className='text-3xl'>{userdata?.name || ' '}</h1>
+                        <h2 className='text-xl'>{userdata?.email || ' '}</h2>
+                        <h3 className='text-xl'>Phone Number: {userdata?.phone_number || ' '}</h3>
                     </div>
-                    <div className='flex flex-row'>
-                        <div className='w-1/2'>
-                            <h1 className='text-3xl'>{userdata?.nid_number || 'Null data'}</h1>
-                            <h2 className='text-xl'>{userdata?.location || 'Null data'}</h2>
+                    <center>
+                    <button className='w-32 bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-auto rounded my-5 duration-300'>
+                        Interested
+                    </button>
+                    </center>
+                    <CustomCards>
+                        <div className='text-left'>
+                            <h2 className='text-md'>Age: {userdata?.age || ' '}</h2>
+                            <h3 className='text-md'>Height: {userdata?.height || ' '}</h3>
+                            <h2 className='text-md'>Location: {userdata?.location || ' '}</h2>
                         </div>
-                        <div className='w-1/2'>
-                            <h1 className='text-3xl'>{userdata?.age || 'Null data'}</h1>
-                        </div>
-                    </div>
+                    </CustomCards>
                 </div>
             </div>
-        </div>
+        </center>
     )
 }

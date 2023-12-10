@@ -17,9 +17,16 @@ const DefaultModal = ({ButtonName, Title, Description, id}: ModalProps): JSX.Ele
     const description = Description || 'Are you sure to delete this Blog?';
     const ID = id || '0';
     const OnClickFunction = async () => {
-        const res = await axios.delete(`http://localhost:3700/?id=${id}`, {id: ID});
+      try{
+        const res = await axios.get(`http://localhost:3700/blog/delete?id=${id}`, {id: ID});
         console.log(res.data);
-        onOpenChange();
+        // onOpenChange();
+        // reload the page
+        window.location.reload();
+      }
+      catch(err){
+        console.log(err);
+      }
     }
     return(
         <>
@@ -36,7 +43,7 @@ const DefaultModal = ({ButtonName, Title, Description, id}: ModalProps): JSX.Ele
                   <Button color="danger" variant="light" onPress={onClose}>
                     Close
                   </Button>
-                  <Button color="primary" onPress={onClose}>
+                  <Button color="primary" onPress={OnClickFunction}>
                     Confirm
                   </Button>
                 </ModalFooter>

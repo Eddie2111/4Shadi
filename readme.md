@@ -1,7 +1,5 @@
 # 4Shadi
 
-- The league of extra ordinary divorcee's...
-
 ## Client
 
 - Frontend Application
@@ -10,7 +8,7 @@
 
 ## Blogs
 
-- stack: Flask, MongoDB
+- stack: Flask, AWS, MySQL
 - relationship based therapy blogs and tips
 - online law support
 - instant security on meetup [frontend]-> `avoid this`
@@ -48,12 +46,14 @@
 
 ## Target Features
 
+Progress: 16/25
+
 Profile:
 
 - can create their profile and see their profile (done)
 - user has to send a request
-- upload their images
-- information restriction
+- upload their images (done)
+- information restriction (done)
 - user can see other profiles (done)
 
 Profile Verification:
@@ -66,7 +66,8 @@ Profile Verification:
 
 Search System:
 
-- Profile sorting based on tags (educational qualification, heights, age, location, Married/Divorced)
+- Profile sorting based on tags (educational qualification, heights, age, location, Married/Divorced) (done)
+- Customized profile searching (done)
 - Profile suggestion based on tags (location, age, likes/preferences) (done)
 - Boost Profile matching upon search depending on payment status
 - Search history
@@ -74,8 +75,8 @@ Search System:
 
 Blogs and other features:
 
-- relationship based therapy blogs and tips
-- online law support
+- relationship based therapy blogs and tips (done)
+- online law support (done)
 - instant security on meetup
 - report a problem (done)
 
@@ -86,3 +87,9 @@ Payment service:
 - payment history
 - profile boosting and third party advertisements
 - advertisement removal upon payment
+
+Revisions:
+
+- Complete check of searching.
+- Implement payment frontend form.
+- ToC, Privacy Policy, About, Support pages.

@@ -1,16 +1,16 @@
 'use client';
 import axios from "axios";
 import React from "react";
-import {Navbar, NavbarBrand, NavbarContent, NavbarItem, NavbarMenu, NavbarMenuItem, NavbarMenuToggle, Link, Button} from "@nextui-org/react";
+import {Navbar, NavbarBrand, NavbarContent, NavbarItem, NavbarMenu, NavbarMenuItem, NavbarMenuToggle, Link} from "@nextui-org/react";
 import Image from 'next/image';
-import ThemeSwitcher from "./ThemeSwitcher";
 import ProfileControlSection from "./ProfileControlSection";
 import {usePathname} from "next/navigation";
-import { useAuth, UserButton } from "@clerk/nextjs";
+import { useAuth,
+        UserButton
+        } from "@clerk/nextjs";
 export default function NavigationBar():JSX.Element {
     const [isMenuOpen, setIsMenuOpen] = React.useState(false);
     const [profileData, setProfileData] = React.useState<IUserProps>({});
-    const [tokening, setTokening] = React.useState<string>('');
     const menuItems = [ "Profile", "Dashboard", "My Settings", "Help & Feedback", "Log Out" ];
     const pathname = usePathname();
     React.useEffect(()=>{
@@ -23,7 +23,7 @@ export default function NavigationBar():JSX.Element {
       })
       .catch((err)=>{console.log(err)})
     },[profileData?.data?.user?.serial])
-    const { isLoaded, userId, sessionId, getToken } = useAuth();
+    // const { isLoaded, userId, sessionId, getToken } = useAuth();
     return (
 
     <Navbar shouldHideOnScroll onMenuOpenChange={setIsMenuOpen} className='light:bg-white'>
@@ -36,31 +36,33 @@ export default function NavigationBar():JSX.Element {
         </NavbarBrand>
 
         <NavbarContent className="hidden sm:flex gap-4" justify="center">
-          <NavbarItem
-          >
+          <NavbarItem>
             <Link href={ profileData?.data?.user?.serial ? `/feed` : "/"}
                   className={pathname === "/" ? "underline" : ""}
                >Home </Link>
           </NavbarItem>
-          <NavbarItem
-
-          >
+          <NavbarItem>
             <Link href="/choices"
                   aria-current="page"
                   className={pathname === "/choices" ? "underline" : ""}
                 > Choices </Link>
           </NavbarItem>
-          <NavbarItem
-
-          >
-            <Link href="/"
+          <NavbarItem>
+            <Link href="/blogs"
                   aria-current="page"
-                  className={pathname === "/about" ? "underline" : ""}
+                  className={pathname === "/blogs" ? "underline" : ""}
+                > Blogs </Link>
+          </NavbarItem>
+          <NavbarItem>
+            <Link href="/support"
+                  aria-current="page"
+                  className={pathname === "/support" ? "underline" : ""}
                   > Support </Link>
           </NavbarItem>
         </NavbarContent>
 
       <ProfileControlSection token={profileData?.data?.user?.serial || 'null'}/>
+      <UserButton/>
 
       <NavbarMenu>
         {menuItems.map((item, index) => (

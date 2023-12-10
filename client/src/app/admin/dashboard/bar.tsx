@@ -1,5 +1,5 @@
 'use client';
-import { Chart as ChartJS, ArcElement, Tooltip, Legend, CategoryScale, PointElement, BarController, BarElement, LineElement, LinearScale, Title } from "chart.js";
+import { Chart as ChartJS, Tooltip, Legend, CategoryScale, PointElement,  LineElement, LinearScale, Title } from "chart.js";
 import {Spinner} from '@nextui-org/react'
 import { Line } from 'react-chartjs-2';
 ChartJS.register(

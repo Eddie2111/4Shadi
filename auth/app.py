@@ -17,6 +17,17 @@ from model.authenticate_user import AuthenticateUser
 from controller.GetAll import GetAllUsers
 from controller.RemoveOneUser import RemoveAUser
 
+###
+"""
+@componet: startup, add_security_headers, generate_unique_token, root, login, register, logout, getone, getall, update, delete
+@description: turns on database, enhances security, creates unique token for particular user type, tests rout, 
+              logs in user, handles user registration, logs out user, retrieve information, retrieve information, checks validity, deletes user if type:admin.
+@props: void, user type, void, void, data, data, void, void, void, void, (user type,data). 
+@returns: none, response, token, message:str, appropriate messages based on the authentication result or invalid user type, 
+        appropriate messages based on the authentication result or invalid user type, message:str, message:str, 
+        dictionary(valid user type) or message:str(invalid), message:str, result.
+"""
+
 app = FastAPI()
 
 # initating cors  → Cross Origin Resource Sharing, allows the server to accept requests from only the specified origins as in our nextjs app
@@ -59,21 +70,6 @@ def generate_unique_token(user_type):
     token = secrets.token_hex(8)
     return token
 
-# @app.post("/register/{user_type}", response_model=dict)
-# async def register(user_type: str):
-#     if user_type in user_types:
-#         # Generate a unique token for the user type
-#         token = generate_unique_token(user_type)
-
-#         # Store the token for the user type (you can save it in a database)
-#         user_tokens[user_type].add(token)
-
-#         # Construct the response explicitly as JSON
-#         response_data = {"message": f"Hello {user_type}", "token": token}
-#         return JSONResponse(content=response_data)
-#     else:
-#         raise HTTPException(status_code=400, detail="Invalid user type")
-
 #D07.10.23<
 @app.get("/")
 async def root():
@@ -92,7 +88,7 @@ async def login(user_type: str, data: UserModel_Login, response: Response):
         }
         # authenticate user from here
         resulting_in = AuthenticateUser(userdata)
-        print(resulting_in,'this?')
+        # print(resulting_in,'this?')
         if resulting_in["status"] == 1:
             response.set_cookie(
                 key="user_token",
@@ -125,7 +121,7 @@ async def register(user_type: str, data: UserModel_Signup):
         }
         # add to auth database from here
         resulting_in = RegisterUser(userdata)
-        print(resulting_in)
+        print("a user with serial {} and email {} registered".format(data.serial, data.email))
         if resulting_in:
             return {
                 "message": f"Hello {user_type}",

@@ -1,20 +1,24 @@
 'use client';
 import React from 'react';
-import {Button, Checkbox, Input, Slider} from '@nextui-org/react';
+import {Button, Checkbox, Slider} from '@nextui-org/react';
 import {Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, useDisclosure} from "@nextui-org/react";
-
+import Link from 'next/link';
 import CustomCards from '@/components/Cards/CustomCards';
 
 import Handler from './handler'
-
+interface IQueryProps {
+    location: boolean,
+    preference: boolean,
+    age: number[]
+}
 export default function SearchAndSort(): JSX.Element {
     // modal state management and handler data setup
     const {isOpen, onOpen, onOpenChange} = useDisclosure();
-    const [dataset, setDataset] = React.useState<any[]>([]);
+    const [dataset, setDataset] = React.useState<IQueryProps[]>([]);
 
     // for custom search modal
     const [isLocation, setIsLocation] = React.useState<boolean>(false);
-    const [ageRange, setAgeRange] = React.useState<number[]>([0,0]);
+    // const [ageRange, setAgeRange] = React.useState<number[]>([0,0]);
     const [isPreference, setIsPreference] = React.useState<boolean>(false);
 
     // for button callback style changes
@@ -66,8 +70,8 @@ export default function SearchAndSort(): JSX.Element {
         }
 
     }
-    const InActiveButtonClassName = 'bg-blue-500 p-2 text-white rounded-lg m-2 hover:bg-blue-700 duration-300';
-    const ActiveButtonClassName = 'bg-blue-700 p-2 text-white rounded-lg m-2 hover:bg-blue-700 duration-300';
+    // const InActiveButtonClassName = 'bg-blue-500 p-2 text-white rounded-lg m-2 hover:bg-blue-700 duration-300';
+    // const ActiveButtonClassName = 'bg-blue-700 p-2 text-white rounded-lg m-2 hover:bg-blue-700 duration-300';
     return(
         <div className='flex flex-col'>
             <div>
@@ -115,13 +119,15 @@ export default function SearchAndSort(): JSX.Element {
             <div class="grid grid-cols-4 gap-4 mx-auto">
                 {
                     dataset.map((item, index) => (
-                        <CustomCards key={index} data={
-                            {
-                                title: item.name,
-                                img: 'test',
-                                age: '24'
-                            }
-                        }/>
+                        <Link href={`profiles?id=${item.serial}`} key={index}>
+                            <CustomCards data={
+                                {
+                                    title: item.name,
+                                    img: item.profileImage,
+                                    age: item.age
+                                }
+                            }/>
+                        </Link>
                     ))
                 }
             </div>

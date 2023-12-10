@@ -12,7 +12,7 @@ export default async function Handler(Query:IQueryProps) {
   const token = cookieStore.get('user_token')
   try {
     const response = await Axios.post("http://localhost:3200", { Query, token }, { withCredentials: true})
-    console.log(response.data);
+    // console.log(response.data);
     return response.data.data;
   } catch (err) {
       console.log(err)

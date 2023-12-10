@@ -2,6 +2,13 @@ import threading
 import asyncio
 from lib.mysql import cursor
 
+###
+""" 
+@component: RegisterUser
+@description: User Registration
+@props: data
+"""
+
 def RegisterUser(data):
     try:
         threaded_query = threading.Thread(

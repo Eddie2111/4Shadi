@@ -10,6 +10,7 @@ interface IDataProps {
         phone_number: string;
         email: string;
         location: string;
+        images: string[];
     }
 }
 
@@ -30,37 +31,21 @@ export default function BioCard({data}:IDataProps): JSX.Element {
         <Divider/>
 
         <CardFooter>
-            <div className='flex flex-col'>
-            <Link
-                isExternal
-                showAnchorIcon
-                href="/"
-            > Works at Sudan
-            </Link>
-            <Link
-                isExternal
-                showAnchorIcon
-                href="/"
-            > Works at Sudan
-            </Link>
-            <Link
-                isExternal
-                showAnchorIcon
-                href="/"
-            > Works at Sudan
-            </Link>
-            <Link
-                isExternal
-                showAnchorIcon
-                href="/"
-            > Works at Sudan
-            </Link>
-            <Link
-                isExternal
-                showAnchorIcon
-                href="/"
-            > Works at Sudan
-            </Link>
+            <div class="grid grid-cols-1 md:grid-cols-4 grid-flow-row gap-4">
+            {
+                data?.images?.map((image, index)=>{
+                    return (
+                        <Image
+                            key={index}
+                            src={image}
+                            width={200}
+                            height={200}
+                            alt='image'
+                            className='my-2'
+                        />
+                    )
+                })
+            }
             </div>
         </CardFooter>
     </Card>
