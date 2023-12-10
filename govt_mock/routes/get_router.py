@@ -50,17 +50,38 @@ def convert_to_dict(data):
             "marriage_certificate": i[3]
         })
     return dataset
-#a get method that get all the data from 'MockDB_Govt' table
-@RouteGet.get("/data") # this one is not working properly 
-async def get_data():
+
+#a get method that will get one data from 'MockDB_Govt' table with "id" as query parameter
+@RouteGet.get("/data/{id}")
+async def get_one_data(id: int):
     try:
-        alldata  = cursor.execute("SELECT * FROM `MockDB_Govt`")
-        allData = cursor.fetchall()
-        alldata = convert_to_dict(allData)
-        print(alldata)
+        cursor.execute("SELECT * FROM `MockDB_Govt` WHERE `id` = %s", (id,))
+        data = cursor.fetchone()
+        print(data)
         return {
             "message": "get success",
-            "data": allData,
+            "data": data,
+            "status":200
+        }
+    except Exception as e:
+        print(e)
+        return {
+            "message": "get failed",
+            "data": {},
+            "status":500
+        }
+        
+#a get method that will get all the data from 'MockDB_Govt' table
+@RouteGet.get("/data")
+async def get_data():
+    try:
+        cursor.execute("SELECT * FROM `MockDB_Govt`")
+        data = cursor.fetchall()
+        data = convert_to_dict(data)
+        print(data)
+        return {
+            "message": "get success",
+            "data": data,
             "status":200
         }
     except Exception as e:

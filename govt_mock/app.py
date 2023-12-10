@@ -36,6 +36,7 @@ async def add_security_headers(request, call_next):
 
 from routes.post_router import RoutePost
 from routes.get_router import RouteGet
+from routes.delete_router import RouteDelete
 
 # example hit link: localhost:4100/post
 # hit with post request with a raw json body like this:
@@ -56,6 +57,12 @@ app.include_router(
     RouteGet,
     prefix="/get",
     tags=["get"],
+    responses={404: {"description": "Not found"}},
+)
+app.include_router(
+    RouteDelete,
+    prefix="/delete",
+    tags=["delete"],
     responses={404: {"description": "Not found"}},
 )
 
