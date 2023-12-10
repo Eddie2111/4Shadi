@@ -20,7 +20,7 @@ async def root():
         "route": "/index"
     }
 
-@RoutePost.post("/")
+@RoutePost.post("/data")
 async def updating(
     data: PostDataModel,
 ):
