@@ -1,16 +1,22 @@
+import type {Metadata} from 'next';
 import Link from 'next/link';
 
 import CustomCard from '@/components/Cards/CustomCard';
 
+export const metadata:Metadata = {
+    title: 'Blogs',
+    description: 'Blogs of 4Shadi',
+  }
+
 export default async function Page(): JSX.Element {
-    const res = await fetch('http://localhost:3700/',{ next: { revalidate: 600 } });
+    const res = await fetch('http://localhost:3700/',{ cache: 'no-store' });
     const data = await res.json();
     // console.log(data);
     return (
         <div className='container mx-10 md:mx-auto'>
         <h1 className="text-2xl font-bold">Blogs</h1>
         <div className='grid grid-cols-3 gap-4'>
-            {data.map((item: any) => (
+            {data.map((item: string[]) => (
                 <Link href={`/blogs/${item[0]}`} key={item[0]}>
                 <CustomCard key={item[0]} className='mx-10 my-10'>
                     <div className='flex flex-row justify-between'>

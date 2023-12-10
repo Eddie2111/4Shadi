@@ -46,7 +46,7 @@ export default function Index():JSX.Element{
 
     <h2 className='font-bold my-2'>8. Indemnification</h2>
 
-    <p>You agree to indemnify, defend, and hold harmless 4Shadi and its officers, directors, employees, agents, licensors, and suppliers from and against all claims, losses, expenses, damages, and costs, including reasonable attorneys' fees, arising out of or relating to your use of the Services or your violation of these Terms.</p>
+    <p>You agree to indemnify, defend, and hold harmless 4Shadi and its officers, directors, employees, agents, licensors, and suppliers from and against all claims, losses, expenses, damages, and costs, including reasonable attorneys&quot; fees, arising out of or relating to your use of the Services or your violation of these Terms.</p>
 
     <h2 className='font-bold my-2'>9. Termination</h2>
 
@@ -66,7 +66,6 @@ export default function Index():JSX.Element{
 
     <br/>
 
-            
         </div>
     )
 }
