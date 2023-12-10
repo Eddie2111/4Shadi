@@ -11,7 +11,26 @@ import CustomCards from '@/components/Cards/CustomCard';
 export default function Profiles(): JSX.Element {
     const params = useSearchParams() as URLSearchParams;
     const [userdata, setUserdata] = React.useState<IUserProps>({});
+    const [sentStatus, setSentStatus] = React.useState<string>('');
     const paramID = params.get('id') || " ";
+    const HitMatches = () => {
+        axios.post(
+            'http://localhost:4100/matches',
+            {
+                userID: localStorage.getItem('id') || " ",
+                sent: paramID.toString() || " ",
+                received: localStorage.getItem('id') || " "
+            },
+        )
+        .then((res:any)=>{
+            setSentStatus('sent');
+            console.log(res.data,'is');
+        })
+        .catch((err)=>{
+            setSentStatus('Already sent');
+            console.log(err,'is');
+        })
+    }
     React.useEffect(()=>{
         axios.post<IUserProps>(
             'http://localhost:3500/profile/getone',
@@ -25,7 +44,7 @@ export default function Profiles(): JSX.Element {
             console.log(err);
         })
     },[paramID])
-    // console.log({'id': params.get('id').toString()})
+    console.log({'id': params.get('id').toString()})
     return(
         <center>
             <div className='w-[300px] md:w-[48rem] max-h-screen '>
@@ -39,9 +58,30 @@ export default function Profiles(): JSX.Element {
                         <h3 className='text-xl'>Phone Number: {userdata?.phone_number || ' '}</h3>
                     </div>
                     <center>
-                    <button className='w-32 bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-auto rounded my-5 duration-300'>
+                    <button 
+                    onClick={
+                        () => {
+                            axios.post(
+                                'http://localhost:4200/matches',
+                                {
+                                    userID: localStorage.getItem('id') || " ",
+                                    sent: params.get('id').toString() || " ",
+                                    received: localStorage.getItem('id') || " "
+                                },
+                            )
+                            .then((res:any)=>{
+                                console.log(res.data);
+                                setSentStatus('sent');
+                            })
+                            .catch((err)=>{
+                                console.log(err);
+                            })
+                        }
+                    }
+                    className='w-32 bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-auto rounded my-5 duration-300'>
                         Interested
                     </button>
+                    <p className='text-white'>{sentStatus}</p>
                     </center>
                     <CustomCards>
                         <div className='text-left'>

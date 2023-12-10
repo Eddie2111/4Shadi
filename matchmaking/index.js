@@ -5,7 +5,14 @@ require('dotenv').config();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 const Match = require('./model/matchSchema');
-
+const jwt = require('jsonwebtoken');
+const cors = require('cors');
+app.use(
+    cors({
+        origin: 'http://localhost:3000',
+        credentials: true,
+    })
+)
 app.get('/', async(req, res) => {
     const userID = req.query.id;
     try{
