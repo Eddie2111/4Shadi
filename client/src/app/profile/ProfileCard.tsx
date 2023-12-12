@@ -1,7 +1,8 @@
 'use client';
 import React from 'react';
 import {Card, CardBody, CardHeader, Image, Divider, CardFooter, Link} from '@nextui-org/react';
-
+import {useRouter} from 'next/navigation';
+import axios from 'axios';
 interface IDataProps{
     data: {
         name:string;
@@ -16,8 +17,25 @@ interface IDataProps{
 }
 
 export default function ProfileCard({data}:IDataProps): JSX.Element {
+    const router = useRouter();
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        const settingData = {
+            name: 'name',
+            email: 'meila',
+            phone: '0170235486',
+            amount: 450,
+        }
+        console.log(settingData)
+        const tokenn = process.env.NEXT_PUBLIC_PAYMENTAPI || " ";
+        await axios.post<string>(tokenn, settingData)
+        .then(data=>{
+            router.push(data.data)
+        })
+        .catch(err=>console.log(err))
+      };
     return (
-    <Card className="md:max-w-[450px] max-w-screen my-2 h-[380px]">
+    <Card className="md:max-w-[450px] max-w-screen my-2 h-[450px]">
         <CardHeader className="flex flex-col gap-3 justify-center">
             <Image
             alt="nextui logo"
@@ -51,6 +69,10 @@ export default function ProfileCard({data}:IDataProps): JSX.Element {
             > {data.email}
             </Link>
         </CardFooter>
+        <button 
+        className='bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full mb-2'
+        onClick={handleSubmit}
+        >Get Premium</button>
     </Card>
     )
 }

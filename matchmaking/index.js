@@ -26,57 +26,61 @@ app.get('/', async(req, res) => {
 
 app.post('/matches', async (req, res) => {
     const userID = req.body.userID;
-    const received = req.body.received;
-
-    try {
-        // Check if sender exists
-        let sender = await Match.findOne({ userID: userID });
-        // If sender doesn't exist, create a new sender
-        if (!sender) {
-            sender = new Match({
-                userID: userID,
-                sent: [],
-                received: []
-            });
-        }
-
-        // Check if receiver exists
-        let receiver = await Match.findOne({ userID: received[0] });
-
-        // If receiver doesn't exist, create a new receiver
-        if (!receiver) {
-            receiver = new Match({
-                userID: received[0],
-                sent: [],
-                received: []
-            });
-        }
-
-        // Check if the request has already been sent
-        if (sender.sent.includes(received[0])) {
-            return res.send('Already sent');
-        }
-
-        // Check if the request has already been received
-        if (sender.received.includes(received[0])) {
-            return res.send('Already received');
-        }
-
-        // Update sender and receiver arrays
-        sender.sent.push(received[0]);
-        receiver.received.push(userID);
-
-        // Save changes to the database
-        await sender.save();
-        await receiver.save();
-
-        res.json({ sender: sender, receiver: receiver });
-    } catch (err) {
-        console.log(err);
-        res.status(500).send('Internal Server Error');
+    // const received = req.body.received;
+    const sent = req.body.sent;
+    console.log(userID, sent);
+    const fetchUserID = await Match.findOne({ userID: userID });
+    const fetchSentID = await Match.findOne({ userID: sent });
+    if (!fetchUserID) {
+        const sentMatch = new Match({
+            userID: userID,
+            sent: [sent],
+            recieved: []
+        });
+        try { await sentMatch.save() }
+        catch (err) { console.log(err) };
     }
+    if (fetchUserID) {
+        const updateSent = await Match.findOneAndUpdate(
+            { userID: userID },
+            { $push: { sent: sent } }
+        );
+        try { await updateSent.save() }
+        catch (err) { console.log(err) };
+    }
+    if(!fetchSentID){
+        const recievedMatch = new Match({
+            userID: sent,
+            sent: [],
+            received: [req.body.userID]
+        });
+        try { await recievedMatch.save() }
+        catch (err) { console.log(err) };
+    }
+    if(fetchSentID){
+        const updateReceived = await Match.findOneAndUpdate(
+            { userID: sent },
+            { $push: { received: userID } }
+        );
+        try { await updateReceived.save() }
+        catch (err) { console.log(err) };
+    }
+
+
+    res.send('ok')
 });
 
+
+app.post('/getMatches', async (req, res) => {
+    const token = req.body.token
+    const decoded = jwt.decode(token.value, process.env.JWT_SECRET);
+    const userID = decoded.serial;
+    const getData = await Match.findOne({ userID: userID });
+    res.json({
+        message: 'GetMatches service reached',
+        data: getData,
+    })
+});
 
 app.listen(process.env.PORT, () => {
     ConnectDB();

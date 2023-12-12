@@ -6,20 +6,16 @@ const matchSchema = new Schema({
         type: String,
         required: true
     },
-    sent: [
-        {
-            type: String,
-            required: true,
-            unique: true
-        }
-    ],
     received: [
         {
             type: String,
-            required: true,
-            unique: true
         }
-    ]
+    ],
+    sent: [
+        {
+            type: String,
+        }
+    ],
     }
     , { collection: 'matches' }
 );

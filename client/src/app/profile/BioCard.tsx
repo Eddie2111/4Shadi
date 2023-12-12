@@ -1,7 +1,9 @@
 'use client';
 import React from 'react';
-import {Card, Input, Button, CardBody, CardHeader, Image, Divider, CardFooter, Link} from '@nextui-org/react';
-
+import {Card, CardBody, CardHeader, Image, Divider, CardFooter, Link} from '@nextui-org/react';
+import { CgProfile } from "react-icons/cg";
+import { CiBellOn } from "react-icons/ci";
+import { GoLaw } from "react-icons/go";
 interface IDataProps {
     data: {
         nid_number: string;
@@ -17,7 +19,16 @@ interface IDataProps {
 export default function BioCard({data}:IDataProps): JSX.Element {
     return (
     <Card className="md:w-[750px] max-w-screen mx-4 my-2">
-        <CardHeader className="flex flex-col gap-3 justify-center">
+        <CardHeader className="flex flex-row gap-3 justify-center">
+            <Link href='/profile/requests' className='text-5xl mx-auto hover:text-green-500 duration-300'>
+                <CgProfile />
+            </Link>
+            <Link href='/profile/notifications' className='text-5xl mx-auto hover:text-green-500 duration-300'>
+                <CiBellOn/>
+            </Link>
+            <Link href='/profile/lawsupport' className='text-5xl mx-auto hover:text-green-500 duration-300'>
+                <GoLaw />
+            </Link>
         </CardHeader>
         <Divider/>
 

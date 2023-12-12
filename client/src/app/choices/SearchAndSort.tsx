@@ -122,9 +122,10 @@ export default function SearchAndSort(): JSX.Element {
                         <Link href={`profiles?id=${item.serial}`} key={index}>
                             <CustomCards data={
                                 {
-                                    title: item.name,
-                                    img: item.profileImage,
-                                    age: item.age
+                                    name: item.name,
+                                    profileImage: item.profileImage,
+                                    age: item.age,
+                                    location: item.location
                                 }
                             }/>
                         </Link>

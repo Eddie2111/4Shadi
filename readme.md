@@ -1,5 +1,12 @@
 # <span style="color: darkred">4Shadi</span>
 
+## !Important
+
+- Integrate issues
+- Integrate law support
+- create tons of account with images
+- check search engine module properly
+
 # 1. Client
 
 - Stack: <span style="color: yellow">**React, TypeScript, NextJS, TailwindCSS**</span>

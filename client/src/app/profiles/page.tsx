@@ -55,7 +55,7 @@ export default function Profiles(): JSX.Element {
                     <div>
                         <h1 className='text-3xl'>{userdata?.name || ' '}</h1>
                         <h2 className='text-xl'>{userdata?.email || ' '}</h2>
-                        <h3 className='text-xl'>Phone Number: {userdata?.phone_number || ' '}</h3>
+                        <h3 className='text-xl'>Likes: {userdata?.preferences || ' '}</h3>
                     </div>
                     <center>
                     <button 

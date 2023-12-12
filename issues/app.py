@@ -116,4 +116,4 @@ async def store_item(
         print(e)
         return ResponseStruct(500, "/create/formdata","POST","error occured")
 
-# uvicorn app:app --reload --port 3800
+# uvicorn app:app --reload --port 3600
