@@ -10,7 +10,7 @@
     "lint:fix": "eslint --fix src/**/*.{ts,tsx}"
   },
   "dependencies": {
-    "@clerk/nextjs": "^4.27.1",
+    "@clerk/nextjs": "^4.29.3",
     "@nextui-org/react": "^2.1.13",
     "@studio-freight/react-lenis": "^0.0.36",
     "axios": "^1.5.1",
