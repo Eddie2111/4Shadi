@@ -5,7 +5,7 @@ bson==0.5.10
 certifi==2023.7.22
 cycler==0.11.0
 exceptiongroup==1.1.2
-fastapi==0.100.1
+fastapi==0.109.1
 fastapi-limiter==0.1.5
 flake8==6.1.0
 Flask==2.3.2
