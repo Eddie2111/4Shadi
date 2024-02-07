@@ -1,11 +1,11 @@
 # <span style="color: darkred">4Shadi</span>
 
-## !Important
+This project aims to work with marriage match making. We have used multi service architecture to structurize this project.
+There are multiple apps that handle each of the functions all by themselves using their own database.
+The whole application is using [NextJS](https://www.nextjs.org) app router as frontend.
+[FastAPI](https://fastapi.tiangolo.com/), [Flask](https://flask.palletsprojects.com/en/3.0.x/), [NodeJS](https://nodejs.org) as backend apps.
+[MySQL](https://www.mysql.com), [MongoDB](https://www.mongodb.com) is being used by multiple apps in the backend.
 
-- Integrate issues
-- Integrate law support
-- create tons of account with images
-- check search engine module properly
 
 # 1. Client
 
